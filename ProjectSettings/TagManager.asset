@@ -3,7 +3,30 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Concrete
+  - NavMeshHelper
+  - Beakable
+  - Wood
+  - Water
+  - Dirt
+  - FootstepGrass
+  - Bush
+  - Gravel
+  - DeepWater
+  - NoThrowSpoil
+  - Squelch
+  - NoFootstep
+  - Gate
+  - NoGlassBreak
+  - Cardboard
+  - Mud
+  - ConcreteHighPriority
+  - Human
+  - Goose
+  - Item
+  - Blanket
+  - NoteScrap
   layers:
   - Default
   - TransparentFX

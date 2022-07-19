@@ -1,0 +1,198 @@
+[
+    {
+        "id": 1,
+        "stage": 1,
+        "questName": "* 정원에 들어가기",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 2,
+        "stage": 1,
+        "questName": "* 정원사 옷 적시기",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 3,
+        "stage": 1,
+        "questName": "* 정원사의 열쇠 훔치기",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 4,
+        "stage": 1,
+        "questName": "* 정원사가 밀짚모자를 쓰게 만들기",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 5,
+        "stage": 1,
+        "questName": "* 호수에서 갈퀴 긁기",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 6,
+        "stage": 1,
+        "questName": "* 피크닉 하기",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 1001,
+        "stage": 1,
+        "questName": "샌드위치",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 1002,
+        "stage": 1,
+        "questName": "사과",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 1003,
+        "stage": 1,
+        "questName": "호박",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 1004,
+        "stage": 1,
+        "questName": "당근",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 1005,
+        "stage": 1,
+        "questName": "잼",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 1006,
+        "stage": 1,
+        "questName": "보온병",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 1007,
+        "stage": 1,
+        "questName": "라디오",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 1008,
+        "stage": 1,
+        "questName": "바구니",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 10001,
+        "stage": 1,
+        "questName": "@ 정원사가 손가락을 망치로 찧게 만들기",
+        "isClear": false,
+        "isMainQuest": true
+    },
+    {
+        "id": 7,
+        "stage": 2,
+        "questName": "* 빗자루 망가뜨리기",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 8,
+        "stage": 2,
+        "questName": "* 소년을 전화박스에 가두기",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 9,
+        "stage": 2,
+        "questName": "* 소년의 안경 바꿔치기",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 10,
+        "stage": 2,
+        "questName": "* 아무나 자신의 물건을 다시 사게 만들기",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 11,
+        "stage": 2,
+        "questName": "* TV에 나오기",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 12,
+        "stage": 2,
+        "questName": "* 쇼핑하기",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 2001,
+        "stage": 2,
+        "questName": "칫솔",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 2002,
+        "stage": 2,
+        "questName": "휴지",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 2003,
+        "stage": 2,
+        "questName": "머리빗",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 2004,
+        "stage": 2,
+        "questName": "깡통음식",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 2005,
+        "stage": 2,
+        "questName": "세정제",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 2006,
+        "stage": 2,
+        "questName": "과일과 채소",
+        "isClear": false,
+        "isMainQuest": false
+    },
+    {
+        "id": 20001,
+        "stage": 2,
+        "questName": "@ 상점주인을 창고에 가두기",
+        "isClear": false,
+        "isMainQuest": true
+    }
+]

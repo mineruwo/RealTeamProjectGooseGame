@@ -1,0 +1,189 @@
+fileFormatVersion: 2
+guid: a267b4e867952ed4ea9689fa6d9cc3f6
+ModelImporter:
+  serializedVersion: 21202
+  internalIDToNameTable:
+  - first:
+      74: -9098987051642063736
+    second: personINTOidle
+  - first:
+      74: -2373050353019242176
+    second: carryingHeavyNarrow
+  - first:
+      74: -7270051116746253017
+    second: carryingHeavyWide
+  - first:
+      74: -6477842882759116486
+    second: PersonTurnHalfLeftLowkey
+  - first:
+      74: -8548254644802742421
+    second: PersonTurnHalfRightLowkey
+  - first:
+      74: -7997195600159579883
+    second: personidle
+  - first:
+      74: -6539935623874849456
+    second: walkingmeek_inplace
+  - first:
+      74: -2731582138064169711
+    second: pottering_sharp_left
+  - first:
+      74: -2256374753839076992
+    second: pottering_left
+  - first:
+      74: -7603843450112586087
+    second: pottering
+  - first:
+      74: -126244078332894195
+    second: pottering_right
+  - first:
+      74: 4470072069541285730
+    second: pottering_sharp_right
+  - first:
+      74: 4340385160380887613
+    second: running_turn_left
+  - first:
+      74: -3925427449959772061
+    second: running
+  - first:
+      74: -7328313281542966459
+    second: running_turn_right
+  - first:
+      74: 264030256968025083
+    second: personpickup
+  - first:
+      74: 5946783502304541060
+    second: walkingNoGlassesIdle
+  - first:
+      74: -6349793863002076398
+    second: walkingNoGlasses
+  - first:
+      74: -1359052151553623658
+    second: strafeHerdInPlace
+  - first:
+      74: -6815814209147692114
+    second: strafeHerdLWalking
+  - first:
+      74: -9117004721162990281
+    second: strafeHerdRWalking
+  - first:
+      74: 7996843886161680477
+    second: strafeHerdLRunning
+  - first:
+      74: 6702645301050153523
+    second: strafeHerdForward
+  - first:
+      74: -6505365496851301773
+    second: strafeHerdRRunning
+  - first:
+      74: -8554022870000001894
+    second: running_scared
+  - first:
+      74: -15586074124387252
+    second: cowering
+  - first:
+      74: -7197742242429305165
+    second: running_scared_wimp_LOOKLEFT
+  - first:
+      74: 7299733874533950243
+    second: running_scared_wimp_LOOKRIGHT
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
