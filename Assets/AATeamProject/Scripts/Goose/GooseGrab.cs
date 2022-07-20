@@ -15,7 +15,7 @@ public class GooseGrab : MonoBehaviour
     void Start()
     {
         collider = GetComponent<Collider>();
-        rb = GetComponent<Rigidbody>();
+       // rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -36,12 +36,19 @@ public class GooseGrab : MonoBehaviour
                 if (!grabObject.GetComponent<PhysicObject>().isHeavy)
                 {
                     Debug.Log("Success Grab");
-                    //grabObjRb.isKinematic = true;
+                    
+                    var pos = gooseMouse.position - grabObject.GetComponent<SmallObject>().handlePoint.transform.position;
+                    grabObject.transform.position += pos;
+                    grabObject.transform.rotation = grabObject.GetComponent<SmallObject>().handlePoint.transform.rotation;
+
                     grabObjRb.useGravity = false;
-                    grabObject.AddComponent<FixedJoint>();
-                    var fixedJoint = grabObject.GetComponent<FixedJoint>();
-                    fixedJoint.connectedBody = rb;
-                   // fixedJoint.connectedAnchor = gameObject.GetComponent<SmallObject>().handlePoint.transform.position;
+                    grabObjRb.isKinematic = false;
+                    grabObjRb.constraints = RigidbodyConstraints.FreezeAll;
+                    grabObject.transform.SetParent(gooseMouse);
+                    
+                   // var fixedJoint = grabObject.AddComponent<FixedJoint>();
+                     //fixedJoint.connectedBody = rb;
+                    // fixedJoint.connectedAnchor = gameObject.GetComponent<SmallObject>().handlePoint.transform.position;
                 }
                 
 
@@ -50,10 +57,7 @@ public class GooseGrab : MonoBehaviour
                 //grabObject.transform.SetParent(gooseMouse);
             }
         }
-        if(rb != null)
-        {
-            Debug.Log("Fail");
-        }
+       
 
         //collider.transform.position = gooseMouse.transform.position;
     }
@@ -79,7 +83,6 @@ public class GooseGrab : MonoBehaviour
     {
         if (other.GetComponent<PhysicObject>())
         {
-            Debug.Log("1");
             grabObject = other.gameObject;
         }
     }
