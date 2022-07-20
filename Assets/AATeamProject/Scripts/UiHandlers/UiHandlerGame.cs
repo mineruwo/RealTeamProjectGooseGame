@@ -26,7 +26,7 @@ public class UiHandlerGame : MonoBehaviour
         Debug.Log($"[UiHandlerGame] 퀘스트 버튼 누름");
 
         // GameManager.instance.uiMgr.ClearNote(questNoteLists);
-
+        GameManager.instance.uiMgr.SetNoteScrap(questNoteScrap);
 
         GameManager.instance.uiMgr.OnClickQuestButton(questMenuUp, questMenuDown);
         GameManager.instance.uiMgr.WriteQuestNote(questNoteLists);
@@ -38,6 +38,8 @@ public class UiHandlerGame : MonoBehaviour
     {
 
     }
+
+    
 
     public void NoteScrapeUp()
     {

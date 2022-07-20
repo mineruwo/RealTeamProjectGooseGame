@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 
 public class QuestManager : MonoBehaviour
 {
     public int currentQuestId;
+
+    public event Action ClearEvent;
 
     public void GetQuestId(int id)
     {
@@ -26,8 +30,20 @@ public class QuestManager : MonoBehaviour
         {
             Debug.Log($"[QuestManage] 퀘스트 클리어 {GameManager.instance.dataMgr.currentQuestDataList[num].questName}");
             GameManager.instance.dataMgr.currentQuestDataList[num].isClear = true;
+            GameManager.instance.uiMgr.GetClearQuest(GameManager.instance.dataMgr.currentQuestDataList[num].questName);
+            if (ClearEvent == null)
+            {
+                Debug.Log($"[QuestManage] 이벤트 비어있음");
+
+            }
+            if (ClearEvent != null)
+            {
+                Debug.Log($"[QuestManage] 이벤트 발동");
+
+                ClearEvent();
+            }
             //GameManager.instance.uiMgr.ShowNoteScrap(GameManager.instance.dataMgr.currentQuestDataList[num].questName);
-            
+
         }
     }
 }

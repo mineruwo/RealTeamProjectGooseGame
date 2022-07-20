@@ -6,6 +6,8 @@ public class Quest
     public string questName { get; set; }
     public bool isClear { get; set; }
     public bool isMainQuest { get; set; }
+    public bool? isSubQuest { get; set; }
+    public int? subQuestCount { get; set; }
 }
 
 [System.Serializable]
