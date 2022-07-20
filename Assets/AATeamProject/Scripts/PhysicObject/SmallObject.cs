@@ -26,10 +26,20 @@ public class SmallObject : PhysicObject
             col.enabled = false;
         }
 
-        isActive = false;
         isHeavy = false;
         isSound = false;
-        isGrab = true;
+        //isGrab = true;
+    }
+
+    public void Update()
+    {
+        if (isActive)
+        {
+            foreach (var col in colliders)
+            {
+                col.enabled = true;
+            }
+        }
     }
 
     public override bool OnGrab(bool isgrab)

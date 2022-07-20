@@ -39,10 +39,14 @@ public class GooseGrab : MonoBehaviour
                     
                     var pos = gooseMouse.position - grabObject.GetComponent<SmallObject>().handlePoint.transform.position;
                     grabObject.transform.position += pos;
-                    grabObject.transform.rotation = grabObject.GetComponent<SmallObject>().handlePoint.transform.rotation;
+                    //grabObject.transform.rotation = gooseMouse.transform.rotation;//grabObject.GetComponent<SmallObject>().handlePoint.transform.rotation;
+                    var rot = gooseMouse.transform.eulerAngles - grabObject.GetComponent<SmallObject>().handlePoint.transform.eulerAngles;
+                    
+                    grabObjRb.transform.eulerAngles += rot;
 
                     grabObjRb.useGravity = false;
                     grabObjRb.isKinematic = false;
+                    grabObjRb.mass = 0f;
                     grabObjRb.constraints = RigidbodyConstraints.FreezeAll;
                     grabObject.transform.SetParent(gooseMouse);
                     
