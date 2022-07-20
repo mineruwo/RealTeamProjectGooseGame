@@ -4,7 +4,6 @@ using UnityEngine;
 public enum NPCState
 {
     idle,
-    move,
     work,
     chase,
 }

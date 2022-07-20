@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 2025917203}
   - component: {fileID: 1936779937}
   - component: {fileID: 3365830985327746389}
+  - component: {fileID: 7671658518944848792}
   m_Layer: 21
   m_Name: gardener
   m_TagString: Human
@@ -383,6 +384,21 @@ MonoBehaviour:
   equipped: 0
   isArrived: 0
   isTakenByGoose: 0
+--- !u!114 &7671658518944848792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294127236928905632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ade5ddc28872e489736d930c476707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: {fileID: 0}
+  isFinished: 0
+  equipped: 0
 --- !u!1 &294127236928905839
 GameObject:
   m_ObjectHideFlags: 0
