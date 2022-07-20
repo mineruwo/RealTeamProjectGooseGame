@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GooseGrab : MonoBehaviour
 {
-    public float grabRange = 3f;
     public Transform gooseMouse;
     public GameObject grabObject;
     public Rigidbody rb;
@@ -34,18 +33,26 @@ public class GooseGrab : MonoBehaviour
             {
                 isDrag = true;
                 Rigidbody grabObjRb = grabObject.GetComponent<Rigidbody>();
-                grabObjRb.isKinematic = true;
-                grabObjRb.useGravity = false;
-
-                goose.AddComponent<FixedJoint>();
-                var fixedJoint = goose.GetComponent<FixedJoint>();
-                fixedJoint.connectedBody = grabObjRb;
-                fixedJoint.connectedAnchor = gameObject.GetComponent<TestGrabHandle>().grabHandle.transform.position;
+                if (!grabObject.GetComponent<PhysicObject>().isHeavy)
+                {
+                    Debug.Log("Success Grab");
+                    //grabObjRb.isKinematic = true;
+                    grabObjRb.useGravity = false;
+                    grabObject.AddComponent<FixedJoint>();
+                    var fixedJoint = grabObject.GetComponent<FixedJoint>();
+                    fixedJoint.connectedBody = rb;
+                   // fixedJoint.connectedAnchor = gameObject.GetComponent<SmallObject>().handlePoint.transform.position;
+                }
+                
 
                 // gooseMouse.transform.position = grabObject.GetComponent<TestGrabHandle>().grabHandle.transform.localPosition;
 
                 //grabObject.transform.SetParent(gooseMouse);
             }
+        }
+        if(rb != null)
+        {
+            Debug.Log("Fail");
         }
 
         //collider.transform.position = gooseMouse.transform.position;
@@ -70,15 +77,16 @@ public class GooseGrab : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<TestGrabHandle>())
+        if (other.GetComponent<PhysicObject>())
         {
+            Debug.Log("1");
             grabObject = other.gameObject;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<TestGrabHandle>() && !isDrag)
+        if (other.GetComponent<PhysicObject>() && !isDrag)
         {
             grabObject = null;
         }
