@@ -23,6 +23,18 @@ public class Waypoints : MonoBehaviour
 
     public Transform GetNextWaypoint(Transform currentWaypoint)
     {
-        return null;
+        if(currentWaypoint == null)
+        {
+            return transform.GetChild(0);
+        }
+
+        if(currentWaypoint.GetSiblingIndex() < transform.childCount)
+        {
+            return transform.GetChild(currentWaypoint.GetSiblingIndex() + 1);
+        }
+        else
+        {
+            return transform.GetChild(0);
+        }
     }
 }

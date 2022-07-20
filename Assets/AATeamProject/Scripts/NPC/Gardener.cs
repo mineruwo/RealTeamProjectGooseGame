@@ -8,7 +8,6 @@ public class Gardener : NPC
     public Animator animator;
 
     private RigBuilder rigBuilder;
-    private NavMeshAgent agent;
 
     public List<NPCState> states;
     public NPCState initState;
@@ -20,57 +19,41 @@ public class Gardener : NPC
     public Transform gardnerOneHand;
     public float pickUpRange = 3f;
 
-    public Transform[] workPos;
     public GameObject goose;
     public GameObject[] items;
 
-    public List<Job> jobs = new List<Job>();
-    private Job Waterring = new Job();
-    private Job Gardening = new Job();
-    private Job Planting = new Job();
     private GardenerJob working;
 
-    public bool equipped;
+    public static bool equipped;
     public bool isArrived;
     public bool isTakenByGoose;
 
     private NPCState state;
-    private int index;
 
     private float timer;
 
     private void Start()
     {
         rigBuilder = GetComponent<RigBuilder>();
-        agent = GetComponent<NavMeshAgent>();
         working = GetComponent<GardenerJob>();
-
-        jobs.Add(Waterring);
-        jobs.Add(Gardening);
-        jobs.Add(Planting);
+        timer = 0f;
 
         Idle();
         Undetect();
     }
     private void Update()
     {
-        if (state == NPCState.idle)
-        {
-            After5sec();
-            Water();
-        }
+        //if(state==NPCState.idle)
+        //{
 
-        if(state==NPCState.work)
-        {
-            Idle();
-        }
+        //}
+        Water();
+        //if(state==NPCState.work)
+        //{
+
+        //}
 
         TouchGoose();
-
-        if(index>workPos.Length-1)
-        {
-            index = 0;
-        }
     }
     public override void Detect()
     {
@@ -82,7 +65,6 @@ public class Gardener : NPC
     }
     public override void Idle()
     {
-        state = NPCState.idle;
         animator.SetFloat("RemainingDistance", 0f);
     }
     public override void Move()
@@ -112,7 +94,7 @@ public class Gardener : NPC
 
     public void Water()
     {
-        Move();
+        state = NPCState.work;
         working.Watering();
     }
 
@@ -148,10 +130,10 @@ public class Gardener : NPC
 
     }
 
-    private void After5sec()
+    public void After5sec()
     {
         timer += Time.deltaTime;
-        if (timer > 8f)
+        if (timer > 5f)
         {
             timer = 0f;
         }
@@ -162,25 +144,6 @@ public class Gardener : NPC
         {
             Detect();
         }
-        //if(other.CompareTag("Item"))
-        //{
-        //    if(!equipped)
-        //    {
-        //        foreach (var item in items)
-        //        {
-        //            var distance = Vector3.Distance(transform.position, item.transform.position);
-        //            if (distance < 1f)
-        //            {
-        //                PickUp();
-        //            }
-
-        //        }
-        //    }
-        //    else
-        //    {
-        //        DropDown();
-        //    }
-        //}
 
     }
 
