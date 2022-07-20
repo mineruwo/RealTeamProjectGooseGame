@@ -26,7 +26,6 @@ public class SmallObject : PhysicObject
             col.enabled = false;
         }
 
-        isActive = false;
         isHeavy = false;
         isSound = false;
         isGrab = true;
@@ -59,6 +58,20 @@ public class SmallObject : PhysicObject
 
     }
 
+    public void Update()
+    {
+        
+
+        if (isActive)
+        {
+            Rigidbody.isKinematic = false;
+
+            foreach (var col in colliders)
+            {
+                col.enabled = true;
+            }
+        }
+    }
     public override bool OnTrigger()
     {
 

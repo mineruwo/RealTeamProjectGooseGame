@@ -26,11 +26,10 @@ public class BigObject : PhysicObject
         {
             col.enabled = false;
         }
-
-        isActive = false;
+        
         isHeavy = true;
         isSound = false;
-        isGrab = true;
+        isGrab = false;
     }
 
     public override bool OnGrab(bool isgrab)
@@ -60,6 +59,20 @@ public class BigObject : PhysicObject
 
     }
 
+    public void Update()
+    {
+       
+
+        if (isActive)
+        {
+            Rigidbody.isKinematic = false;
+
+            foreach (var col in colliders)
+            {
+                col.enabled = true;
+            }
+        }
+    }
     public override bool OnTrigger()
     {
         return true;
