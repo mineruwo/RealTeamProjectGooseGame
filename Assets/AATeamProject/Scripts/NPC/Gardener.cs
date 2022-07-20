@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -29,6 +28,7 @@ public class Gardener : NPC
     private Job Waterring = new Job();
     private Job Gardening = new Job();
     private Job Planting = new Job();
+    private GardenerJob working;
 
     public bool equipped;
     public bool isArrived;
@@ -43,6 +43,7 @@ public class Gardener : NPC
     {
         rigBuilder = GetComponent<RigBuilder>();
         agent = GetComponent<NavMeshAgent>();
+        working = GetComponent<GardenerJob>();
 
         jobs.Add(Waterring);
         jobs.Add(Gardening);
@@ -56,18 +57,12 @@ public class Gardener : NPC
         if (state == NPCState.idle)
         {
             After5sec();
-            Move();
+            Water();
         }
 
-        if (state == NPCState.move)
+        if(state==NPCState.work)
         {
-            var distance = Vector3.Distance(transform.position, workPos[index].position);
-            if (agent.stoppingDistance > distance + 0.1f)
-            {
-                isArrived = true;
-                Idle();
-                index += 1;
-            }
+            Idle();
         }
 
         TouchGoose();
@@ -89,19 +84,11 @@ public class Gardener : NPC
     {
         state = NPCState.idle;
         animator.SetFloat("RemainingDistance", 0f);
-
-        if(equipped)
-        {
-
-        }
     }
     public override void Move()
     {
-        state = NPCState.move;
         animator.SetFloat("LocalVelocityZ", 0.5f);
         animator.SetFloat("RemainingDistance", 1f);
-
-        agent.SetDestination(workPos[index].position);
     }
 
     public override void Chase()
@@ -113,19 +100,20 @@ public class Gardener : NPC
         animator.SetFloat("RemainingDistance", 1f);
     }
 
-    public override void DoWork()
-    {
-        state = NPCState.work;
-
-    }
-
     public override void PickUp()
     {
-        foreach(var item in items)
+        equipped = true;
+        foreach (var item in items)
         {
             item.transform.SetParent(gardnerOneHand.transform);
         }
-        equipped = true;
+
+    }
+
+    public void Water()
+    {
+        Move();
+        working.Watering();
     }
 
     public override void DropDown()

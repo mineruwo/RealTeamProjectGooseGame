@@ -51,12 +51,12 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(dir * curspeed);
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+            
         }
         else
         {
             rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.deltaTime * 10f);
         }
-        Debug.Log(rb.velocity);
     }
 
     public void Move()
