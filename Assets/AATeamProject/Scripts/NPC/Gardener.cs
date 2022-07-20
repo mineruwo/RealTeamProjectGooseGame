@@ -121,11 +121,12 @@ public class Gardener : NPC
 
     public override void PickUp()
     {
-        foreach(var item in items)
+        equipped = true;
+        foreach (var item in items)
         {
             item.transform.SetParent(gardnerOneHand.transform);
         }
-        equipped = true;
+
     }
 
     public override void DropDown()
