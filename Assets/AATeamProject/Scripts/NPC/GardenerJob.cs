@@ -13,7 +13,6 @@ public class GardenerJob : MonoBehaviour
     private NavMeshAgent agent;
 
     public bool isFinished = false;
-    public bool equipped = false;
 
     private void Start()
     {
@@ -22,19 +21,38 @@ public class GardenerJob : MonoBehaviour
     }
 
     //공통적으로 들어가야 할 것 -> if 거위가 item 뺏어갔을 시 chase
-    public void DoNothing()
-    {
-        //그 장소 그대로 Idle animation
-    }
 
     public void Watering()
     {
-        var pos = GameObject.Find("WateringPos1");
-        agent.SetDestination(pos.transform.position);
-        //얘를 어떻게 들고오지
-
         //물뿌리개 있는 장소로 감
+        var pos = GameObject.Find("WateringPos1");
+        var pos2 = GameObject.Find("WateringPos2");
+
+        gardener.Move();
+        agent.SetDestination(pos.transform.position);
+
+        var distance = Vector3.Distance(agent.transform.position, pos.transform.position);
+        Debug.Log(distance);
+        if (distance <= 0.1f)
+        {
+            gardener.Idle();
+            Gardener.equipped = true;
+        }
+
         //물뿌리개 들고 꽃 있는 곳으로 감
+
+        if (Gardener.equipped)
+        {
+            gardener.Move();
+            agent.SetDestination(pos2.transform.position);
+            distance = Vector3.Distance(agent.transform.position, pos2.transform.position);
+
+            if (distance <= 0.1f)
+            {
+                gardener.Idle();
+                isFinished = true;
+            }
+        }
         //물 줌
         //물뿌리개 원래 장소에
 
@@ -48,12 +66,15 @@ public class GardenerJob : MonoBehaviour
         //있으면 삽 들고 새싹있는 화단에 감
         //삽질
         //삽 다시 원래 자리에
-
-        DoNothing();
     }
 
     public void CarryingVase()
     {
+        var pos = GameObject.Find("VasePos1");
+        var pos2 = GameObject.Find("VasePos2");
+
+        gardener.Move();
+        agent.SetDestination(pos.transform.position);
         //근데 얘는 한번 옮기고 그자리를 곶어해줘야하니까 . . .. 업데이트에서...??
     }
 }
