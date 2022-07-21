@@ -35,17 +35,6 @@ public class SmallObject : PhysicObject
         //isGrab = true;
     }
 
-    public void Update()
-    {
-        if (isActive)
-        {
-            foreach (var col in colliders)
-            {
-                col.enabled = true;
-            }
-        }
-    }
-
     public override bool OnGrab(bool isgrab)
     {
         Rigidbody.isKinematic = false;
