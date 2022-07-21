@@ -20,8 +20,6 @@ public class CameraInsightInObject : MonoBehaviour
 
     private void Update()
     {
-        CheckToTarget();
-
         foreach (GameObject go in viewTarget)
         {
             var insight = go.GetComponentInChildren<OnvisualCamera>().isView;
