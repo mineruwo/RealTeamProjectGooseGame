@@ -13,7 +13,10 @@ public class UiManager : MonoBehaviour
 
         GameManager.instance.dataMgr.LoadQuestData(slotNum);
         GameManager.instance.sceneMgr.LoadGameScene();
+        GameManager.instance.questMgr.ClearEvent += ShowNoteScrap;
     }
+    
+
 
     public void OnClickDeleteButton(int slotNum)
     {
@@ -22,6 +25,26 @@ public class UiManager : MonoBehaviour
     }
 
     // 게임씬
+    GameObject scrapNote;
+    public void SetNoteScrape(GameObject obj)
+    {
+        scrapNote = obj;
+    }
+
+
+    public void ShowNoteScrap()
+    {
+        if (scrapNote == null)
+        {
+            //scrapNote = GameObject.FindGameObjectWithTag("NoteScrap");
+            Debug.Log($"[UiManager] 없음 스크랩");
+
+        }
+        var textnote = scrapNote.transform.GetChild(0);
+        textnote.GetComponent<TextMeshProUGUI>().text = "<s>" + text + "</s>";
+        scrapNote.SetActive(true);
+        StartCoroutine(ScrapeDown());
+    }
 
     private int currentCursor = 1;
 
@@ -51,9 +74,6 @@ public class UiManager : MonoBehaviour
             downMenu.SetActive(true);
         }
     }
-
-
-
 
     public void OnClickLeftArrow(GameObject[] cursors)
     {
@@ -113,20 +133,22 @@ public class UiManager : MonoBehaviour
     public void GetClearQuest(string text)
     {
         this.text = text;
+        Debug.Log($"[UiManager] 들어온텍스트 확인{this.text}");
+
     }
 
-    GameObject scrapNote;
-    public void ShowNoteScrap(string name)
-    {
-        if (scrapNote == null)
-        {
-            scrapNote = GameObject.FindGameObjectWithTag("ScrapNote");
-        }
-        var text = scrapNote.transform.GetChild(0);
-        text.GetComponent<TextMeshProUGUI>().text = "<s>" + name + "</s>";
-        scrapNote.SetActive(true);
-        StartCoroutine(ScrapeDown());
-    }
+    //GameObject scrapNote;
+    //public void ShowNoteScrap(string name)
+    //{
+    //    if (scrapNote == null)
+    //    {
+    //        scrapNote = GameObject.FindGameObjectWithTag("ScrapNote");
+    //    }
+    //    var text = scrapNote.transform.GetChild(0);
+    //    text.GetComponent<TextMeshProUGUI>().text = "<s>" + name + "</s>";
+    //    scrapNote.SetActive(true);
+    //    StartCoroutine(ScrapeDown());
+    //}
 
     public IEnumerator ScrapeDown()
     {
@@ -176,21 +198,27 @@ public class UiManager : MonoBehaviour
                 {
                     subQuestTextObj = GameManager.instance.objpoolMgr.GetObject("QuestCollectTextQ1");
                     subQuestTextObj.transform.parent = questNoteLists[1].transform;
-                    subQuestTextObj.GetComponent<TextMeshProUGUI>().text = "(피크닉 담요에 가져올 물건 : ";
-                    subQuestTextObj.GetComponent<TextMeshProUGUI>().text += quest.questName;
+                    subQuestTextObj.GetComponent<TextMeshProUGUI>().text = "(피크닉 담요에 가져올 물건 : ";             
                     if (quest.isClear)
                     {
                         subQuestTextObj.GetComponent<TextMeshProUGUI>().text += "<s>" + quest.questName + "</s>";
+                    }
+                    else
+                    {
+                        subQuestTextObj.GetComponent<TextMeshProUGUI>().text += quest.questName;
                     }
                     Stage1SubQuest = true;
                     deList.Add(subQuestTextObj);
                 }
                 else
                 {
-                    subQuestTextObj.GetComponent<TextMeshProUGUI>().text += (", " + quest.questName);
                     if (quest.isClear)
                     {
                         subQuestTextObj.GetComponent<TextMeshProUGUI>().text += (", " +"<s>" + quest.questName + "</s>");
+                    }
+                    else
+                    {
+                        subQuestTextObj.GetComponent<TextMeshProUGUI>().text += (", " + quest.questName);
                     }
                 }
             }

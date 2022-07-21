@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
 
+    public NPC npc;
+
     private bool isSneck;
     private bool isRun = false;
     private bool isWing = false;
@@ -22,6 +24,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 dir;
     private bool input = false;
     private Quaternion targetRot;
+
+    public GameManager gamemanager;
     void Start()
     {
         camTr = Camera.main.transform;
@@ -50,13 +54,12 @@ public class PlayerController : MonoBehaviour
         if (input)
         {
             rb.AddForce(dir * curspeed);
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);  
         }
         else
         {
             rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.deltaTime * 10f);
         }
-        Debug.Log(rb.velocity);
     }
 
     public void Move()
@@ -79,6 +82,7 @@ public class PlayerController : MonoBehaviour
         rDir.Normalize();
 
         dir = v * wDir + h * rDir;
+        dir.y += 0.1f;
         dir.Normalize();
 
         if (rb.velocity.magnitude > 0.1f)
@@ -111,6 +115,21 @@ public class PlayerController : MonoBehaviour
         {
             isRun = !isRun;
         }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            //꽥꽥
+            //gamemanager.audioMgr.SFXPlay("")
+            Debug.Log("꽥꽥");
+
+
+            //npc와의 거리가 약 10cm 정도 거리라면 npc 어그로 끄는 함수 발동
+            //var a = npc.transform.position - transform.position;
+            //if(a.magnitude < 10f)
+            //{
+            //    npc.어그로끄는 함수();
+            //}
+        }
     }
 
     public void AniParameters()
@@ -122,4 +141,5 @@ public class PlayerController : MonoBehaviour
     {
 
     }
+
 }

@@ -6,6 +6,8 @@ public class Quest
     public string questName { get; set; }
     public bool isClear { get; set; }
     public bool isMainQuest { get; set; }
+    public bool? isSubQuest { get; set; }
+    public int? subQuestCount { get; set; }
 }
 
 [System.Serializable]
@@ -25,4 +27,11 @@ public class Option
 
     // false : 거위만 true : 거위 + NPC
     public bool isNpcFocus;
+}
+
+[System.Serializable]
+public class StartPositon
+{
+    public Transition position1;
+    public Transition position2;
 }
