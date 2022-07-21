@@ -21,8 +21,6 @@ public class GooseGrab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("test");
-        Debug.Log("test2");
         if (Input.GetKeyDown(KeyCode.Z))
         {
             switch(isDrag)
@@ -41,10 +39,11 @@ public class GooseGrab : MonoBehaviour
                     if (grabObject != null) //
                     {
                         isDrag = true;
-                        Rigidbody grabObjRb = grabObject.GetComponent<Rigidbody>();
+                        Rigidbody grabObjRb;
 
                         if (!grabObject.GetComponent<PhysicObject>().isHeavy)   //가벼운 오브젝트 잡을 때
                         {
+                            grabObjRb = grabObject.GetComponent<SmallObject>().Rigidbody;
                             Debug.Log("Success Grab");
 
                             var rot = gooseMouse.transform.eulerAngles - grabObject.GetComponent<SmallObject>().handlePoint.transform.eulerAngles;
@@ -62,6 +61,7 @@ public class GooseGrab : MonoBehaviour
                         }
                         else if(grabObject.GetComponent<PhysicObject>().isHeavy)    //무거운 오브젝트 잡을 때
                         {
+                            grabObjRb = grabObject.GetComponent<BigObject>().Rigidbody;
                             GameObject handle = grabObject.GetComponent<BigObject>().handlePoint[0];
                             Vector3 vec3 = gooseMouse.transform.position - handle.transform.position;
                             float distance = vec3.magnitude;
@@ -119,15 +119,29 @@ public class GooseGrab : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<PhysicObject>())
+        var obj = other.GetComponent<PhysicObject>();
+
+        if (obj == null)
         {
-            grabObject = other.gameObject;
+            obj = other.GetComponentInParent<PhysicObject>();
+        }
+
+        if (obj)
+        {
+            grabObject = obj.gameObject;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PhysicObject>() && !isDrag)
+        var obj = other.GetComponent<PhysicObject>();
+
+        if(obj == null)
+        {
+            obj = other.GetComponentInParent<PhysicObject>();
+        }
+
+        if (obj && !isDrag)
         {
             grabObject = null;
         }

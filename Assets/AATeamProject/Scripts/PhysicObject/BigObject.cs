@@ -5,7 +5,7 @@ using UnityEngine;
 public class BigObject : PhysicObject
 {
     public Vector3 setPos;
-    private Rigidbody Rigidbody;
+    public Rigidbody Rigidbody;
     private List<Collider> colliders;
     public List<GameObject> handlePoint;
     private Rigidbody settngRb;
