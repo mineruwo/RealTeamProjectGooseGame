@@ -22,6 +22,7 @@ public class GooseGrab : MonoBehaviour
     void Update()
     {
         Debug.Log("test");
+        Debug.Log("test2");
         if (Input.GetKeyDown(KeyCode.Z))
         {
             switch(isDrag)
