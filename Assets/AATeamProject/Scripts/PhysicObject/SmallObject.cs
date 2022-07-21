@@ -47,6 +47,7 @@ public class SmallObject : PhysicObject
                     col.enabled = true;
                 }
                 isActive = true;
+                Rigidbody.useGravity = true;
 
                 return true;
 
@@ -58,6 +59,7 @@ public class SmallObject : PhysicObject
                 }
 
                 Rigidbody = settngRb;
+                Rigidbody.useGravity = true;
 
                 return false;
         }
