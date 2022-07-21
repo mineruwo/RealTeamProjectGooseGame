@@ -13,7 +13,7 @@ public abstract class PhysicObject : MonoBehaviour
 
     public bool isActive = true;
     
-    public abstract bool OnTrigger();
+    public abstract Vector3 OnTrigger();
 
     public abstract bool OnGrab(bool isgrab);
 

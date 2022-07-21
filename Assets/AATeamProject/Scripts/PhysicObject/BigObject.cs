@@ -73,8 +73,8 @@ public class BigObject : PhysicObject
             }
         }
     }
-    public override bool OnTrigger()
+    public override Vector3 OnTrigger()
     {
-        return true;
+        return transform.position;
     }
 }
