@@ -9,6 +9,8 @@ public class SmallObject : PhysicObject
     private List<Collider> colliders;
     public GameObject handlePoint;
 
+    private Rigidbody settngRb;
+
     public void Awake()
     {
         setPos = transform.position;
@@ -21,12 +23,13 @@ public class SmallObject : PhysicObject
         Rigidbody.isKinematic = true;
         colliders =  new List<Collider>(GetComponentsInChildren<Collider>());
 
+        settngRb = Rigidbody;
+
         foreach (var col in colliders)
         {
             col.enabled = false;
         }
 
-        isActive = false;
         isHeavy = false;
         isSound = false;
         isGrab = true;
@@ -44,6 +47,7 @@ public class SmallObject : PhysicObject
                     col.enabled = true;
                 }
                 isActive = true;
+                Rigidbody.useGravity = true;
 
                 return true;
 
@@ -54,14 +58,29 @@ public class SmallObject : PhysicObject
                     col.enabled = false;
                 }
 
+                Rigidbody = settngRb;
+                Rigidbody.useGravity = true;
+
                 return false;
         }
 
     }
 
-    public override bool OnTrigger()
+    public void Update()
+    {
+        if (isActive)
+        {
+            Rigidbody.isKinematic = false;
+
+            foreach (var col in colliders)
+            {
+                col.enabled = true;
+            }
+        }
+    }
+    public override Vector3 OnTrigger()
     {
 
-        return true;
+        return transform.position;
     }
 }

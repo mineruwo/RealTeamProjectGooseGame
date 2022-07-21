@@ -19,9 +19,9 @@ public class InterectionObject : PhysicObject
         return true;
     }
 
-    public override bool OnTrigger()
+    public override Vector3 OnTrigger()
     {
 
-        return true;
+        return transform.position;
     }
 }

@@ -8,6 +8,7 @@ public class BigObject : PhysicObject
     private Rigidbody Rigidbody;
     private List<Collider> colliders;
     public List<GameObject> handlePoint;
+    private Rigidbody settngRb;
 
     public void Awake()
     {
@@ -19,6 +20,8 @@ public class BigObject : PhysicObject
             Rigidbody = GetComponent<Rigidbody>();
         }
 
+        settngRb = Rigidbody;
+
         Rigidbody.isKinematic = true;
         colliders = new List<Collider>(GetComponentsInChildren<Collider>());
 
@@ -26,16 +29,16 @@ public class BigObject : PhysicObject
         {
             col.enabled = false;
         }
-
-        isActive = false;
+        
         isHeavy = true;
         isSound = false;
-        isGrab = true;
+        isGrab = false;
     }
 
     public override bool OnGrab(bool isgrab)
     {
         Rigidbody.isKinematic = false;
+
 
         switch (isgrab)
         {
@@ -55,13 +58,29 @@ public class BigObject : PhysicObject
                     col.enabled = false;
                 }
 
+                Rigidbody = settngRb;
+                Rigidbody.useGravity = true;
+
                 return false;
         }
 
     }
 
-    public override bool OnTrigger()
+    public void Update()
     {
-        return true;
+
+        if (isActive)
+        {
+            Rigidbody.isKinematic = false;
+
+            foreach (var col in colliders)
+            {
+                col.enabled = true;
+            }
+        }
+    }
+    public override Vector3 OnTrigger()
+    {
+        return transform.position;
     }
 }
