@@ -10,7 +10,6 @@ public class GlobalSceneManager : MonoBehaviour
 
     void Start()
     {
-        //if (SceneManager.sceneCount == 1)
         if(SceneManager.GetActiveScene().buildIndex == 0)
         {
             Debug.Log($"[GlobalSceneManager] ÇöÀç ·Îµù¾À");
