@@ -145,6 +145,7 @@ public class Gardener : NPC
             Detect();
         }
 
+
     }
 
     private void OnTriggerExit(Collider other)

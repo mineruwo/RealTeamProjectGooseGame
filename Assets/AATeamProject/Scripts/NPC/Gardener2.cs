@@ -20,6 +20,14 @@ public enum WorkTypes
     TakingVase,
 }
 
+public enum ChasingSituations
+{
+    DefaultChase,
+    GetWetfeet,
+    WetChase,
+    MissItem,
+}
+
 
 public class Gardener2 : MonoBehaviour
 {
@@ -48,12 +56,15 @@ public class Gardener2 : MonoBehaviour
     private float timer;
 
     private NPCState currentState;
-
+    public GameObject lake;
     
     private WorkTypes prevWorkType;
     private WorkTypes workType;
+    private ChasingSituations chasingSituation;
     private int prevWorkStep;
     private int workStep = 0;
+
+    private bool isWetted;
 
 
     // Watrt
@@ -117,6 +128,34 @@ public class Gardener2 : MonoBehaviour
         }
     }
 
+    public ChasingSituations ChasingSituation
+    {
+        get { return chasingSituation; }
+        private set
+        {
+            CurrentState = NPCState.chase;
+            chasingSituation = value;
+            switch (chasingSituation)
+            {
+                case ChasingSituations.DefaultChase:
+                    break;
+                case ChasingSituations.GetWetfeet:
+                    gameObject.GetComponent<NavMeshAgent>().enabled = false;
+                    animator.SetBool("ReactionActive", true);
+                    animator.SetInteger("ReactionIndex", 1);
+                    break;
+
+                case ChasingSituations.WetChase:
+                    gameObject.GetComponent<NavMeshAgent>().enabled = true;
+                    agent.SetDestination(lake.transform.position);
+                    animator.SetBool("ReactionActive", false);
+                    break;
+                case ChasingSituations.MissItem:
+                    break;
+            }
+        }
+    }
+
     private void Start()
     {
 
@@ -124,6 +163,7 @@ public class Gardener2 : MonoBehaviour
         rigBuilder = GetComponent<RigBuilder>();
         working = GetComponent<GardenerJob>();
         timer = 0f;
+        isWetted = false;
 
         CurrentState = NPCState.idle;
     }
@@ -149,8 +189,23 @@ public class Gardener2 : MonoBehaviour
 
     private void UpdateChase()
     {
+        switch (ChasingSituation)
+        {
+            case ChasingSituations.DefaultChase:
+                UpdateDefaultChase();
+                break;
+            case ChasingSituations.GetWetfeet:
+                UpdateGetWetfeet();
+                break;
+            case ChasingSituations.WetChase:
+                UpdateWetChase();
+                break;
+            case ChasingSituations.MissItem:
+                break;
+        }
 
     }
+
 
     private void UpdateWork()
     {
@@ -234,14 +289,38 @@ public class Gardener2 : MonoBehaviour
 
     }
 
+    private void UpdateDefaultChase()
+    {
+        animator.SetFloat("LocalVelocityZ", 1f);
+        animator.SetFloat("RemainingDistance", 1f);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+    }
+
+    private void UpdateGetWetfeet()
+    {
+        timer += Time.deltaTime;
+        if (timer>3f && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            ChasingSituation = ChasingSituations.WetChase;
+        }
+    }
+
+    private void UpdateWetChase()
+    {
+        animator.SetFloat("LocalVelocityZ", 0.7f);
+        animator.SetFloat("RemainingDistance", 1f);
+
+    }
+
     private void UpdateIdle()
     {
         timer += Time.deltaTime;
         if (timer > 5f)
         {
             timer = 0f;
-            CurrentState = NPCState.work;
-            WorkType = WorkTypes.Water;
+            agent.SetDestination(lake.transform.position);
+            CurrentState = NPCState.chase;
+            chasingSituation = ChasingSituations.DefaultChase;
         }
     }
 
@@ -257,4 +336,15 @@ public class Gardener2 : MonoBehaviour
         animator.SetFloat("RemainingRotation", angle);
         animator.SetFloat("TurnSpeed", angle > 0f ? 2f : -2f);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(!isWetted && other.gameObject.layer == LayerMask.NameToLayer("PropAndGooseAndHumanTrigger"))
+        {
+            timer = 0f;
+            ChasingSituation = ChasingSituations.GetWetfeet;
+            isWetted = true;
+        }
+    }
+
 }
