@@ -16002,7 +16002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Data:
-    m_ConstrainedObject: {fileID: 8665319479859940636}
+    m_ConstrainedObject: {fileID: 8665319479580062466}
     m_SourceObjects:
       m_Length: 1
       m_Item0:
@@ -16030,10 +16030,10 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: -100
-    m_MaxLimit: 100
-    m_AimAxis: 4
-    m_UpAxis: 4
+    m_MinLimit: -70
+    m_MaxLimit: 70
+    m_AimAxis: 1
+    m_UpAxis: 5
     m_WorldUpType: 0
     m_WorldUpObject: {fileID: 0}
     m_WorldUpAxis: 2
