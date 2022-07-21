@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/AATeamProject/Scenes/SceneTitle.unity
     guid: 24d8c7c0649f65a469bf00b7dbff27fe
   - enabled: 1
-    path: Assets/AATeamProject/Scenes/SceneGame.unity
-    guid: 712adcde2b2dae04c84bd09b13d388fc
+    path: Assets/AATeamProject/Scenes/JH/SceneGameJH.unity
+    guid: 910b2e6eac9378f4ea18535a7398eb7e
   m_configObjects: {}

@@ -28,3 +28,10 @@ public class Option
     // false : 거위만 true : 거위 + NPC
     public bool isNpcFocus;
 }
+
+[System.Serializable]
+public class StartPositon
+{
+    public Transition position1;
+    public Transition position2;
+}

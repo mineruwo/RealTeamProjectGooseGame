@@ -34,7 +34,6 @@ public class QuestManager : MonoBehaviour
             if (ClearEvent == null)
             {
                 Debug.Log($"[QuestManage] 이벤트 비어있음");
-
             }
             if (ClearEvent != null)
             {
@@ -42,8 +41,6 @@ public class QuestManager : MonoBehaviour
 
                 ClearEvent();
             }
-            //GameManager.instance.uiMgr.ShowNoteScrap(GameManager.instance.dataMgr.currentQuestDataList[num].questName);
-
         }
     }
 }
