@@ -60,12 +60,28 @@ public class GooseGrab : MonoBehaviour
                         }
                         else if(grabObject.GetComponent<PhysicObject>().isHeavy)    //무거운 오브젝트 잡을 때
                         {
-                            
-                            var distances = grabObject.GetComponent<BigObject>().handlePoint;
-                            foreach(var distance in distances)
+                            GameObject handle = grabObject.GetComponent<BigObject>().handlePoint[0];
+                            Vector3 vec3 = gooseMouse.transform.position - handle.transform.position;
+                            float distance = vec3.magnitude;
+
+                            var handlePoints = grabObject.GetComponent<BigObject>().handlePoint;
+                            foreach(var handlePoint in handlePoints)
                             {
                                 //여기서 거리 짧은애 구함
+                                var trans = gooseMouse.transform.position - handlePoint.transform.position;
+                                if(trans.magnitude < distance)
+                                {
+                                    handle = handlePoint;
+                                    distance = trans.magnitude;
+                                }
                             }
+
+                            var hingeJoint = goose.AddComponent<HingeJoint>();
+                            hingeJoint.anchor = gooseMouse.transform.position;
+
+                            hingeJoint.connectedBody = grabObjRb;
+
+                            hingeJoint.connectedAnchor = handle.transform.position;
                             //그다음 여기서 위에 있는 코드들이랑 똑같이 작성하면 끝?
                             //단 inverse kinematic 애니메이션을 사용하여 부리가 handlePoint에 닿게 해야함.
                             
