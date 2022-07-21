@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
 
     public NPC npc;
 
+    public SphereCollider gooseSphereCollider;
+    public Transform groundCastPoint;
+    private bool isGround;
+
     private bool isSneck;
     private bool isRun = false;
     private bool isWing = false;
@@ -37,6 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         InputSet();
+        CheckForward();
 
         sneak = Mathf.Lerp(sneak, isSneck ? 1f : 0f, Time.deltaTime * 10f);
         animator.SetFloat("Sneak", sneak);
@@ -82,7 +87,6 @@ public class PlayerController : MonoBehaviour
         rDir.Normalize();
 
         dir = v * wDir + h * rDir;
-        dir.y += 0.1f;
         dir.Normalize();
 
         if (rb.velocity.magnitude > 0.1f)
@@ -139,6 +143,22 @@ public class PlayerController : MonoBehaviour
 
     public void Shoo(Vector3 forward)
     {
+
+    }
+
+    public void CheckForward()
+    {
+        float checkDistance = 3f;
+        bool cast = Physics.SphereCast(groundCastPoint.position, gooseSphereCollider.radius * 0.9f, Vector3.down, out var hit, checkDistance, LayerMask.NameToLayer("Ground"), QueryTriggerInteraction.Ignore);
+       
+        if(cast)
+        {
+            float groundSlope = Vector3.Angle(hit.normal, Vector3.up);
+            float forwardSlope = Vector3.Angle(hit.normal, dir);
+
+            rb.velocity += Quaternion.AngleAxis(forwardSlope, dir) * Vector3.one;
+            Debug.Log(Quaternion.AngleAxis(forwardSlope, dir) * Vector3.one);
+        }
 
     }
 
