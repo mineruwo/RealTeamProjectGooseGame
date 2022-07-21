@@ -56,7 +56,6 @@ public class Gardener2 : MonoBehaviour
     private float timer;
 
     private NPCState currentState;
-    public GameObject lake;
     
     private WorkTypes prevWorkType;
     private WorkTypes workType;
@@ -147,7 +146,7 @@ public class Gardener2 : MonoBehaviour
 
                 case ChasingSituations.WetChase:
                     gameObject.GetComponent<NavMeshAgent>().enabled = true;
-                    agent.SetDestination(lake.transform.position);
+                    agent.SetDestination(targetPos);
                     animator.SetBool("ReactionActive", false);
                     break;
                 case ChasingSituations.MissItem:
@@ -247,7 +246,11 @@ public class Gardener2 : MonoBehaviour
         //¹°»Ñ¸®°³ÁÖ¿ö
         if(distance <= 0.1f)
         {
-            CurrentState = NPCState.idle;
+            if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime>=1f)
+            {
+                CurrentState = NPCState.idle;
+                Debug.Log("µ¹¾Ñ³Ä°í");
+            }
         }
 
         switch (workStep)
@@ -309,6 +312,7 @@ public class Gardener2 : MonoBehaviour
     {
         animator.SetFloat("LocalVelocityZ", 0.7f);
         animator.SetFloat("RemainingDistance", 1f);
+        
 
     }
 
@@ -318,16 +322,16 @@ public class Gardener2 : MonoBehaviour
         if (timer > 5f)
         {
             timer = 0f;
-            agent.SetDestination(lake.transform.position);
-            CurrentState = NPCState.chase;
-            chasingSituation = ChasingSituations.DefaultChase;
+            agent.SetDestination(targetPos);
+            CurrentState = NPCState.work;
+            WorkType = WorkTypes.Water;
         }
     }
 
     private void TurnSide()
     {
         var from = transform.forward;
-        var to = GameObject.Find("platerman").transform.position - transform.position;
+        var to = GameObject.FindGameObjectWithTag("Item").transform.position - transform.position;
         to.Normalize();
 
         var angle = Vector3.SignedAngle(transform.forward, to, Vector3.up);
@@ -339,7 +343,7 @@ public class Gardener2 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!isWetted && other.gameObject.layer == LayerMask.NameToLayer("PropAndGooseAndHumanTrigger"))
+        if(!isWetted && other.gameObject.layer == LayerMask.NameToLayer("Water"))
         {
             timer = 0f;
             ChasingSituation = ChasingSituations.GetWetfeet;
