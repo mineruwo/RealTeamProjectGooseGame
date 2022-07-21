@@ -21,6 +21,7 @@ public class GooseGrab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("test");
         if (Input.GetKeyDown(KeyCode.Z))
         {
             switch(isDrag)
