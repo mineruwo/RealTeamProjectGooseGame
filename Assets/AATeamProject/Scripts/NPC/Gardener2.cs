@@ -52,7 +52,9 @@ public class Gardener2 : MonoBehaviour
     
     private WorkTypes prevWorkType;
     private WorkTypes workType;
+    private int prevWorkStep;
     private int workStep = 0;
+
 
     // Watrt
     // step 1: 물뿌리개로 가
@@ -102,9 +104,8 @@ public class Gardener2 : MonoBehaviour
                     animator.SetFloat("RemainingDistance", 1f);
 
                     targetPos = GameObject.Find("WateringPos1").transform.position;
-                    //var pos2 = GameObject.Find("WateringPos2");
-
                     agent.SetDestination(targetPos);
+
                     break;
                 case WorkTypes.Gardening:
 
@@ -175,33 +176,49 @@ public class Gardener2 : MonoBehaviour
 
     private void UpdateGardening()
     {
+        switch(workStep)
+        {
+            case 1:
+                break;
+            case 2:
+                break;
+        }
     }
 
     private void UpdateWorkWater()
     {
-        switch(workStep)
+        var distance = Vector3.Distance(transform.position, targetPos);
+        prevWorkStep = workStep;
+        //물뿌리개주워
+        if(distance <= 0.1f)
+        {
+            CurrentState = NPCState.idle;
+        }
+
+        switch (workStep)
         {
             case 1:
-                //물뿌리개주워
-                Gardener.equipped = true;
+                targetPos = GameObject.Find("WateringPos2").transform.position;
+                agent.SetDestination(targetPos);
+
                 break;
 
             case 2:
-                //들고가고
-                targetPos = GameObject.Find("WateringPos2").transform.position;
-                agent.SetDestination(targetPos);
-                workStep++;
+                //물주고
+                //물주는애니메이션
+                animator.SetBool("JobActive", true);
+                animator.SetInteger("JobIndex", 0);
+                UpdateIdle();
                 break;
 
             case 3:
                 //앞에서서돌고
                 //idle
+                UpdateIdle();
                 break;
 
             case 4:
-                //물주고
-                //물주는애니메이션
-                break;
+       
 
             case 5:
                 //다시물뿌리개들고가고
@@ -212,20 +229,20 @@ public class Gardener2 : MonoBehaviour
                 //finish
                 break;
         }
-        var distance = Vector3.Distance(transform.position, targetPos);
+
+
 
     }
 
     private void UpdateIdle()
     {
-        TurnSide();
-        //timer += Time.deltaTime;
-        //if (timer > 5f)
-        //{
-        //    timer = 0f;
-        //    CurrentState = NPCState.work;
-        //    //WorkType = UnityEngine.Random.Range(WorkTypes);
-        //}
+        timer += Time.deltaTime;
+        if (timer > 5f)
+        {
+            timer = 0f;
+            CurrentState = NPCState.work;
+            WorkType = WorkTypes.Water;
+        }
     }
 
     private void TurnSide()
