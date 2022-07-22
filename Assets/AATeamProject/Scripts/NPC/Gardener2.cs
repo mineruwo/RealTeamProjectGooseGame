@@ -46,6 +46,9 @@ public class Gardener2 : MonoBehaviour
     public float pickUpRange = 3f;
 
     public GameObject goose;
+    public GameObject item;
+    public Rigidbody rd;
+    public ParticleSystem particle;
 
     private GardenerJob working;
 
@@ -244,42 +247,66 @@ public class Gardener2 : MonoBehaviour
         var distance = Vector3.Distance(transform.position, targetPos);
         prevWorkStep = workStep;
         //물뿌리개주워
-        if(distance <= 0.1f)
+        if(distance < 0.05f && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
         {
-            if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime>=1f)
+            animator.SetFloat("RemainingDistance", 0f);
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
-                CurrentState = NPCState.idle;
-                Debug.Log("돌앗냐고");
+                workStep += 1;
+                if(workStep>4)
+                    workStep = 0;
             }
+
         }
 
         switch (workStep)
         {
             case 1:
-                targetPos = GameObject.Find("WateringPos2").transform.position;
-                agent.SetDestination(targetPos);
+                if(item != null)
+                {
+                    if(item.CompareTag("Item"))
+                    {
+                        Debug.Log("got");
+                        rd = item.GetComponent<Rigidbody>();
+                        item.transform.SetParent(gardnerOneHand, true);
+                        rd.isKinematic = true;
+                        
+                    }
+                }
 
                 break;
 
             case 2:
-                //물주고
-                //물주는애니메이션
-                animator.SetBool("JobActive", true);
-                animator.SetInteger("JobIndex", 0);
-                UpdateIdle();
+                targetPos = GameObject.Find("WateringPos2").transform.position;
+                animator.SetFloat("LocalVelocityZ", 0.5f);
+                animator.SetFloat("RemainingDistance", 1f);
+                agent.SetDestination(targetPos);
                 break;
 
             case 3:
-                //앞에서서돌고
-                //idle
-                UpdateIdle();
+                transform.LookAt(GameObject.FindGameObjectWithTag("WorkSpot").transform);
+                break;
+            case 4:
+                //물주고
+                //물주는애니메이션
+                particle = item.GetComponentInChildren<ParticleSystem>();
+                animator.SetBool("JobActive", true);
+                animator.SetInteger("JobIndex", 0);
+                if(animator.GetBool("JobActive"))
+                {
+                    particle.Play();
+                }
+
+                if(TestFunc.isFinishedWater)
+                {
+                    particle.Stop();
+                    workStep = 5;
+                }
+
                 break;
 
-            case 4:
-       
-
             case 5:
-                //다시물뿌리개들고가고
+                UpdateIdle();
                 break;
 
             case 6:
@@ -337,6 +364,7 @@ public class Gardener2 : MonoBehaviour
         var angle = Vector3.SignedAngle(transform.forward, to, Vector3.up);
         Debug.Log(angle);
 
+        transform.LookAt(to);
         animator.SetFloat("RemainingRotation", angle);
         animator.SetFloat("TurnSpeed", angle > 0f ? 2f : -2f);
     }
@@ -349,6 +377,32 @@ public class Gardener2 : MonoBehaviour
             ChasingSituation = ChasingSituations.GetWetfeet;
             isWetted = true;
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Goose"))
+        {
+            Detect();
+        }
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Goose"))
+        {
+            Undetect();
+            Debug.Log("나감");
+        }
+
+    }
+    public void Detect()
+    {
+        rigBuilder.layers[0].active = true;
+    }
+    public void Undetect()
+    {
+        rigBuilder.layers[0].active = false;
     }
 
 }
