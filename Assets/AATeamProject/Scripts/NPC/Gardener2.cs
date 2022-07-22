@@ -48,6 +48,7 @@ public class Gardener2 : MonoBehaviour
     public GameObject goose;
     public GameObject item;
     public Rigidbody rd;
+    public ParticleSystem particle;
 
     private GardenerJob working;
 
@@ -246,17 +247,16 @@ public class Gardener2 : MonoBehaviour
         var distance = Vector3.Distance(transform.position, targetPos);
         prevWorkStep = workStep;
         //물뿌리개주워
-        if(distance <= 0.05f)
+        if(distance < 0.05f && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
         {
-            if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime>=1f)
+            animator.SetFloat("RemainingDistance", 0f);
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
-                animator.SetFloat("RemainingDistance", 0f);
-                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-                {
-                    workStep += 1;
-                }
-
+                workStep += 1;
+                if(workStep>4)
+                    workStep = 0;
             }
+
         }
 
         switch (workStep)
@@ -289,15 +289,24 @@ public class Gardener2 : MonoBehaviour
             case 4:
                 //물주고
                 //물주는애니메이션
+                particle = item.GetComponentInChildren<ParticleSystem>();
                 animator.SetBool("JobActive", true);
                 animator.SetInteger("JobIndex", 0);
+                if(animator.GetBool("JobActive"))
+                {
+                    particle.Play();
+                }
 
-                Debug.Log("물주는중");
+                if(TestFunc.isFinishedWater)
+                {
+                    particle.Stop();
+                    workStep = 5;
+                }
 
                 break;
 
             case 5:
-                animator.SetFloat("RemainingDistance", 0f);
+                UpdateIdle();
                 break;
 
             case 6:
