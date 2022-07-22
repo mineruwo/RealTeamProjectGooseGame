@@ -27,7 +27,7 @@ public class GooseGrab : MonoBehaviour
             {
                 case true:
                     isDrag = false;
-
+                    grabObject.GetComponent<PhysicObject>().isGrab = false;
                     //grabObject의 rigidBody를 원래 상태로 되돌려야함.
                     //grabObject를 자식오브젝트로 배치한거 풀어야함.
 
@@ -38,12 +38,15 @@ public class GooseGrab : MonoBehaviour
                 case false:
                     if (grabObject != null) //
                     {
+                        grabObject.GetComponent<PhysicObject>().isGrab = true;
                         isDrag = true;
                         Rigidbody grabObjRb;
+
 
                         if (!grabObject.GetComponent<PhysicObject>().isHeavy)   //가벼운 오브젝트 잡을 때
                         {
                             grabObjRb = grabObject.GetComponent<SmallObject>().Rigidbody;
+
                             Debug.Log("Success Grab");
 
                             var rot = gooseMouse.transform.eulerAngles - grabObject.GetComponent<SmallObject>().handlePoint.transform.eulerAngles;

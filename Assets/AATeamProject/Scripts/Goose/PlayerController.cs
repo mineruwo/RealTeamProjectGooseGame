@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public NPC npc;
 
+    public LayerMask layer;
     public SphereCollider gooseSphereCollider;
     public Transform groundCastPoint;
     private bool isGround;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
         Move();
         InputSet();
         CheckForward();
+        //CheckForward();
 
         sneak = Mathf.Lerp(sneak, isSneck ? 1f : 0f, Time.deltaTime * 10f);
         animator.SetFloat("Sneak", sneak);
@@ -58,7 +60,9 @@ public class PlayerController : MonoBehaviour
     {
         if (input)
         {
+           
             rb.AddForce(dir * curspeed);
+            
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);  
         }
         else
@@ -87,6 +91,12 @@ public class PlayerController : MonoBehaviour
         rDir.Normalize();
 
         dir = v * wDir + h * rDir;
+        var dirY = dir;
+        if (isGround)
+        {
+            dirY.y += 1f;
+            dir = dirY;
+        }
         dir.Normalize();
 
         if (rb.velocity.magnitude > 0.1f)
@@ -143,23 +153,35 @@ public class PlayerController : MonoBehaviour
 
     public void Shoo(Vector3 forward)
     {
-
+        rb.velocity = Vector3.zero;
+        rb.AddForce(forward, ForceMode.Impulse);
     }
 
+    public float radius = 0.1f;
     public void CheckForward()
     {
         float checkDistance = 3f;
-        bool cast = Physics.SphereCast(groundCastPoint.position, gooseSphereCollider.radius * 0.9f, Vector3.down, out var hit, checkDistance, LayerMask.NameToLayer("Ground"), QueryTriggerInteraction.Ignore);
-       
-        if(cast)
+        bool cast = Physics.SphereCast(groundCastPoint.position, radius, Vector3.down, out var hit, checkDistance, layer, QueryTriggerInteraction.Ignore);
+
+        if (cast)
         {
+            isGround = true;
             float groundSlope = Vector3.Angle(hit.normal, Vector3.up);
-            float forwardSlope = Vector3.Angle(hit.normal, dir);
-
-            rb.velocity += Quaternion.AngleAxis(forwardSlope, dir) * Vector3.one;
-            Debug.Log(Quaternion.AngleAxis(forwardSlope, dir) * Vector3.one);
+            rb.velocity = Quaternion.AngleAxis(groundSlope, dir) * rb.velocity;
         }
-
+        else if(!cast)
+        {
+            isGround = false;
+        }
     }
 
+   
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(dir, dir * 1500f);
+        
+        Gizmos.color = Color.yellow;
+        //Gizmos.DrawSphere(groundCastPoint.position, radius);
+    }
 }
