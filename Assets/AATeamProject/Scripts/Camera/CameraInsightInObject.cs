@@ -22,7 +22,7 @@ public class CameraInsightInObject : MonoBehaviour
     {
         foreach (GameObject go in viewTarget)
         {
-            var insight = go.GetComponentInChildren<OnvisualCamera>().isView;
+            var insight = go.GetComponentInChildren<OnvisualCamera>().isView;   
             if (insight)
             {
                 var check = targetGroup.FindMember(go.transform);
