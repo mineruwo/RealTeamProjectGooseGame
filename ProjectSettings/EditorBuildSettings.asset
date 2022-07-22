@@ -9,12 +9,15 @@ EditorBuildSettings:
     path: Assets/AATeamProject/Scenes/SceneLoading.unity
     guid: 324fabd21f5ffac49a9d53485870b687
   - enabled: 1
+    path: Assets/AATeamProject/Scenes/OpeningScene.unity
+    guid: e1a6f9672cb91ec409843d56d5e768be
+  - enabled: 1
     path: Assets/AATeamProject/Scenes/SceneTitle.unity
     guid: 24d8c7c0649f65a469bf00b7dbff27fe
   - enabled: 1
+    path: Assets/AATeamProject/Scenes/middleLoad.unity
+    guid: 50f62f3829d8a654d8efa7d880e98cd2
+  - enabled: 1
     path: Assets/AATeamProject/Scenes/SceneGame.unity
     guid: 712adcde2b2dae04c84bd09b13d388fc
-  - enabled: 1
-    path: Assets/AATeamProject/Scenes/JH/SceneGameJH.unity
-    guid: 910b2e6eac9378f4ea18535a7398eb7e
   m_configObjects: {}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public Dictionary<string, AudioClip> audioClips;
+    private Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
     public AudioSource BGM;
     public string filePath = "Assets/Resources/Audio/SFX/";
     [System.Obsolete]
