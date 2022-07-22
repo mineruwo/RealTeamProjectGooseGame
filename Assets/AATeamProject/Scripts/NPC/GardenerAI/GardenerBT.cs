@@ -21,17 +21,33 @@ public class GardenerBT : MonoBehaviour
         aiState = new BTRoot();
         BTSelector btMainSelector = new BTSelector();
 
-        //move
-        BTSequence btMove = new BTSequence();
-        Move aiMoveAction = new Move(gameObject);
-        btMove.AddChild(aiMoveAction);
+        //gardener work1
+        BTSequence watering = new BTSequence();
+        WaterCanPoint waterWp = new WaterCanPoint(gameObject);
+        GrabItem waterWp2 = new GrabItem(gameObject);
+        WateringPoint3 waterWp3 = new WateringPoint3(gameObject);
+        WateringPlants waterWp4 = new WateringPlants(gameObject);
+        WaterCanPoint waterWp5 = new WaterCanPoint(gameObject);
 
-        BTSequence btFind = new BTSequence();
+        watering.AddChild(waterWp);
+        watering.AddChild(waterWp2);
+        watering.AddChild(waterWp3);
+        watering.AddChild(waterWp4);
+        watering.AddChild(waterWp5);
+
+        //gardener work2
+        BTSequence gardening = new BTSequence();
         FindItem aiFindItem = new FindItem(gameObject);
-        btFind.AddChild(aiFindItem);
+        gardening.AddChild(aiFindItem);
 
-        btMainSelector.AddChild(btMove);
-        btMainSelector.AddChild(btFind);
+
+        //gardener work3
+
+
+        btMainSelector.AddChild(watering);
+        btMainSelector.AddChild(gardening);
+
+        Debug.Log(btMainSelector.GetChildCount());
 
         aiState.AddChild(btMainSelector);
 

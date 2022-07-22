@@ -121,6 +121,8 @@ public class Gardener2 : MonoBehaviour
 
                     break;
                 case WorkTypes.Gardening:
+                    animator.SetFloat("LocalVelocityZ", 0.5f);
+                    animator.SetFloat("RemainingDistance", 1f);
 
                     break;
                 case WorkTypes.TakingVase:
@@ -153,6 +155,8 @@ public class Gardener2 : MonoBehaviour
                     animator.SetBool("ReactionActive", false);
                     break;
                 case ChasingSituations.MissItem:
+                    //두리번거리는 애니메이션
+                    //그냥 집에 돌아감
                     break;
             }
         }
@@ -171,8 +175,6 @@ public class Gardener2 : MonoBehaviour
     }
 
 
-
-    // Update is called once per frame
     void Update()
     {
         switch (CurrentState)
@@ -266,7 +268,7 @@ public class Gardener2 : MonoBehaviour
                 {
                     if(item.CompareTag("Item"))
                     {
-                        Debug.Log("got");
+                        equipped = true;
                         rd = item.GetComponent<Rigidbody>();
                         item.transform.SetParent(gardnerOneHand, true);
                         rd.isKinematic = true;
@@ -287,26 +289,25 @@ public class Gardener2 : MonoBehaviour
                 transform.LookAt(GameObject.FindGameObjectWithTag("WorkSpot").transform);
                 break;
             case 4:
-                //물주고
-                //물주는애니메이션
+                //물주기
                 particle = item.GetComponentInChildren<ParticleSystem>();
                 animator.SetBool("JobActive", true);
                 animator.SetInteger("JobIndex", 0);
-                if(animator.GetBool("JobActive"))
-                {
-                    particle.Play();
-                }
 
-                if(TestFunc.isFinishedWater)
+                if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
                 {
-                    particle.Stop();
-                    workStep = 5;
-                }
+                    isFinished = true;
+                    if (isFinished)
+                    {
+                        workStep = 5;
+                    }
 
+                }
                 break;
 
             case 5:
                 UpdateIdle();
+                Debug.Log("d");
                 break;
 
             case 6:
@@ -339,8 +340,6 @@ public class Gardener2 : MonoBehaviour
     {
         animator.SetFloat("LocalVelocityZ", 0.7f);
         animator.SetFloat("RemainingDistance", 1f);
-        
-
     }
 
     private void UpdateIdle()
@@ -352,6 +351,13 @@ public class Gardener2 : MonoBehaviour
             agent.SetDestination(targetPos);
             CurrentState = NPCState.work;
             WorkType = WorkTypes.Water;
+        }
+
+        if(equipped)
+        {
+            agent.SetDestination(targetPos); //이전장소저장한 거 불러오기
+            animator.SetFloat("LocalVelocityZ", 0.5f);
+            animator.SetFloat("RemainingDistance", 1f);
         }
     }
 
