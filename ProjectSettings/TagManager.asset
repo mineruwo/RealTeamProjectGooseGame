@@ -29,6 +29,7 @@ TagManager:
   - NoteScrap
   - Stage1Col
   - WorkSpot
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
