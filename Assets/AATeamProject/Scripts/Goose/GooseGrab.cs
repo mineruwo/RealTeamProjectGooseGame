@@ -7,14 +7,14 @@ public class GooseGrab : MonoBehaviour
     public Transform gooseMouse;
     public GameObject grabObject;
     public Rigidbody rb;
-    private Collider collider;
     public GameObject goose;
+
+    private GameObject handle;
 
     private bool isDrag = false;
     // Start is called before the first frame update
     void Start()
     {
-        collider = GetComponent<Collider>();
        // rb = GetComponent<Rigidbody>();
     }
 
@@ -72,7 +72,7 @@ public class GooseGrab : MonoBehaviour
                         else if (grabObject.GetComponent<PhysicObject>().isHeavy)    //무거운 오브젝트 잡을 때
                         {
                             grabObjRb = grabObject.GetComponent<BigObject>().Rigidbody;
-                            GameObject handle = grabObject.GetComponent<BigObject>().handlePoint[0];
+                            handle = grabObject.GetComponent<BigObject>().handlePoint[0];
                             Vector3 vec3 = gooseMouse.transform.position - handle.transform.position;
                             float distance = vec3.magnitude;
 
@@ -88,32 +88,59 @@ public class GooseGrab : MonoBehaviour
                                 }
                             }
 
-                            var hingeJoint = goose.AddComponent<HingeJoint>();
-                            hingeJoint.anchor = gooseMouse.transform.position;
+                            //var hingeJoint = goose.AddComponent<HingeJoint>();
+                            //hingeJoint.anchor = gooseMouse.transform.position;
 
-                            hingeJoint.connectedBody = grabObjRb;
+                            //hingeJoint.connectedBody = grabObjRb;
 
-                            hingeJoint.connectedAnchor = handle.transform.position;
+                            //hingeJoint.connectedAnchor = handle.transform.position;
                             //그다음 여기서 위에 있는 코드들이랑 똑같이 작성하면 끝?
                             //단 inverse kinematic 애니메이션을 사용하여 부리가 handlePoint에 닿게 해야함.
+
+                            var joint = goose.AddComponent<ConfigurableJoint>();
+                            joint.connectedBody = grabObjRb;
+
+                            SoftJointLimit limit = joint.linearLimit;
+                            limit.limit = 0.35f;
+                            joint.linearLimit = limit;
+
+                            joint.xMotion = ConfigurableJointMotion.Limited;
+                            joint.yMotion = ConfigurableJointMotion.Limited;
+                            joint.zMotion = ConfigurableJointMotion.Limited;
+
+                            
+                            // joint.connectedAnchor = handle.transform.position;
+                            joint.connectedAnchor = goose.transform.InverseTransformPoint(handle.transform.position);
+                            //joint.anchor = gooseMouse.transform.position;
+                            joint.anchor = new Vector3(0f, 3f, 0f);
+
+                            joint.enableCollision = true;
+
+
+                            joint.autoConfigureConnectedAnchor = false;
 
                         }
                     }
                     break;
             }
         }
-    }
 
-    private JointDrive NewJointDrive(float force, float damping)
+      
+    }
+    private void FixedUpdate()
     {
-        JointDrive drive = new JointDrive();
-        drive.mode = JointDriveMode.Position;
-        drive.positionSpring = force;
-        drive.positionDamper = damping;
-        drive.maximumForce = Mathf.Infinity;
-        return drive;
+        var joint = goose.GetComponentInParent<ConfigurableJoint>();
+        if (handle != null)
+        { 
+           joint.connectedAnchor = handle.transform.InverseTransformPoint(handle.transform.position);
+        }
+        var a = joint.connectedBody.gameObject.transform.position - transform.position;
+        Debug.Log(a.magnitude);
+
+        goose.transform.LookAt(handle.transform);
     }
 
+    
     private void OnTriggerStay(Collider other)
     {
         var obj = other.GetComponent<PhysicObject>();
