@@ -5672,9 +5672,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npc: {fileID: 0}
-  curspeed: 5
+  layer:
+    serializedVersion: 2
+    m_Bits: 512
+  gooseSphereCollider: {fileID: 8665319478537169499}
+  groundCastPoint: {fileID: 8665319477973319265}
+  curspeed: 10
   maxSpeed: 1
   gamemanager: {fileID: 0}
+  radius: 0.38
 --- !u!1 &8665319478607382295
 GameObject:
   m_ObjectHideFlags: 0
