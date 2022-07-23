@@ -7,11 +7,12 @@ using BehaviorTree;
 public class WaterCanPoint : BTAction
 {
     private GameObject owner;
+    private NavMeshAgent agent;
+    private Animator animator;
 
     private Vector3 waypoint;
     private float waypointRadius = 0.3f;
-    private NavMeshAgent agent;
-    private Animator animator;
+
 
     public WaterCanPoint(GameObject owner)
     {
@@ -22,6 +23,7 @@ public class WaterCanPoint : BTAction
     {
         waypoint = GameObject.Find("WateringPos1").transform.position;
         animator = owner.GetComponent<Animator>();
+        animator.Rebind(); 
         agent = owner.GetComponent<NavMeshAgent>();
     }
     public override void Terminate()

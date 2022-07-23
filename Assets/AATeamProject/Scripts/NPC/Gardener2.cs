@@ -348,9 +348,9 @@ public class Gardener2 : MonoBehaviour
         if (timer > 5f)
         {
             timer = 0f;
-            agent.SetDestination(targetPos);
             CurrentState = NPCState.work;
             WorkType = WorkTypes.Water;
+            agent.SetDestination(targetPos);
         }
 
         if(equipped)

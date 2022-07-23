@@ -18,6 +18,7 @@ namespace BehaviorTree
     {
         Root,
         Selector,
+        RandSelector,
         Sequence,
         Paraller,
         Decorator,

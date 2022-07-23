@@ -21,7 +21,7 @@ public class GrabItem : BTAction
     }
     public override void Initialize()
     {
-        item = GameObject.FindGameObjectWithTag("Item");
+        item = GameObject.FindWithTag("Item");
         rb = item.GetComponent<Rigidbody>();
         animator = owner.GetComponent<Animator>();
     }
@@ -29,6 +29,12 @@ public class GrabItem : BTAction
 
     public override NodeState Update()
     {
+        if (item == null)
+        {
+            Debug.Log("½ÇÆÐ");
+            return NodeState.FAILURE;
+        }
+
         OnFindItem();
         if (isGrabbed)
             return NodeState.SUCCESS;
@@ -37,11 +43,9 @@ public class GrabItem : BTAction
 
     private void OnFindItem()
     {
-        if(item == null)
-        {
-            
-        }
-        else
+        float distance = Vector3.Distance(item.transform.position, owner.transform.position);
+        Debug.Log(distance);
+        if (distance < detectRadius)
         {
             rb.isKinematic = true;
             item.transform.SetParent(GameObject.Find("rightGrasper").transform);

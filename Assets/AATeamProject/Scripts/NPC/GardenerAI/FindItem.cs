@@ -19,7 +19,7 @@ public class FindItem : BTAction
 
     private void OnLookAt()
     {
-        GameObject item = GameObject.FindGameObjectWithTag("Tag");
+        GameObject item = GameObject.FindGameObjectWithTag("Item");
         if(item)
         {
             Vector3 dir = item.transform.position - owner.transform.position;
