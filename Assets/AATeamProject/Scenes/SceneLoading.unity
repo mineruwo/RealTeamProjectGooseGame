@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -871,6 +871,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentQuestDataList: []
+  currenSubQuestDataList: []
+  currentOptionData:
+    language: 
+    musicVolume: 0
+    sfxVolume: 0
+    isNpcFocus: 0
 --- !u!4 &7072456623216114083
 Transform:
   m_ObjectHideFlags: 0
@@ -975,7 +981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3663a44bc9b154fbb6284a2ab74454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deList: []
+  deleteList: []
 --- !u!4 &7949625413940189208
 Transform:
   m_ObjectHideFlags: 0

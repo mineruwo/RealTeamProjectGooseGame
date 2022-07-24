@@ -6,15 +6,33 @@ public class Quest
     public string questName { get; set; }
     public bool isClear { get; set; }
     public bool isMainQuest { get; set; }
-    public bool? isSubQuest { get; set; }
-    public int? subQuestCount { get; set; }
+    public int subQuestCount { get; set; }
+}
+
+[System.Serializable]
+public class SubQuest
+{
+    public int surQuestId { get; set; }
+    public int id { get; set; }
+    public int stage { get; set; }
+    public string questName { get; set; }
+    public bool isClear { get; set; }
+}
+
+[System.Serializable]
+public class SaveDate
+{
+    public string Stage1Time { get; set; }
+    public string Stage2Time { get; set; }
+    public string Stage3Time { get; set; }
 }
 
 [System.Serializable]
 public class ClearStage
 {
-    public bool stage1 = false;
-    public bool stage2 = false;
+    public int tutorial { get; set; }
+    public int stage1 { get; set; }
+    public int stage2 { get; set; }
 }
 
 [System.Serializable]

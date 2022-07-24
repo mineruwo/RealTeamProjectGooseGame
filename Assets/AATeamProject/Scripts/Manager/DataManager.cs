@@ -10,6 +10,9 @@ using Newtonsoft.Json.Serialization;
 public class DataManager : MonoBehaviour
 {
     public List<Quest> currentQuestDataList;
+    public List<SubQuest> currenSubQuestDataList;
+    public ClearStage currentQuestCount;
+    public Option currentOptionData;
 
     private FileInfo fileInfo;
 
@@ -30,15 +33,38 @@ public class DataManager : MonoBehaviour
             fileName = "DefaultQuestData";
             path = Application.dataPath + "/" + "AATeamProject" + "/"  +
             "Json" + "/" + fileName + ".Json";
-
             string json = File.ReadAllText(path);
-
             currentQuestDataList = JsonConvert.DeserializeObject<List<Quest>>(json);
+
+            fileName = "DefaultSubQuestData";
+            path = Application.dataPath + "/" + "AATeamProject" + "/"  +
+            "Json" + "/" + fileName + ".Json";
+            json = File.ReadAllText(path);
+            currenSubQuestDataList = JsonConvert.DeserializeObject<List<SubQuest>>(json);
+
+            fileName = "DefaultClearStage";
+            path = Application.dataPath + "/" + "AATeamProject" + "/"  +
+            "Json" + "/" + fileName + ".Json";
+            json = File.ReadAllText(path);
+            currentQuestCount = JsonConvert.DeserializeObject<ClearStage>(json);
         }
         else
         {
             string json = File.ReadAllText(path);
             currentQuestDataList = JsonConvert.DeserializeObject<List<Quest>>(json);
+
+            fileName = "SubQuest" + slotNum;
+            path = Application.dataPath + "/" + "AATeamProject" + "/"  +
+            "Json" + "/" + fileName + ".Json";
+            json = File.ReadAllText(path);
+            currenSubQuestDataList = JsonConvert.DeserializeObject<List<SubQuest>>(json);
+
+            fileName = "ClearStage" + slotNum;
+            path = Application.dataPath + "/" + "AATeamProject" + "/"  +
+            "Json" + "/" + fileName + ".Json";
+            json = File.ReadAllText(path);
+            currentQuestCount = JsonConvert.DeserializeObject<ClearStage>(json);
+            Debug.Log($"[DataManager] 불러온거 체크 :  {currentQuestCount.stage1}");
         }
 
         Debug.Log($"[DataManager] 불러온 파일명 :  {fileName}");
@@ -50,9 +76,21 @@ public class DataManager : MonoBehaviour
         string fileName = "Quest" + currentSlot;
         string path = Application.dataPath + "/" + "AATeamProject" + "/"  +
             "Json" + "/" + fileName + ".Json";
-
         var setJson = JsonConvert.SerializeObject(currentQuestDataList);
         File.WriteAllText(path, setJson);
+
+        fileName = "SubQuest" + currentSlot;
+        path = Application.dataPath + "/" + "AATeamProject" + "/"  +
+        "Json" + "/" + fileName + ".Json";
+        setJson = JsonConvert.SerializeObject(currenSubQuestDataList);
+        File.WriteAllText(path, setJson);
+
+        fileName = "ClearStage" + currentSlot;
+        path = Application.dataPath + "/" + "AATeamProject" + "/"  +
+        "Json" + "/" + fileName + ".Json";
+        setJson = JsonConvert.SerializeObject(currentQuestCount);
+        File.WriteAllText(path, setJson);
+
         Debug.Log($"[DataManager] 저장한 파일명 : {fileName}");
     }
 
@@ -61,7 +99,16 @@ public class DataManager : MonoBehaviour
         string fileName = "Quest" + slotNum;
         string path = Application.dataPath + "/" + "AATeamProject" + "/"  +
            "Json" + "/" + fileName + ".Json";
+        File.Delete(path);
 
+        fileName = "SubQuest" + slotNum;
+        path = Application.dataPath + "/" + "AATeamProject" + "/"  +
+            "Json" + "/" + fileName + ".Json";
+        File.Delete(path);
+
+        fileName = "ClearStage" + slotNum;
+        path = Application.dataPath + "/" + "AATeamProject" + "/"  +
+        "Json" + "/" + fileName + ".Json";
         File.Delete(path);
     }
 }
