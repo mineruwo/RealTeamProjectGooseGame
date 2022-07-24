@@ -30,7 +30,6 @@ public class Hammering : BTAction
 
     public override void Terminate()
     {
-        base.Terminate();
     }
 
     public override NodeState Update()

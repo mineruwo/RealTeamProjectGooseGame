@@ -32,14 +32,17 @@ public class GardenerBT : MonoBehaviour
         WateringPoint3 waterWp3 = new WateringPoint3(gameObject);
         WateringPlants waterWp4 = new WateringPlants(gameObject);
         WaterCanPoint waterWp5 = new WaterCanPoint(gameObject);
+        DropItem waterWp6 = new DropItem(gameObject);
 
         watering.AddChild(waterWp);
         watering.AddChild(waterWp2);
         watering.AddChild(waterWp3);
         watering.AddChild(waterWp4);
         watering.AddChild(waterWp5);
+        watering.AddChild(waterWp6);
 
         //**************************gardener work2
+
         BTSequence gardening = new BTSequence();
         FindItem aiFindItem = new FindItem(gameObject);
         gardening.AddChild(aiFindItem);
@@ -58,10 +61,11 @@ public class GardenerBT : MonoBehaviour
 
 
         //**************************Main Selector
+        Idle idle = new Idle(gameObject);
 
+        //btMainSelector.AddChild(idle);
         btMainSelector.AddChild(watering);
         btMainSelector.AddChild(hammeringSign);
-
         btMainSelector.AddChild(gardening);
 
         aiState.AddChild(btMainSelector);
