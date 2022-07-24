@@ -5677,8 +5677,8 @@ MonoBehaviour:
     m_Bits: 512
   gooseSphereCollider: {fileID: 8665319478537169499}
   groundCastPoint: {fileID: 8665319477973319265}
-  curspeed: 10
-  maxSpeed: 1
+  curspeed: 15
+  maxSpeed: 1.5
   gamemanager: {fileID: 0}
   radius: 0.38
 --- !u!1 &8665319478607382295
