@@ -37,4 +37,6 @@ public class GameManager : MonoBehaviour
     // public CameraSystem cameraSystem;
 
     public GlobalSceneManager sceneMgr;
+
+    public InputManager inputMgr;
 }

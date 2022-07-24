@@ -29,6 +29,7 @@ TagManager:
   - NoteScrap
   - Stage1Col
   - WorkSpot
+  - Rake
   layers:
   - Default
   - TransparentFX
@@ -41,7 +42,6 @@ TagManager:
   - PropAndGooseAndHumanTrigger
   - GardenerItem
   - Ground
-  - 
   - 
   - 
   - 

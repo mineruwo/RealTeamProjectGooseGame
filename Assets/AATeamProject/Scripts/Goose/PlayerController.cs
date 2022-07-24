@@ -72,8 +72,16 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
-        var v = Input.GetAxisRaw("Vertical");
-        var h = Input.GetAxisRaw("Horizontal");
+        // var v = Input.GetAxisRaw("Vertical");
+        // var h = Input.GetAxisRaw("Horizontal");
+
+        // 재휘 모바일 수정
+        Debug.Log($"[PlayerController] 들어가는중?");
+        Debug.Log($"[PlayerController] 값 출력?{GameManager.instance.inputMgr.moveX}");
+        //
+
+        var v = GameManager.instance.inputMgr.moveX;
+        var h = GameManager.instance.inputMgr.moveZ;
 
         input = v != 0f || h != 0f;
 
@@ -110,8 +118,6 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Velocity", rb.velocity.magnitude * 4f);
     }
 
-
-
     public void InputSet()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -143,6 +149,21 @@ public class PlayerController : MonoBehaviour
             //}
         }
     }
+
+    // 재휘 추가
+    public void ChangeSneck()
+    {
+        isSneck = !isSneck;
+    }
+    public void ChangeWing()
+    {
+        isWing = !isWing;
+    }
+    public void ChangeRun()
+    {
+        isRun = !isRun;
+    }
+    //
 
     public void AniParameters()
     {
