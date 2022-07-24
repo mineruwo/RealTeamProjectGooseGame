@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
 
-    public NPC npc;
+    public Gardener2 npc;
 
     public LayerMask layer;
     public SphereCollider gooseSphereCollider;
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public GameManager gamemanager;
     void Start()
     {
+        npc = GameObject.FindObjectOfType<Gardener2>();
         camTr = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
@@ -60,9 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         if (input)
         {
-           
             rb.AddForce(dir * curspeed);
-            
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);  
         }
         else
@@ -136,10 +135,9 @@ public class PlayerController : MonoBehaviour
             //gamemanager.audioMgr.SFXPlay("")
             Debug.Log("꽥꽥");
 
-
             //npc와의 거리가 약 10cm 정도 거리라면 npc 어그로 끄는 함수 발동
-            //var a = npc.transform.position - transform.position;
-            //if(a.magnitude < 10f)
+            var a = npc.transform.position - transform.position;
+            //if(a.magnitude < 5f)
             //{
             //    npc.어그로끄는 함수();
             //}

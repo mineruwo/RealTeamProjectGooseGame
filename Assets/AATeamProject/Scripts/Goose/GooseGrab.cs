@@ -7,33 +7,39 @@ public class GooseGrab : MonoBehaviour
     public Transform gooseMouse;
     public GameObject grabObject;
     public Rigidbody rb;
-    private Collider collider;
     public GameObject goose;
+
+    private GameObject handle;
 
     private bool isDrag = false;
     // Start is called before the first frame update
     void Start()
     {
-        collider = GetComponent<Collider>();
-       // rb = GetComponent<Rigidbody>();
+        // rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        GrabObject();
+    }
+
+
+    void GrabObject()
+    {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            switch(isDrag)
+            switch (isDrag)
             {
                 case true:
                     isDrag = false;
                     grabObject.GetComponent<PhysicObject>().isGrab = false;
-                    //grabObject의 rigidBody를 원래 상태로 되돌려야함.
-                    //grabObject를 자식오브젝트로 배치한거 풀어야함.
-
                     grabObject.transform.SetParent(null);
+                    grabObject = null;
 
-                    grabObject = null;  
+                    //var joint = goose.GetComponent<HingeJoint>();
+                    Destroy(goose.GetComponent<ConfigurableJoint>());
+                    handle = null;
                     break;
                 case false:
                     if (grabObject != null) //
@@ -62,63 +68,63 @@ public class GooseGrab : MonoBehaviour
                             grabObjRb.constraints = RigidbodyConstraints.FreezeAll;
                             grabObject.transform.SetParent(gooseMouse);
                         }
-                        else if(grabObject.GetComponent<PhysicObject>().isHeavy)    //무거운 오브젝트 잡을 때
+                        else if (grabObject.GetComponent<PhysicObject>().isHeavy)    //무거운 오브젝트 잡을 때
                         {
                             grabObjRb = grabObject.GetComponent<BigObject>().Rigidbody;
-                            GameObject handle = grabObject.GetComponent<BigObject>().handlePoint[0];
+                            handle = grabObject.GetComponent<BigObject>().handlePoint[0];
                             Vector3 vec3 = gooseMouse.transform.position - handle.transform.position;
                             float distance = vec3.magnitude;
 
                             var handlePoints = grabObject.GetComponent<BigObject>().handlePoint;
-                            foreach(var handlePoint in handlePoints)
+                            foreach (var handlePoint in handlePoints)
                             {
                                 //여기서 거리 짧은애 구함
                                 var trans = gooseMouse.transform.position - handlePoint.transform.position;
-                                if(trans.magnitude < distance)
+                                if (trans.magnitude < distance)
                                 {
                                     handle = handlePoint;
                                     distance = trans.magnitude;
                                 }
                             }
+                            var joint = goose.AddComponent<ConfigurableJoint>();
+                            joint.connectedBody = grabObjRb;
+                            joint.enableCollision = true;
+                            joint.autoConfigureConnectedAnchor = false;
 
-                            var hingeJoint = goose.AddComponent<HingeJoint>();
-                            hingeJoint.anchor = gooseMouse.transform.position;
+                            SoftJointLimit limit = joint.linearLimit;
+                            limit.limit = 0.3f;
+                            joint.linearLimit = limit;
 
-                            hingeJoint.connectedBody = grabObjRb;
+                            joint.xMotion = ConfigurableJointMotion.Limited;
+                            joint.yMotion = ConfigurableJointMotion.Limited;
+                            joint.zMotion = ConfigurableJointMotion.Limited;
 
-                            hingeJoint.connectedAnchor = handle.transform.position;
-                            //그다음 여기서 위에 있는 코드들이랑 똑같이 작성하면 끝?
-                            //단 inverse kinematic 애니메이션을 사용하여 부리가 handlePoint에 닿게 해야함.
-                            
+                            // joint.connectedAnchor = handle.transform.position;
+                            joint.connectedAnchor = grabObjRb.gameObject.transform.InverseTransformPoint(handle.transform.position);
+                            joint.anchor = goose.transform.InverseTransformPoint(gooseMouse.transform.position);
                         }
                     }
                     break;
             }
-
-           
-
-           
         }
-       
+
 
     }
-
-
-    void GrabObject(GameObject grabObj)
+    private void FixedUpdate()
     {
-        if (grabObj.GetComponent<TestGrabHandle>())
+        var joint = goose.GetComponentInParent<ConfigurableJoint>();
+        if (handle != null)
         {
-            Rigidbody grabObjRb = grabObj.GetComponent<Rigidbody>();
-            grabObjRb.isKinematic = true;
-            grabObjRb.useGravity = false;
-
-            gooseMouse.transform.position = grabObj.GetComponent<TestGrabHandle>().transform.localPosition;
-
-            grabObj.GetComponent<TestGrabHandle>().transform.SetParent(gooseMouse);
-
+            goose.transform.LookAt(handle.transform);
 
         }
+        if (joint)
+        {
+            var a = joint.connectedBody.gameObject.transform.position - transform.position;
+            Debug.Log(a.magnitude);
+        }
     }
+
 
     private void OnTriggerStay(Collider other)
     {
@@ -139,7 +145,7 @@ public class GooseGrab : MonoBehaviour
     {
         var obj = other.GetComponent<PhysicObject>();
 
-        if(obj == null)
+        if (obj == null)
         {
             obj = other.GetComponentInParent<PhysicObject>();
         }
@@ -150,4 +156,8 @@ public class GooseGrab : MonoBehaviour
         }
     }
 
+    private void OnAnimatorIK(int layerIndex)
+    {
+
+    }
 }
