@@ -27,7 +27,10 @@ namespace BehaviorTree
         public override NodeState Tick()
         {
             if (child == null)
+            {
                 return NodeState.INVALID;
+            }
+
             else if(child.GetState()==NodeState.INVALID)
             {
                 child.Initialize();

@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BehaviorTree;
+using UnityEngine.Animations.Rigging;
+
 
 public class GardenerBT : MonoBehaviour
 {
+    private RigBuilder rigBuilder;
     private BTRoot aiState;
 
     private void Start()
     {
         CreateBehaviorTreeAiState();
+        rigBuilder = GetComponent<RigBuilder>();
     }
     private void Update()
     {
@@ -21,17 +25,48 @@ public class GardenerBT : MonoBehaviour
         aiState = new BTRoot();
         BTSelector btMainSelector = new BTSelector();
 
-        //move
-        BTSequence btMove = new BTSequence();
-        Move aiMoveAction = new Move(gameObject);
-        btMove.AddChild(aiMoveAction);
+        //**************************gardener work1
+        BTSequence watering = new BTSequence();
+        WaterCanPoint waterWp = new WaterCanPoint(gameObject);
+        GrabItem waterWp2 = new GrabItem(gameObject);
+        WateringPoint3 waterWp3 = new WateringPoint3(gameObject);
+        WateringPlants waterWp4 = new WateringPlants(gameObject);
+        WaterCanPoint waterWp5 = new WaterCanPoint(gameObject);
+        DropItem waterWp6 = new DropItem(gameObject);
 
-        BTSequence btFind = new BTSequence();
+        watering.AddChild(waterWp);
+        watering.AddChild(waterWp2);
+        watering.AddChild(waterWp3);
+        watering.AddChild(waterWp4);
+        watering.AddChild(waterWp5);
+        watering.AddChild(waterWp6);
+
+        //**************************gardener work2
+
+        BTSequence gardening = new BTSequence();
         FindItem aiFindItem = new FindItem(gameObject);
-        btFind.AddChild(aiFindItem);
+        gardening.AddChild(aiFindItem);
 
-        btMainSelector.AddChild(btMove);
-        btMainSelector.AddChild(btFind);
+
+        //**************************gardener work3
+
+
+
+        //**************************gardener hammering
+        BTSequence hammeringSign = new BTSequence();
+        GrabItem getHammer = new GrabItem(gameObject);
+        Hammering hammering = new Hammering(gameObject);
+        hammeringSign.AddChild(getHammer);
+        hammeringSign.AddChild(hammering);
+
+
+        //**************************Main Selector
+        Idle idle = new Idle(gameObject);
+
+        //btMainSelector.AddChild(idle);
+        btMainSelector.AddChild(watering);
+        btMainSelector.AddChild(hammeringSign);
+        btMainSelector.AddChild(gardening);
 
         aiState.AddChild(btMainSelector);
 
