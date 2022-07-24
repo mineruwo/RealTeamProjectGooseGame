@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GooseGrab : MonoBehaviour
 {
+    public Animator animator;
+
     public Transform gooseMouse;
     public GameObject grabObject;
     public Rigidbody rb;
@@ -11,10 +13,11 @@ public class GooseGrab : MonoBehaviour
 
     private GameObject handle;
 
-    private bool isDrag = false;
+    public bool isDrag = false;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         // rb = GetComponent<Rigidbody>();
     }
 
@@ -22,6 +25,7 @@ public class GooseGrab : MonoBehaviour
     void Update()
     {
         GrabObject();
+        animator.SetBool("isDrag", isDrag);
     }
 
 
@@ -86,6 +90,7 @@ public class GooseGrab : MonoBehaviour
                                     distance = trans.magnitude;
                                 }
                             }
+
                             var joint = goose.AddComponent<ConfigurableJoint>();
                             joint.connectedBody = grabObjRb;
                             joint.enableCollision = true;
@@ -156,8 +161,5 @@ public class GooseGrab : MonoBehaviour
         }
     }
 
-    private void OnAnimatorIK(int layerIndex)
-    {
-
-    }
+    
 }
