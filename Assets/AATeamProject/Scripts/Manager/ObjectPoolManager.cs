@@ -61,4 +61,9 @@ public class ObjectPoolManager : MonoBehaviour
         }
         return null;
     }
+
+    public void ReturnObject(GameObject gameobject)
+    {
+
+    }
 }

@@ -9,59 +9,49 @@ public class UiHandlerGame : MonoBehaviour
 
     public GameObject[] questNoteLists;
 
-    
     public GameObject[] cursors;
     private Vector2 sizeUp = new Vector2(1.3f, 1.3f);
     private Vector2 sizeDown = new Vector2(1f, 1f);
 
     public GameObject questNoteScrap;
 
-    public void OnClickSaveButton()
+    public void Start()
     {
-        GameManager.instance.uiMgr.OnClickSaveButton();
+        GameManager.instance.uiMgr.SetQuestMenu(questMenuUp, questMenuDown
+            , questNoteLists, cursors);
+        GameManager.instance.uiMgr.SetScrapNote(questNoteScrap);
     }
 
     public void OnClickQuestButton()
     {
         Debug.Log($"[UiHandlerGame] 퀘스트 버튼 누름");
-
+        GameManager.instance.uiMgr.ShowQuestWindow();
         // GameManager.instance.uiMgr.ClearNote(questNoteLists);
-        GameManager.instance.uiMgr.SetNoteScrap(questNoteScrap);
-
-        GameManager.instance.uiMgr.OnClickQuestButton(questMenuUp, questMenuDown);
-        GameManager.instance.uiMgr.WriteQuestNote(questNoteLists);
-
-        
+        //GameManager.instance.uiMgr.OnClickQuestButton(questMenuUp, questMenuDown);
+        //GameManager.instance.uiMgr.WriteQuestNote();        
     }
 
     public void OnClickLeftArrow()
     {
+        Debug.Log($"[UiHandlerGame] 왼쪽 화살표 누름");
 
+        GameManager.instance.uiMgr.ClickLeftArrow();
     }
-
-    
-
-    public void NoteScrapeUp()
+    public void OnClickRightArrow()
     {
-        GameManager.instance.uiMgr.NoteScrapeUp(questNoteScrap);
-        StartCoroutine(ScrapeDown());
+        Debug.Log($"[UiHandlerGame] 오른쪽 화살표 누름");
+
+        GameManager.instance.uiMgr.ClickRightArrow();
     }
 
-    //public void QuestClear(int num)
-    //{
-    //    Debug.Log($"[UiManager] ????????");
 
 
-    //    var text = questNoteScrape.transform.GetChild(0);
-    //    text.GetComponent<TextMeshProUGUI>().text = "<s>" + DataManager.currentQuestDataList[num].questName + "</s>";
-    //    questNoteScrape.SetActive(true);
-    //    StartCoroutine(ScrapeDown());
-    //}
 
-    public IEnumerator ScrapeDown()
+
+    public void OnClickSaveButton()
     {
-        yield return new WaitForSeconds(2.5f);
-        questNoteScrap.SetActive(false);
+        GameManager.instance.uiMgr.OnClickSaveButton();
     }
+
 
 }
