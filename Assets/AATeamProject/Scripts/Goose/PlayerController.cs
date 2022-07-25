@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private Transform camTr;
     private Rigidbody rb;
     private Animator animator;
+    public GooseGrab goosegrab;
 
     public GardenerBT npc;
 
@@ -67,7 +68,8 @@ public class PlayerController : MonoBehaviour
         if (input)
         {
             rb.AddForce(dir * curspeed);
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);  
+
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
         }
         else
         {
@@ -146,13 +148,11 @@ public class PlayerController : MonoBehaviour
             float npcDistance = 3f;
             //²Ð²Ð
             //gamemanager.audioMgr.SFXPlay("")
-            Debug.Log("²Ð²Ð");
             var source = Camera.main.transform.GetComponent<AudioSource>();
             source.PlayOneShot(honk);
             // gamemanager.audioMgr.SFXPlay("sfx_goose_honk_b_01");
             //npc¿ÍÀÇ °Å¸®°¡ ¾à 10cm Á¤µµ °Å¸®¶ó¸é npc ¾î±×·Î ²ô´Â ÇÔ¼ö ¹ßµ¿
             var distance = npc.transform.position - transform.position;
-            Debug.Log(distance.magnitude);
             if (distance.magnitude < npcDistance)
             {
                 isHonk = true;
@@ -184,6 +184,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.AddForce(forward, ForceMode.Impulse);
+        goosegrab.Drop();
     }
 
     public float radius = 0.1f;
@@ -206,11 +207,11 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(dir, dir * 15f);
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawLine(dir, dir * 15f);
         
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(groundCastPoint.position, radius);
-    }
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawSphere(groundCastPoint.position, radius);
+    //}
 }

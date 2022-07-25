@@ -58,9 +58,12 @@ public class TargetController : MonoBehaviour
                 Vector3 vec3 = target.transform.position - goose.position;
                 if (vec3.magnitude < distance)
                 {
-                    float angle = Vector3.Angle(transform.forward, vec3);
+                    float angle = Vector3.Angle(goose.forward, vec3);
+                    
                     if (angle < maxAngle)
                     {
+                        Debug.Log(goose.forward);
+                        Debug.Log(angle);
                         track = target.transform;
 
                         distance = vec3.magnitude;
