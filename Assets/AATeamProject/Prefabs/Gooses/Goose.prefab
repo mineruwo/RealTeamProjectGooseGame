@@ -16124,7 +16124,8 @@ MonoBehaviour:
   smallTargets: []
   bigTargets: []
   targetsTransform: []
-  maxAngle: 100
+  maxAngle: 70
+  weightChangeTiemr: 2
 --- !u!1 &8665319479580062467
 GameObject:
   m_ObjectHideFlags: 0

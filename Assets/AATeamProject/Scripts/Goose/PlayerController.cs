@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
 
-    public Gardener2 npc;
+    public GardenerBT npc;
 
     public LayerMask layer;
     public SphereCollider gooseSphereCollider;
@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private bool isSneck;
     private bool isRun = false;
     private bool isWing = false;
+    public static bool isHonk = false;
 
     private float wing = 0f;
     private float sneak = 0f;
@@ -30,10 +31,14 @@ public class PlayerController : MonoBehaviour
     private bool input = false;
     private Quaternion targetRot;
 
+
+    public AudioClip honk;
+
+
     public GameManager gamemanager;
     void Start()
     {
-        npc = GameObject.FindObjectOfType<Gardener2>();
+        npc = GameObject.FindObjectOfType<GardenerBT>();
         camTr = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
@@ -72,16 +77,15 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
-        // var v = Input.GetAxisRaw("Vertical");
-        // var h = Input.GetAxisRaw("Horizontal");
-
+        var v = Input.GetAxisRaw("Vertical");
+        var h = Input.GetAxisRaw("Horizontal");
         // 재휘 모바일 수정
-        Debug.Log($"[PlayerController] 들어가는중?");
-        Debug.Log($"[PlayerController] 값 출력?{GameManager.instance.inputMgr.moveX}");
+        //Debug.Log($"[PlayerController] 들어가는중?");
+        //Debug.Log($"[PlayerController] 값 출력?{GameManager.instance.inputMgr.moveX}");
         //
 
-        var v = GameManager.instance.inputMgr.moveX;
-        var h = GameManager.instance.inputMgr.moveZ;
+        //var v = GameManager.instance.inputMgr.moveX;
+        //var h = GameManager.instance.inputMgr.moveZ;
 
         input = v != 0f || h != 0f;
 
@@ -98,9 +102,9 @@ public class PlayerController : MonoBehaviour
         rDir.Normalize();
 
         dir = v * wDir + h * rDir;
-        var dirY = dir;
-        if (isGround)
+        if(isGround)
         {
+            var dirY = dir;
             dirY.y += 1f;
             dir = dirY;
         }
@@ -139,16 +143,20 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
+            float npcDistance = 3f;
             //꽥꽥
             //gamemanager.audioMgr.SFXPlay("")
             Debug.Log("꽥꽥");
-
+            var source = Camera.main.transform.GetComponent<AudioSource>();
+            source.PlayOneShot(honk);
+            // gamemanager.audioMgr.SFXPlay("sfx_goose_honk_b_01");
             //npc와의 거리가 약 10cm 정도 거리라면 npc 어그로 끄는 함수 발동
-            var a = npc.transform.position - transform.position;
-            //if(a.magnitude < 5f)
-            //{
-            //    npc.어그로끄는 함수();
-            //}
+            var distance = npc.transform.position - transform.position;
+            Debug.Log(distance.magnitude);
+            if (distance.magnitude < npcDistance)
+            {
+                isHonk = true;
+            }
         }
     }
 
@@ -170,7 +178,6 @@ public class PlayerController : MonoBehaviour
 
     public void AniParameters()
     {
-
     }
 
     public void Shoo(Vector3 forward)
@@ -180,6 +187,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public float radius = 0.1f;
+
     public void CheckForward()
     {
         float checkDistance = 1f;
@@ -197,13 +205,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(dir, dir * 1500f);
+        Gizmos.DrawLine(dir, dir * 15f);
         
         Gizmos.color = Color.yellow;
-        //Gizmos.DrawSphere(groundCastPoint.position, radius);
+        Gizmos.DrawSphere(groundCastPoint.position, radius);
     }
 }
