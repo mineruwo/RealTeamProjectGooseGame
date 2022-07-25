@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,10 +16,14 @@ public class UiHandlerTitle : MonoBehaviour
     private Vector3 eraserDPosition;
     private bool isGetEraser = false;
     private bool isDelete = false;
+    private int slotNum;
+
+    public GameObject[] timeTexts;
 
     public void Start()
     {
         eraserDPosition = eraser.transform.position;
+        UpdateSaveData();
     }
 
 
@@ -87,11 +92,29 @@ public class UiHandlerTitle : MonoBehaviour
 
         if(Input.GetMouseButtonUp(0))
         {
+            slotNum = eraser.GetComponent<Eraser>().slotNum;
+            if(slotNum == 1)
+            {
+                GameManager.instance.dataMgr.saveFileDate.Stage1Time = "비어있음";
+                Debug.Log($"[UiHandlerTitle] 텍스트 지워진거확인{GameManager.instance.dataMgr.saveFileDate.Stage1Time}");
+
+            }
+            GameManager.instance.uiMgr.OnClickDeleteButton(slotNum);
+            UpdateSaveData();
             isGetEraser = false;
             isDelete = true;
             eraser.transform.position = eraserDPosition;
         }
 
+    }
+
+    public void UpdateSaveData()
+    {
+        Debug.Log($"[UiHandlerTitle] 게임오브젝트찾음?{timeTexts[0]}");
+        Debug.Log($"[UiHandlerTitle] 텍스트 찾음?{timeTexts[0].GetComponent<TextMeshPro>().text}");
+        timeTexts[0].GetComponent<TextMeshPro>().text = GameManager.instance.dataMgr.saveFileDate.Stage1Time;
+        timeTexts[1].GetComponent<TextMeshPro>().text = GameManager.instance.dataMgr.saveFileDate.Stage2Time;
+        timeTexts[2].GetComponent<TextMeshPro>().text = GameManager.instance.dataMgr.saveFileDate.Stage3Time;
     }
 
     //public void OnTriggerStay(Collider other)

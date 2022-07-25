@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Vertex Colors w Specular Custom
-  m_Shader: {fileID: 4800000, guid: 86bbf0cdfd6d1ca468a69845f16e6af0, type: 2}
+  m_Shader: {fileID: 4800000, guid: 35e778fba8b2b49a198d8d7cfced67eb, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _EMISSION
