@@ -164,6 +164,7 @@ public class PlayerController : MonoBehaviour
     public void ChangeRun()
     {
         isRun = !isRun;
+        maxSpeed = isRun ? 2.5f : 1.5f;
     }
     //
 
