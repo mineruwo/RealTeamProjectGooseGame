@@ -39,6 +39,7 @@ public class Wet : BTAction
         owner.GetComponent<NavMeshAgent>().enabled = false;
         animator.SetBool("ReactionActive", true);
         animator.SetInteger("ReactionIndex", 1);
+        GameManager.instance.questMgr.GetQuestId(2);
     }
 
 

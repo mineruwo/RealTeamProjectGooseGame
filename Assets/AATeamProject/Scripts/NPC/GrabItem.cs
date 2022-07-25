@@ -39,7 +39,6 @@ public class GrabItem : BTAction
             }
             else
             {
-                Debug.Log("nope");
                 return NodeState.FAILURE;
             }
         }
@@ -62,7 +61,7 @@ public class GrabItem : BTAction
         if (distance < detectRadius)
         {
             rb.isKinematic = true;
-            item.transform.SetParent(GameObject.Find("rightGrasper").transform);
+            item.transform.SetParent(GameObject.Find("leftGrasper").transform);
             isGrabbed = true;
         }
     }
@@ -74,7 +73,7 @@ public class GrabItem : BTAction
         if (distance < detectRadius)
         {
             rb.isKinematic = true;
-            item2.transform.SetParent(GameObject.Find("rightGrasper").transform);
+            item2.transform.SetParent(GameObject.Find("leftGrasper").transform);
             isGrabbed = true;
         }
     }

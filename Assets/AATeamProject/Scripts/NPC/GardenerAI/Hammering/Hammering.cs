@@ -12,6 +12,7 @@ public class Hammering : BTAction
     private Vector3 waypoint;
 
     private bool isGooseQuacked;
+    public static bool inHammer;
     private bool isFinished;
     private float timer = 0f;
 
@@ -42,12 +43,12 @@ public class Hammering : BTAction
             animator.SetFloat("CurrentSpeed", 0);
             return NodeState.FAILURE;
         }
-
         return NodeState.RUNNING;
     }
 
     public void OnHammering()
     {
+        inHammer = true;
         timer += Time.deltaTime;
 
         Debug.Log(timer);
@@ -55,10 +56,11 @@ public class Hammering : BTAction
         animator.SetInteger("JobIndex", 4);
         animator.SetFloat("CurrentSpeed", timer);
 
-        if(timer>6f && isGooseQuacked)
+
+        if(timer>5f && inHammer)
         {
             animator.SetBool("GooseQuacked", true);
-            GameManager.instance.questMgr.GetQuestId(10001);
+            isGooseQuacked = true;
         }
         else if(timer>10f && !isGooseQuacked)
         {
