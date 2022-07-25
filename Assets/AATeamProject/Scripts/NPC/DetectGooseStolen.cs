@@ -5,7 +5,7 @@ using BehaviorTree;
 using System;
 using UnityEngine.AI;
 
-public class ChaseGoose : BTConditions
+public class DetectGooseStolen : BTConditions
 {
     private GameObject owner;
     private GameObject goose;
@@ -16,7 +16,7 @@ public class ChaseGoose : BTConditions
     private static bool isStolen;
     private NavMeshAgent agent;
     
-    public ChaseGoose(GameObject owner)
+    public DetectGooseStolen(GameObject owner)
     {
         this.owner = owner;
     }
@@ -38,13 +38,14 @@ public class ChaseGoose : BTConditions
         else
         {
             Debug.Log("¿‚¿Ω");
+            return NodeState.SUCCESS;
         }
         return NodeState.RUNNING;
     }
 
     private void OnChasing()
     {
-        agent.SetDestination(item.transform.position);
+        //agent.SetDestination(item.transform.position);
     }
 
     private GameObject DetectStealer(string tag)

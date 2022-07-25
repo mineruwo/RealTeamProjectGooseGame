@@ -29,7 +29,12 @@ public class GardenerBT : MonoBehaviour
 
 
         //**************************gardener wet
-        ChaseGoose chaseGoose = new ChaseGoose(gameObject);
+        BTSequence chasing = new BTSequence();
+        DetectGooseStolen detectGooseStolen = new DetectGooseStolen(gameObject);
+        Chasing chasingGoose = new Chasing(gameObject);
+
+        chasing.AddChild(detectGooseStolen);
+        chasing.AddChild(chasingGoose);
 
         //**************************gardener watering
         BTSequence watering = new BTSequence();
@@ -88,7 +93,7 @@ public class GardenerBT : MonoBehaviour
         //**************************Main Selector
         //btMainSelector.AddChild(idle);
         Idle idle = new Idle(gameObject);
-        btMainSelector.AddChild(chaseGoose);
+        btMainSelector.AddChild(chasing);
         btMainSelector.AddChild(wetState);
         btMainSelector.AddChild(workSelector);
 
