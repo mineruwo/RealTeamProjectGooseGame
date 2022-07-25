@@ -8,7 +8,6 @@ public class Eraser : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"[Eraser] 충돌한 물체{other.name}");
         if(other.gameObject.name == "savebook_yellow")
         {
             slotNum = 1;

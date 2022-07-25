@@ -9,6 +9,7 @@ public class UiHandlerGame : MonoBehaviour
     public GameObject questMenuDown;
 
     public GameObject[] questNoteLists;
+    public GameObject[] questPages;
 
     public GameObject[] cursors;
     private Vector2 sizeUp = new Vector2(1.3f, 1.3f);
@@ -17,7 +18,6 @@ public class UiHandlerGame : MonoBehaviour
     public GameObject questNoteScrap;
 
     public GameObject joyStick;
-
 
     // 버튼
     public PlayerController gooseCon;
@@ -30,7 +30,7 @@ public class UiHandlerGame : MonoBehaviour
     public void Start()
     {
         GameManager.instance.uiMgr.SetQuestMenu(questMenuUp, questMenuDown
-            , questNoteLists, cursors);
+            , questNoteLists, cursors, questPages);
         GameManager.instance.uiMgr.SetScrapNote(questNoteScrap);
         GameManager.instance.inputMgr.SetJoyStick(joyStick);
     }
@@ -52,27 +52,17 @@ public class UiHandlerGame : MonoBehaviour
         gooseCon.ChangeRun();
     }
 
-
-
     public void OnClickQuestButton()
     {
-        Debug.Log($"[UiHandlerGame] 퀘스트 버튼 누름");
-        GameManager.instance.uiMgr.ShowQuestWindow();
-        // GameManager.instance.uiMgr.ClearNote(questNoteLists);
-        //GameManager.instance.uiMgr.OnClickQuestButton(questMenuUp, questMenuDown);
-        //GameManager.instance.uiMgr.WriteQuestNote();        
+        GameManager.instance.uiMgr.ShowQuestWindow();      
     }
 
     public void OnClickLeftArrow()
     {
-        Debug.Log($"[UiHandlerGame] 왼쪽 화살표 누름");
-
         GameManager.instance.uiMgr.ClickLeftArrow();
     }
     public void OnClickRightArrow()
     {
-        Debug.Log($"[UiHandlerGame] 오른쪽 화살표 누름");
-
         GameManager.instance.uiMgr.ClickRightArrow();
     }
 
@@ -80,8 +70,4 @@ public class UiHandlerGame : MonoBehaviour
     {
         GameManager.instance.uiMgr.OnClickSaveButton();
     }
-
-
-
-
 }
