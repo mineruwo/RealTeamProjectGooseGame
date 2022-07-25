@@ -42,6 +42,8 @@ public class DropItem : BTAction
 
         if(isDropped && isFinishedWork)
         {
+            Debug.Log("Á¦¹ß¿ä");
+            isFinishedWork = false;
             return NodeState.SUCCESS;
         }
         return NodeState.RUNNING;
@@ -51,8 +53,10 @@ public class DropItem : BTAction
     private void OnDropItem()
     {
         //rb.isKinematic = false;
-        item.transform.SetParent(null);
         isDropped = true;
+        isFinishedWork = true;
+        item.transform.SetParent(null);
+
     }
 
     private GameObject FindNearestObjectByTag(string tag)

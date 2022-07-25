@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     private bool input = false;
     private Quaternion targetRot;
 
+    public static bool isHonk= false;
+
     public GameManager gamemanager;
     void Start()
     {
@@ -72,16 +74,16 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
-        // var v = Input.GetAxisRaw("Vertical");
-        // var h = Input.GetAxisRaw("Horizontal");
+         var v = Input.GetAxisRaw("Vertical");
+         var h = Input.GetAxisRaw("Horizontal");
 
         // 재휘 모바일 수정
-        Debug.Log($"[PlayerController] 들어가는중?");
-        Debug.Log($"[PlayerController] 값 출력?{GameManager.instance.inputMgr.moveX}");
+        //Debug.Log($"[PlayerController] 들어가는중?");
+        //Debug.Log($"[PlayerController] 값 출력?{GameManager.instance.inputMgr.moveX}");
         //
 
-        var v = GameManager.instance.inputMgr.moveX;
-        var h = GameManager.instance.inputMgr.moveZ;
+        //var v = GameManager.instance.inputMgr.moveX;
+        //var h = GameManager.instance.inputMgr.moveZ;
 
         input = v != 0f || h != 0f;
 
@@ -137,14 +139,15 @@ public class PlayerController : MonoBehaviour
             maxSpeed = isRun ? 2.5f : 1.5f;
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             //꽥꽥
             //gamemanager.audioMgr.SFXPlay("")
             Debug.Log("꽥꽥");
+            isHonk = true;
 
             //npc와의 거리가 약 10cm 정도 거리라면 npc 어그로 끄는 함수 발동
-            var a = npc.transform.position - transform.position;
+            //var a = npc.transform.position - transform.position;
             //if(a.magnitude < 5f)
             //{
             //    npc.어그로끄는 함수();

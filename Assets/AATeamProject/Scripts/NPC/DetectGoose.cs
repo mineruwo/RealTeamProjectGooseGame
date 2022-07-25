@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.AI;
 
 public class DetectGoose : MonoBehaviour
 {
     private RigBuilder rigBuilder;
+    private NavMeshAgent agent;
+    private Animator animator;
     public GameObject goose;
     public static bool isWetted;
 
@@ -13,11 +16,17 @@ public class DetectGoose : MonoBehaviour
 
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         rigBuilder = GetComponentInParent<RigBuilder>();
     }
     private void Update()
     {
-        
+    }
+
+    public void AggroFromGoose()
+    {
+        transform.forward = goose.transform.position;
     }
 
     private void OnTriggerStay(Collider other)

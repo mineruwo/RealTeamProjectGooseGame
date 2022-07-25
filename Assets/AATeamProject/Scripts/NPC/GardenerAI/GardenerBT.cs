@@ -29,20 +29,19 @@ public class GardenerBT : MonoBehaviour
 
 
         //**************************gardener wet
-        BTSequence chasing = new BTSequence();
-        DetectGooseStolen detectGooseStolen = new DetectGooseStolen(gameObject);
+        //BTSequence chasing = new BTSequence();
+        DetectGooseSound detectSound = new DetectGooseSound(gameObject);
+        DetectGoosePos detectGoose = new DetectGoosePos(gameObject);
         Chasing chasingGoose = new Chasing(gameObject);
 
-        chasing.AddChild(detectGooseStolen);
-        chasing.AddChild(chasingGoose);
 
         //**************************gardener watering
         BTSequence watering = new BTSequence();
-        WaterCanPoint waterWp = new WaterCanPoint(gameObject);
+        GoPos waterWp = new GoPos(gameObject, "WateringPos1");
         GrabItem waterWp2 = new GrabItem(gameObject);
         WateringPoint3 waterWp3 = new WateringPoint3(gameObject);
         WateringPlants waterWp4 = new WateringPlants(gameObject);
-        WaterCanPoint waterWp5 = new WaterCanPoint(gameObject);
+        GoPos waterWp5 = new GoPos(gameObject, "WateringPos1");
         DropItem waterWp6 = new DropItem(gameObject);
 
         watering.AddChild(waterWp);
@@ -55,11 +54,11 @@ public class GardenerBT : MonoBehaviour
         //**************************gardener gardening
 
         BTSequence gardening = new BTSequence();
-        GoShovelPos gardenWp = new GoShovelPos(gameObject);
+        GoPos gardenWp = new GoPos(gameObject, "GardeningPos2");
         GrabItem gardenWp2 = new GrabItem(gameObject);
-        GoGardening gardenWp3 = new GoGardening(gameObject);
+        GoWork gardenWp3 = new GoWork(gameObject, "GardeningPos1");
         GardeningPlants gardenWp4 = new GardeningPlants(gameObject);
-        GoShovelPos gardenWp5 = new GoShovelPos(gameObject);
+        GoPos gardenWp5 = new GoPos(gameObject, "GardeningPos2");
         gardening.AddChild(gardenWp);
         gardening.AddChild(gardenWp2);
         gardening.AddChild(gardenWp3);
@@ -72,10 +71,18 @@ public class GardenerBT : MonoBehaviour
 
         //**************************gardener hammering
         BTSequence hammeringSign = new BTSequence();
-        GrabItem getHammer = new GrabItem(gameObject);
-        Hammering hammering = new Hammering(gameObject);
-        hammeringSign.AddChild(getHammer);
-        hammeringSign.AddChild(hammering);
+        GoPos hammerWp = new GoPos(gameObject, "HammeringPos2");
+        GrabItem hammerWp2 = new GrabItem(gameObject);
+        GoWork hammerWp3 = new GoWork(gameObject, "HammeringPos1");
+        Hammering hammerWp4 = new Hammering(gameObject);
+        GoPos hammerWp5 = new GoPos(gameObject, "HammeringPos2");
+
+        hammeringSign.AddChild(hammerWp);
+        hammeringSign.AddChild(hammerWp2);
+        hammeringSign.AddChild(hammerWp3);
+        hammeringSign.AddChild(hammerWp4);
+        hammeringSign.AddChild(hammerWp5);
+
 
         //**************************When gardener Wets
         BTSequence wetState = new BTSequence();
@@ -85,15 +92,18 @@ public class GardenerBT : MonoBehaviour
 
 
         //**************************Work Selector
-        workSelector.AddChild(gardening);
         workSelector.AddChild(watering);
+        workSelector.AddChild(gardening);
         workSelector.AddChild(hammeringSign);
+
+
+
 
 
         //**************************Main Selector
         //btMainSelector.AddChild(idle);
         Idle idle = new Idle(gameObject);
-        btMainSelector.AddChild(chasing);
+        btMainSelector.AddChild(detectSound);
         btMainSelector.AddChild(wetState);
         btMainSelector.AddChild(workSelector);
 

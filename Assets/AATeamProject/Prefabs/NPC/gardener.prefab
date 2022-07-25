@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 7095098618484800586}
   - component: {fileID: 5017841410139063226}
   - component: {fileID: 727918269}
+  - component: {fileID: 4013269108469728540}
   m_Layer: 7
   m_Name: gardener_model
   m_TagString: Untagged
@@ -301,6 +302,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017c32f4f89ce4c48bb478698d494ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4013269108469728540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784251205139163156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e1144b6615c4447bc6764382c11065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goose: {fileID: 0}
 --- !u!1 &784251205139163243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,6 +1597,7 @@ GameObject:
   - component: {fileID: 784251205139138276}
   - component: {fileID: 784251205139105504}
   - component: {fileID: 280702350}
+  - component: {fileID: 1096239927}
   m_Layer: 7
   m_Name: person_master
   m_TagString: Untagged
@@ -1691,6 +1706,19 @@ SkinnedMeshRenderer:
     m_Extent: {x: 4.391253, y: 3.63, z: 5.74}
   m_DirtyAABB: 0
 --- !u!114 &280702350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784251205139168354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce99222296523b448a3ed784758585c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isView: 0
+--- !u!114 &1096239927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
