@@ -7,7 +7,6 @@ public class CameraInsightInObject : MonoBehaviour
 {
     public CinemachineTargetGroup targetGroup;
 
-    public CinemachineVirtualCamera vcam;
 
     public int currMember = 0;
 
@@ -20,6 +19,7 @@ public class CameraInsightInObject : MonoBehaviour
 
     private void Update()
     {
+        CheckToTarget();
         foreach (GameObject go in viewTarget)
         {
             var insight = go.GetComponentInChildren<OnvisualCamera>().isView;   
@@ -45,25 +45,14 @@ public class CameraInsightInObject : MonoBehaviour
             }
         }
 
-        if (currMember <= 1)
-        {
-            vcam.enabled = false;
-        }
-        else
-        {
-            vcam.enabled = true;
-        }
-
     }
 
     public void CheckToTarget()
     {
         viewTarget.Clear();
 
-        var gooseList = GameObject.FindGameObjectsWithTag("Goose");
         var NPCList = GameObject.FindGameObjectsWithTag("Human");
 
-        viewTarget.AddRange(gooseList);
         viewTarget.AddRange(NPCList);
     }
 }
