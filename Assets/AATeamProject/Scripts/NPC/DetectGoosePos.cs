@@ -23,28 +23,21 @@ public class DetectGoosePos : BTConditions
     public override void Initialize()
     {
         goose = GameObject.FindGameObjectWithTag("Goose");
-        item = DetectStealer("Beakable");
+        item = DetectStealer("Item");
+
     }
 
     public override NodeState Update()
     {
-        Debug.Log(item);
         if (!isStolen)
         {
             return NodeState.FAILURE;
         }
         else
         {
-            //Debug.Log("¿‚¿Ω");
+            Debug.Log("see");
             return NodeState.SUCCESS;
         }
-
-        return NodeState.RUNNING;
-    }
-
-    private void OnChasing()
-    {
-        //agent.SetDestination(item.transform.position);
     }
 
     private GameObject DetectStealer(string tag)
@@ -54,7 +47,11 @@ public class DetectGoosePos : BTConditions
         {
             float distance = Vector3.Distance(goose.transform.position, obj.transform.position);
             if(distance < gooseRadius)
-                return obj; 
+            {
+                isStolen = true;
+                return obj;
+            }
+
         }
 
         return null;

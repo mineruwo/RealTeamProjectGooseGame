@@ -42,8 +42,6 @@ public class DetectGoose : MonoBehaviour
         if(other.CompareTag("Goose"))
         {
             rigBuilder.layers[0].active = false;
-            Debug.Log("³ª°¨");
-
         }
     }
 

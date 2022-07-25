@@ -17,7 +17,9 @@ public class WateringPlants : BTAction
     }
     public override void Initialize()
     {
+        isFinished = false;
         animator = owner.GetComponent<Animator>();
+        animator.Rebind();
         item = GameObject.FindGameObjectWithTag("Item");
         timer = 0f;
     }
@@ -42,6 +44,7 @@ public class WateringPlants : BTAction
         timer += Time.deltaTime;
         if(timer>10f)
         {
+            timer = 0f;
             isFinished = true;
             animator.SetFloat("RemainingDistance", 0f);
         }

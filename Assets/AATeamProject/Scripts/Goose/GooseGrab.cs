@@ -24,7 +24,7 @@ public class GooseGrab : MonoBehaviour
     void Update()
     {
         GrabObject();
-        animator.SetBool("isDrag", isDrag);
+        //animator.SetBool("isDrag", isDrag);
     }
 
     public void ChangeGrab()

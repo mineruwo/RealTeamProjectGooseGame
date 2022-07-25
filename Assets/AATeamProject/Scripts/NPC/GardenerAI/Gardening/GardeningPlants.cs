@@ -18,6 +18,7 @@ public class GardeningPlants : BTAction
     public override void Initialize()
     {
         animator = owner.GetComponent<Animator>();
+        animator.Rebind();
         item = GameObject.FindGameObjectWithTag("Item");
         timer = 0f;
     }
