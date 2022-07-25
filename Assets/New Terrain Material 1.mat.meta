@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/AATeamProject/Json/DefaultSaveTime.Json.meta
+guid: cb7215df1515aa94c833dba88b14f495
+TextScriptImporter:
+  externalObjects: {}
+========
+guid: f21aa49b2cca2764fbf736d41a779af7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+>>>>>>>> SMW-COM:Assets/New Terrain Material 1.mat.meta
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

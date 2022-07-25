@@ -30,8 +30,7 @@ public class DetectGooseStolen : BTConditions
 
     public override NodeState Update()
     {
-        Debug.Log(item);
-        if (!GooseGrab.isGrabbed)
+        if (isStolen)
         {
             return NodeState.FAILURE;
         }

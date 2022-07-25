@@ -78,6 +78,11 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-        SoundSource = Camera.main.GetComponent<AudioSource>();
+        var set = Camera.main.transform.GetComponent<AudioSource>();
+
+        if (set != null)
+        {
+            SoundSource = set;
+        }
     }
 }
