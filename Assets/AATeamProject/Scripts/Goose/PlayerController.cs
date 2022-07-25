@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, Time.deltaTime * 5f);
         }
-        animator.SetFloat("Velocity", rb.velocity.magnitude * 4f);
+        animator.SetFloat("Velocity", rb.velocity.magnitude * 2f);
     }
 
     public void InputSet()
@@ -133,6 +133,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             isRun = !isRun;
+
+            maxSpeed = isRun ? 2.5f : 1.5f;
         }
 
         if(Input.GetKeyDown(KeyCode.Space))
@@ -179,7 +181,7 @@ public class PlayerController : MonoBehaviour
     public float radius = 0.1f;
     public void CheckForward()
     {
-        float checkDistance = 3f;
+        float checkDistance = 1f;
         bool cast = Physics.SphereCast(groundCastPoint.position, radius, Vector3.down, out var hit, checkDistance, layer, QueryTriggerInteraction.Ignore);
 
         if (cast)

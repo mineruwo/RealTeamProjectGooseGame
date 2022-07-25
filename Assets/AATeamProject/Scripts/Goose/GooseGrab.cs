@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GooseGrab : MonoBehaviour
 {
+    public Animator animator;
+
     public Transform gooseMouse;
     public GameObject grabObject;
     public Rigidbody rb;
@@ -11,10 +13,11 @@ public class GooseGrab : MonoBehaviour
 
     private GameObject handle;
 
-    private bool isDrag = false;
+    public bool isDrag = false;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         // rb = GetComponent<Rigidbody>();
     }
 
@@ -22,88 +25,89 @@ public class GooseGrab : MonoBehaviour
     void Update()
     {
         GrabObject();
-        //ChangeGrab();
+        animator.SetBool("isDrag", isDrag);
     }
 
     public void ChangeGrab()
     {
         switch (isDrag)
-        {
-            case true:
-                isDrag = false;
-                grabObject.GetComponent<PhysicObject>().isGrab = false;
-                grabObject.transform.SetParent(null);
-                grabObject = null;
+            {
+                case true:
+                    isDrag = false;
+                    grabObject.GetComponent<PhysicObject>().isGrab = false;
+                    grabObject.transform.SetParent(null);
+                    grabObject = null;
 
-                //var joint = goose.GetComponent<HingeJoint>();
-                Destroy(goose.GetComponent<ConfigurableJoint>());
-                handle = null;
-                break;
-            case false:
-                if (grabObject != null) //
-                {
-                    grabObject.GetComponent<PhysicObject>().isGrab = true;
-                    isDrag = true;
-                    Rigidbody grabObjRb;
-
-
-                    if (!grabObject.GetComponent<PhysicObject>().isHeavy)   //°¡º­¿î ¿ÀºêÁ§Æ® ÀâÀ» ¶§
+                    //var joint = goose.GetComponent<HingeJoint>();
+                    Destroy(goose.GetComponent<ConfigurableJoint>());
+                    handle = null;
+                    break;
+                case false:
+                    if (grabObject != null) //
                     {
-                        grabObjRb = grabObject.GetComponent<SmallObject>().Rigidbody;
+                        grabObject.GetComponent<PhysicObject>().isGrab = true;
+                        isDrag = true;
+                        Rigidbody grabObjRb;
 
-                        Debug.Log("Success Grab");
 
-                        var rot = gooseMouse.transform.eulerAngles - grabObject.GetComponent<SmallObject>().handlePoint.transform.eulerAngles;
-
-                        grabObjRb.transform.eulerAngles += rot;
-
-                        var pos = gooseMouse.position - grabObject.GetComponent<SmallObject>().handlePoint.transform.position;
-                        grabObject.transform.position += pos;
-
-                        grabObjRb.useGravity = false;
-                        grabObjRb.isKinematic = false;
-                        grabObjRb.mass = 0f;
-                        grabObjRb.constraints = RigidbodyConstraints.FreezeAll;
-                        grabObject.transform.SetParent(gooseMouse);
-                    }
-                    else if (grabObject.GetComponent<PhysicObject>().isHeavy)    //¹«°Å¿î ¿ÀºêÁ§Æ® ÀâÀ» ¶§
-                    {
-                        grabObjRb = grabObject.GetComponent<BigObject>().Rigidbody;
-                        handle = grabObject.GetComponent<BigObject>().handlePoint[0];
-                        Vector3 vec3 = gooseMouse.transform.position - handle.transform.position;
-                        float distance = vec3.magnitude;
-
-                        var handlePoints = grabObject.GetComponent<BigObject>().handlePoint;
-                        foreach (var handlePoint in handlePoints)
+                        if (!grabObject.GetComponent<PhysicObject>().isHeavy)   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
                         {
-                            //¿©±â¼­ °Å¸® ÂªÀº¾Ö ±¸ÇÔ
-                            var trans = gooseMouse.transform.position - handlePoint.transform.position;
-                            if (trans.magnitude < distance)
-                            {
-                                handle = handlePoint;
-                                distance = trans.magnitude;
-                            }
+                            grabObjRb = grabObject.GetComponent<SmallObject>().Rigidbody;
+
+                            Debug.Log("Success Grab");
+
+                            var rot = gooseMouse.transform.eulerAngles - grabObject.GetComponent<SmallObject>().handlePoint.transform.eulerAngles;
+
+                            grabObjRb.transform.eulerAngles += rot;
+
+                            var pos = gooseMouse.position - grabObject.GetComponent<SmallObject>().handlePoint.transform.position;
+                            grabObject.transform.position += pos;
+
+                            grabObjRb.useGravity = false;
+                            grabObjRb.isKinematic = false;
+                            grabObjRb.mass = 0f;
+                            grabObjRb.constraints = RigidbodyConstraints.FreezeAll;
+                            grabObject.transform.SetParent(gooseMouse);
                         }
-                        var joint = goose.AddComponent<ConfigurableJoint>();
-                        joint.connectedBody = grabObjRb;
-                        joint.enableCollision = true;
-                        joint.autoConfigureConnectedAnchor = false;
+                        else if (grabObject.GetComponent<PhysicObject>().isHeavy)    //ï¿½ï¿½ï¿½Å¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+                        {
+                            grabObjRb = grabObject.GetComponent<BigObject>().Rigidbody;
+                            handle = grabObject.GetComponent<BigObject>().handlePoint[0];
+                            Vector3 vec3 = gooseMouse.transform.position - handle.transform.position;
+                            float distance = vec3.magnitude;
 
-                        SoftJointLimit limit = joint.linearLimit;
-                        limit.limit = 0.3f;
-                        joint.linearLimit = limit;
+                            var handlePoints = grabObject.GetComponent<BigObject>().handlePoint;
+                            foreach (var handlePoint in handlePoints)
+                            {
+                                //ï¿½ï¿½ï¿½â¼­ ï¿½Å¸ï¿½ Âªï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                                var trans = gooseMouse.transform.position - handlePoint.transform.position;
+                                if (trans.magnitude < distance)
+                                {
+                                    handle = handlePoint;
+                                    distance = trans.magnitude;
+                                }
+                            }
 
-                        joint.xMotion = ConfigurableJointMotion.Limited;
-                        joint.yMotion = ConfigurableJointMotion.Limited;
-                        joint.zMotion = ConfigurableJointMotion.Limited;
+                            var joint = goose.AddComponent<ConfigurableJoint>();
+                            joint.connectedBody = grabObjRb;
+                            joint.enableCollision = true;
+                            joint.autoConfigureConnectedAnchor = false;
 
-                        // joint.connectedAnchor = handle.transform.position;
-                        joint.connectedAnchor = grabObjRb.gameObject.transform.InverseTransformPoint(handle.transform.position);
-                        joint.anchor = goose.transform.InverseTransformPoint(gooseMouse.transform.position);
+                            SoftJointLimit limit = joint.linearLimit;
+                            limit.limit = 0.3f;
+                            joint.linearLimit = limit;
+
+                            joint.xMotion = ConfigurableJointMotion.Limited;
+                            joint.yMotion = ConfigurableJointMotion.Limited;
+                            joint.zMotion = ConfigurableJointMotion.Limited;
+
+                            // joint.connectedAnchor = handle.transform.position;
+                            joint.connectedAnchor = grabObjRb.gameObject.transform.InverseTransformPoint(handle.transform.position);
+                            joint.anchor = goose.transform.InverseTransformPoint(gooseMouse.transform.position);
+                        }
                     }
-                }
-                break;
-        }
+                    break;
+            }
     }
 
     void GrabObject()
@@ -130,7 +134,7 @@ public class GooseGrab : MonoBehaviour
                         Rigidbody grabObjRb;
 
 
-                        if (!grabObject.GetComponent<PhysicObject>().isHeavy)   //°¡º­¿î ¿ÀºêÁ§Æ® ÀâÀ» ¶§
+                        if (!grabObject.GetComponent<PhysicObject>().isHeavy)   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
                         {
                             grabObjRb = grabObject.GetComponent<SmallObject>().Rigidbody;
 
@@ -149,7 +153,7 @@ public class GooseGrab : MonoBehaviour
                             grabObjRb.constraints = RigidbodyConstraints.FreezeAll;
                             grabObject.transform.SetParent(gooseMouse);
                         }
-                        else if (grabObject.GetComponent<PhysicObject>().isHeavy)    //¹«°Å¿î ¿ÀºêÁ§Æ® ÀâÀ» ¶§
+                        else if (grabObject.GetComponent<PhysicObject>().isHeavy)    //ï¿½ï¿½ï¿½Å¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
                         {
                             grabObjRb = grabObject.GetComponent<BigObject>().Rigidbody;
                             handle = grabObject.GetComponent<BigObject>().handlePoint[0];
@@ -159,7 +163,7 @@ public class GooseGrab : MonoBehaviour
                             var handlePoints = grabObject.GetComponent<BigObject>().handlePoint;
                             foreach (var handlePoint in handlePoints)
                             {
-                                //¿©±â¼­ °Å¸® ÂªÀº¾Ö ±¸ÇÔ
+                                //ï¿½ï¿½ï¿½â¼­ ï¿½Å¸ï¿½ Âªï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                                 var trans = gooseMouse.transform.position - handlePoint.transform.position;
                                 if (trans.magnitude < distance)
                                 {
@@ -167,6 +171,7 @@ public class GooseGrab : MonoBehaviour
                                     distance = trans.magnitude;
                                 }
                             }
+
                             var joint = goose.AddComponent<ConfigurableJoint>();
                             joint.connectedBody = grabObjRb;
                             joint.enableCollision = true;
@@ -239,8 +244,5 @@ public class GooseGrab : MonoBehaviour
         }
     }
 
-    private void OnAnimatorIK(int layerIndex)
-    {
-
-    }
+    
 }
