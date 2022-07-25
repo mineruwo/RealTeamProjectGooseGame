@@ -18,10 +18,7 @@ public class VirtualJoyStick : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private void Start()
     {
-        //rectTf = GetComponent<RectTransform>();
-        //Debug.Log($"[vj]??????? ?????? ??????{point.rectTransform.position}");
         originalPoint = point.rectTransform.position;
-        //Debug.Log($"[vj]??????? ????? ??????{originalPoint}");
     }
 
     public float GetAxis(string axis)
@@ -39,7 +36,6 @@ public class VirtualJoyStick : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        //Vector3.ClampMagnitude(dir, r)
         var newPos = eventData.position;
         direction = newPos - originalPoint;
         if (direction.magnitude > radius)
