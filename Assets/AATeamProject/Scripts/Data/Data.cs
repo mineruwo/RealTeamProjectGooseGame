@@ -20,7 +20,7 @@ public class SubQuest
 }
 
 [System.Serializable]
-public class SaveDate
+public class SaveFileDate
 {
     public string Stage1Time { get; set; }
     public string Stage2Time { get; set; }
