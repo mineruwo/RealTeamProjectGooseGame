@@ -17,7 +17,6 @@ public class GooseGrab : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
         // rb = GetComponent<Rigidbody>();
     }
 
@@ -87,7 +86,6 @@ public class GooseGrab : MonoBehaviour
                                     distance = trans.magnitude;
                                 }
                             }
-
                             var joint = goose.AddComponent<ConfigurableJoint>();
                             joint.connectedBody = grabObjRb;
                             joint.enableCollision = true;
@@ -204,7 +202,6 @@ public class GooseGrab : MonoBehaviour
         if (handle != null)
         {
             goose.transform.LookAt(handle.transform);
-
         }
         if (joint)
         {

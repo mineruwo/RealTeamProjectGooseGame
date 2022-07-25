@@ -20,6 +20,7 @@ public class TargetController : MonoBehaviour
 
 
     public float maxAngle = 100f;
+    public float weightChangeTiemr = 2f;
     void Start()
     {
         smallTargets = FindObjectsOfType<SmallObject>().ToList();
@@ -48,21 +49,21 @@ public class TargetController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distance = 1.5f;
+        float distance = 2f;
         Transform track = null;
         if (!gooseGrab.isDrag)
         {
             foreach (var target in targetsTransform)
             {
                 Vector3 vec3 = target.transform.position - goose.position;
-                Debug.Log(vec3.magnitude);
                 if (vec3.magnitude < distance)
                 {
                     float angle = Vector3.Angle(transform.forward, vec3);
                     if (angle < maxAngle)
                     {
                         track = target.transform;
-                        break;
+
+                        distance = vec3.magnitude;
                     }
                 }
             }
@@ -75,6 +76,7 @@ public class TargetController : MonoBehaviour
             weight = 1;
         }
 
-        headRig.weight = weight;
+        headRig.weight = Mathf.Lerp(headRig.weight, weight, Time.deltaTime * weightChangeTiemr);
+        
     }
 }
