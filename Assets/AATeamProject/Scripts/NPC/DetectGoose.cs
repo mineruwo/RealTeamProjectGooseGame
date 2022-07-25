@@ -7,6 +7,7 @@ public class DetectGoose : MonoBehaviour
 {
     private RigBuilder rigBuilder;
     public GameObject goose;
+    public static bool isWetted;
 
     private float distance;
 
@@ -36,4 +37,13 @@ public class DetectGoose : MonoBehaviour
 
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!isWetted && other.gameObject.layer == LayerMask.NameToLayer("Water"))
+        {
+            isWetted = true;
+        }
+    }
+
 }
