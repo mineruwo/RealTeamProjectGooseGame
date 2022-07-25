@@ -35,7 +35,7 @@ public class DetectGoosePos : BTConditions
         }
         else
         {
-            Debug.Log("잡음");
+            //Debug.Log("잡음");
             return NodeState.SUCCESS;
         }
 

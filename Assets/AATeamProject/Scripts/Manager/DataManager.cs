@@ -20,16 +20,27 @@ public class DataManager : MonoBehaviour
 
     private int currentSlot;
 
+    public TextAsset DefaultSaveTime;
+    public TextAsset DefaultQuestData;
+    public TextAsset DefaultSubQuestData;
+    public TextAsset DefaultClearStage;
+
     public void Start()
     {
         string fileName = "DefaultSaveTime";
         string path = Application.persistentDataPath + "/" + "AATeamProject" + "/"  +
             "Json" + "/" + fileName + ".Json";
+
+        fileInfo = new FileInfo(path);
+        if (!fileInfo.Exists)
+        {
+            saveFileDate = JsonConvert.DeserializeObject<SaveFileDate>(DefaultSaveTime.ToString());
+        }
+
         string timeJson = File.ReadAllText(path);
         saveFileDate = JsonConvert.DeserializeObject<SaveFileDate>(timeJson);
 
         Debug.Log($"[DataManager] 받아온 시간{saveFileDate.Stage1Time}");
-
     }
 
     public void LoadQuestData(int slotNum)
@@ -45,24 +56,31 @@ public class DataManager : MonoBehaviour
         {
             Debug.Log($"[DataManager] 세이브 데이터 없음");
 
-            fileName = "DefaultQuestData";
-            path = Application.persistentDataPath + "/" + "AATeamProject" + "/"  +
-            "Json" + "/" + fileName + ".Json";
-            string json = File.ReadAllText(path);
-            currentQuestDataList = JsonConvert.DeserializeObject<List<Quest>>(json);
-            Debug.Log($"[DataManager] 불러온 파일명 :  {fileName}");
+            currentQuestDataList = JsonConvert.DeserializeObject<List<Quest>>(DefaultQuestData.ToString());
+            Debug.Log($"[DataManager] 불러온 파일명 :  {DefaultQuestData.name}");
 
-            fileName = "DefaultSubQuestData";
-            path = Application.persistentDataPath + "/" + "AATeamProject" + "/"  +
-            "Json" + "/" + fileName + ".Json";
-            json = File.ReadAllText(path);
-            currenSubQuestDataList = JsonConvert.DeserializeObject<List<SubQuest>>(json);
+            currenSubQuestDataList = JsonConvert.DeserializeObject<List<SubQuest>>(DefaultSubQuestData.ToString());
+            currentQuestCount = JsonConvert.DeserializeObject<ClearStage>(DefaultClearStage.ToString());
 
-            fileName = "DefaultClearStage";
-            path = Application.persistentDataPath + "/" + "AATeamProject" + "/"  +
-            "Json" + "/" + fileName + ".Json";
-            json = File.ReadAllText(path);
-            currentQuestCount = JsonConvert.DeserializeObject<ClearStage>(json);
+
+            //fileName = "DefaultQuestData";
+            //path = Application.persistentDataPath + "/" + "AATeamProject" + "/"  +
+            //"Json" + "/" + fileName + ".Json";
+            //string json = File.ReadAllText(path);
+            //currentQuestDataList = JsonConvert.DeserializeObject<List<Quest>>(json);
+            //Debug.Log($"[DataManager] 불러온 파일명 :  {fileName}");
+
+            //fileName = "DefaultSubQuestData";
+            //path = Application.persistentDataPath + "/" + "AATeamProject" + "/"  +
+            //"Json" + "/" + fileName + ".Json";
+            //json = File.ReadAllText(path);
+            //currenSubQuestDataList = JsonConvert.DeserializeObject<List<SubQuest>>(json);
+
+            //fileName = "DefaultClearStage";
+            //path = Application.persistentDataPath + "/" + "AATeamProject" + "/"  +
+            //"Json" + "/" + fileName + ".Json";
+            //json = File.ReadAllText(path);
+            //currentQuestCount = JsonConvert.DeserializeObject<ClearStage>(json);
         }
         else
         {
