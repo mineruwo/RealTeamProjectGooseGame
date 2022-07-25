@@ -36,7 +36,7 @@ public class DetectGooseStolen : BTConditions
         }
         else
         {
-            Debug.Log("잡음");
+            //Debug.Log("잡음");
             return NodeState.SUCCESS;
         }
         return NodeState.RUNNING;

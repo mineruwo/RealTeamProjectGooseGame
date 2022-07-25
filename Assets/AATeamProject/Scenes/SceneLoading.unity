@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -922,6 +922,10 @@ MonoBehaviour:
     musicVolume: 0
     sfxVolume: 0
     isNpcFocus: 0
+  DefaultSaveTime: {fileID: 4900000, guid: ca4b6da3c5f65cb42b6dd36693873367, type: 3}
+  DefaultQuestData: {fileID: 4900000, guid: 1fa05f7f9740c894d85c09d1c2a0a630, type: 3}
+  DefaultSubQuestData: {fileID: 4900000, guid: 45d02e297a75040428afd1ad7e313d61, type: 3}
+  DefaultClearStage: {fileID: 4900000, guid: f0439ddde93986745aa4b83b3469177f, type: 3}
 --- !u!4 &7072456623216114083
 Transform:
   m_ObjectHideFlags: 0
