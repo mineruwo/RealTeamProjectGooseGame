@@ -10,6 +10,8 @@ public class GooseGrab : MonoBehaviour
     private Collider collider;
     public GameObject goose;
 
+    public static bool isGrabbed = false;
+
     private bool isDrag = false;
     // Start is called before the first frame update
     void Start()
@@ -48,6 +50,7 @@ public class GooseGrab : MonoBehaviour
                             grabObjRb = grabObject.GetComponent<SmallObject>().Rigidbody;
 
                             Debug.Log("Success Grab");
+                            isGrabbed = true;
 
                             var rot = gooseMouse.transform.eulerAngles - grabObject.GetComponent<SmallObject>().handlePoint.transform.eulerAngles;
 

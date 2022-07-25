@@ -22,6 +22,7 @@ public class WateringPoint3 : BTAction
     {
         waypoint = GameObject.Find("WateringPos2").transform.position;
         animator = owner.GetComponent<Animator>();
+        animator.Rebind();
         agent = owner.GetComponent<NavMeshAgent>();
     }
     public override void Terminate()

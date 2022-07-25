@@ -8,6 +8,7 @@ using UnityEngine.Animations.Rigging;
 public class GardenerBT : MonoBehaviour
 {
     private RigBuilder rigBuilder;
+    private bool isWet;
     private BTRoot aiState;
 
     private void Start()
@@ -24,8 +25,13 @@ public class GardenerBT : MonoBehaviour
     {
         aiState = new BTRoot();
         BTSelector btMainSelector = new BTSelector();
+        BTSelector workSelector = new BTSelector();
 
-        //**************************gardener work1
+
+        //**************************gardener wet
+        ChaseGoose chaseGoose = new ChaseGoose(gameObject);
+
+        //**************************gardener watering
         BTSequence watering = new BTSequence();
         WaterCanPoint waterWp = new WaterCanPoint(gameObject);
         GrabItem waterWp2 = new GrabItem(gameObject);
@@ -41,15 +47,22 @@ public class GardenerBT : MonoBehaviour
         watering.AddChild(waterWp5);
         watering.AddChild(waterWp6);
 
-        //**************************gardener work2
+        //**************************gardener gardening
 
         BTSequence gardening = new BTSequence();
-        FindItem aiFindItem = new FindItem(gameObject);
-        gardening.AddChild(aiFindItem);
+        GoShovelPos gardenWp = new GoShovelPos(gameObject);
+        GrabItem gardenWp2 = new GrabItem(gameObject);
+        GoGardening gardenWp3 = new GoGardening(gameObject);
+        GardeningPlants gardenWp4 = new GardeningPlants(gameObject);
+        GoShovelPos gardenWp5 = new GoShovelPos(gameObject);
+        gardening.AddChild(gardenWp);
+        gardening.AddChild(gardenWp2);
+        gardening.AddChild(gardenWp3);
+        gardening.AddChild(gardenWp4);
+        gardening.AddChild(gardenWp5);
 
 
-        //**************************gardener work3
-
+        //**************************gardener vase
 
 
         //**************************gardener hammering
@@ -59,14 +72,25 @@ public class GardenerBT : MonoBehaviour
         hammeringSign.AddChild(getHammer);
         hammeringSign.AddChild(hammering);
 
+        //**************************When gardener Wets
+        BTSequence wetState = new BTSequence();
+        Wet wetGardener = new Wet(gameObject);
+        wetState.AddChild(wetGardener);
+
+
+
+        //**************************Work Selector
+        workSelector.AddChild(gardening);
+        workSelector.AddChild(watering);
+        workSelector.AddChild(hammeringSign);
+
 
         //**************************Main Selector
-        Idle idle = new Idle(gameObject);
-
         //btMainSelector.AddChild(idle);
-        btMainSelector.AddChild(watering);
-        btMainSelector.AddChild(hammeringSign);
-        btMainSelector.AddChild(gardening);
+        Idle idle = new Idle(gameObject);
+        btMainSelector.AddChild(chaseGoose);
+        btMainSelector.AddChild(wetState);
+        btMainSelector.AddChild(workSelector);
 
         aiState.AddChild(btMainSelector);
 
