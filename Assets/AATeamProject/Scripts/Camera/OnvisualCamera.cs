@@ -8,6 +8,7 @@ public class OnvisualCamera : MonoBehaviour
 
     private void OnBecameVisible()
     {
+
         if (Camera.current == Camera.main)
         {
             isView = true;
@@ -15,7 +16,6 @@ public class OnvisualCamera : MonoBehaviour
         }
 
     }
-
     private void OnBecameInvisible()
     {
 
@@ -25,6 +25,17 @@ public class OnvisualCamera : MonoBehaviour
             Debug.Log("Target out side" + gameObject.name);
         }
 
+    }
+    private void OnWillRenderObject()
+    {
+        if (Camera.current == Camera.main)
+        {
+            isView = true;
+        }
+        else
+        {
+            isView = false;
+        }
     }
 
 }

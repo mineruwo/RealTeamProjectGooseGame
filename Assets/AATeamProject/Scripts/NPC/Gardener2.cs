@@ -266,7 +266,6 @@ public class Gardener2 : MonoBehaviour
                 {
                     if(item.CompareTag("Item"))
                     {
-                        Debug.Log("got");
                         rd = item.GetComponent<Rigidbody>();
                         item.transform.SetParent(gardnerOneHand, true);
                         rd.isKinematic = true;
