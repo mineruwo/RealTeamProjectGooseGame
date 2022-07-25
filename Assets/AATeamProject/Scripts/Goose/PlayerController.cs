@@ -76,8 +76,6 @@ public class PlayerController : MonoBehaviour
         // var h = Input.GetAxisRaw("Horizontal");
 
         // 재휘 모바일 수정
-        Debug.Log($"[PlayerController] 들어가는중?");
-        Debug.Log($"[PlayerController] 값 출력?{GameManager.instance.inputMgr.moveX}");
         //
 
         var v = GameManager.instance.inputMgr.moveX;

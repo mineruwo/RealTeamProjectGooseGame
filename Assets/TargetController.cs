@@ -55,7 +55,6 @@ public class TargetController : MonoBehaviour
             foreach (var target in targetsTransform)
             {
                 Vector3 vec3 = target.transform.position - goose.position;
-                Debug.Log(vec3.magnitude);
                 if (vec3.magnitude < distance)
                 {
                     float angle = Vector3.Angle(transform.forward, vec3);
