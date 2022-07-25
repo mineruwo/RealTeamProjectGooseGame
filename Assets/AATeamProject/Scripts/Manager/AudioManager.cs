@@ -5,19 +5,55 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     private Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
-    public AudioSource BGM;
-    public string filePath = "Assets/Resources/Audio/SFX/";
+    private Dictionary<int, AudioClip> BGMClips = new Dictionary<int, AudioClip>();
+    public AudioSource SoundSource;
+    public string SFXFilePath = "Assets/Resources/Audio/SFX/";
+    public string BGMFilePath = "Assets/Resources/Audio/BGM/Bruyers/";
+    private int BGMCurrentSequence = 1;
+    private string index;
     [System.Obsolete]
     WWW www;
 
     public void BGMPlay()
     {
-        BGM.Play();
+        string fileName = "Bruyeres_";
+
+        if (BGMCurrentSequence < 10)
+        {
+            index = string.Format("{0:D1}", BGMCurrentSequence);
+        }
+        else
+        {
+            index = BGMCurrentSequence.ToString();
+        }
+
+
+        if (!BGMClips.ContainsKey(BGMCurrentSequence))
+        {
+            www = new($"{Application.persistentDataPath}{BGMFilePath}{fileName}{index}.wav");
+
+            var audio = www.GetAudioClip();
+
+            BGMClips.Add(BGMCurrentSequence, audio);
+
+        }
+        var clip = BGMClips.GetValueOrDefault(BGMCurrentSequence);
+
+
+        SoundSource.PlayOneShot(clip);
+
+        BGMCurrentSequence++;
+
+        if (BGMCurrentSequence > 154)
+        {
+            BGMCurrentSequence = 0;
+        }
+
     }
 
-    public void BGMStop()
+    public void BGMStop(string key)
     {
-        BGM.Stop();
+
     }
 
     [System.Obsolete]
@@ -25,8 +61,7 @@ public class AudioManager : MonoBehaviour
     {
         if (!audioClips.ContainsKey(key))
         {
-            www = new(Application.persistentDataPath + "Assets/Resources/Audio/SFX/"
-                + key + ".wav");
+            www = new($"{Application.persistentDataPath}{SFXFilePath}{key}.wav");
 
             var audio = www.GetAudioClip();
 
@@ -36,6 +71,13 @@ public class AudioManager : MonoBehaviour
 
         var clip = audioClips.GetValueOrDefault(key);
 
+        SoundSource.PlayOneShot(clip);
+
         return clip;
+    }
+
+    private void Update()
+    {
+        SoundSource = Camera.main.GetComponent<AudioSource>();
     }
 }
