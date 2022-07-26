@@ -11,9 +11,9 @@ public class DropItem : BTAction
     private Rigidbody rb;
 
     private bool isDropped = false;
-    private bool isFinishedWork = false;
+    public static bool isFinishedWork = false;
 
-    private float detectRadius = 0.5f;
+    private float detectRadius = 1f;
 
 
     public DropItem(GameObject owner)
@@ -24,7 +24,7 @@ public class DropItem : BTAction
     public override void Initialize()
     {
         item = FindNearestObjectByTag("Item");
-        //rb = item.GetComponent<Rigidbody>();
+        rb = item.GetComponent<Rigidbody>();
     }
     public override void Terminate() { }
     public override NodeState Update()
@@ -32,27 +32,28 @@ public class DropItem : BTAction
 
         if (item == null)
         {
-            Debug.Log(item);
-            Debug.Log("!");
             return NodeState.FAILURE;
         }
 
         OnDropItem();
 
-
-        if(isDropped && isFinishedWork)
+        if (!isDropped)
+            return NodeState.FAILURE;
+        else if(isDropped && !isFinishedWork)
         {
-            Debug.Log("Á¦¹ß¿ä");
-            isFinishedWork = false;
+            return NodeState.RUNNING;
+        }
+        else if(isDropped && isFinishedWork)
+        {
             return NodeState.SUCCESS;
         }
         return NodeState.RUNNING;
 
     }
 
-    private void OnDropItem()
+    public void OnDropItem()
     {
-        //rb.isKinematic = false;
+        rb.isKinematic = false;
         isDropped = true;
         isFinishedWork = true;
         item.transform.SetParent(null);

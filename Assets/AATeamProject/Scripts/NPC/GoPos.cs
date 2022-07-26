@@ -33,13 +33,16 @@ public class GoPos : BTAction
     public override NodeState Update()
     {
         MoveAnim();
+
         agent.SetDestination(waypoint);
         float distance = Vector3.Distance(waypoint, owner.transform.position);
         if (distance < waypointRadius)
         {
             animator.SetFloat("RemainingDistance", 0f);
+            Idle.isIdle = true;
             return NodeState.SUCCESS;
         }
+
         return NodeState.RUNNING;
 
     }

@@ -50,8 +50,6 @@ public class Gardener2 : MonoBehaviour
     public Rigidbody rd;
     public ParticleSystem particle;
 
-    private GardenerJob working;
-
     public static bool equipped;
     public bool isArrived;
     public bool isTakenByGoose;
@@ -167,7 +165,6 @@ public class Gardener2 : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
         rigBuilder = GetComponent<RigBuilder>();
-        working = GetComponent<GardenerJob>();
         timer = 0f;
         isWetted = false;
 

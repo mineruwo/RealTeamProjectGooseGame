@@ -7,6 +7,7 @@ public class Idle : BTAction
 { 
     private GameObject owner;
     private Animator animator;
+    public static bool isIdle = false;
 
     public Idle(GameObject owner)
     {
@@ -20,8 +21,13 @@ public class Idle : BTAction
 
     public override NodeState Update()
     {
-        OnIdle();
-        return NodeState.RUNNING;
+        if (!isIdle)
+            return NodeState.FAILURE;
+        else
+        {
+            OnIdle();
+            return NodeState.RUNNING;
+        }
     }
 
     public void OnIdle()
