@@ -42,10 +42,7 @@ public class SmallObject : PhysicObject
         switch (isgrab)
         {
             case true:
-                foreach (var col in colliders)
-                {
-                    col.enabled = true;
-                }
+             
                 isActive = true;
                 Rigidbody.useGravity = true;
 
@@ -53,13 +50,9 @@ public class SmallObject : PhysicObject
 
             case false:
 
-                foreach (var col in colliders)
-                {
-                    col.enabled = false;
-                }
-
-                Rigidbody = settngRb;
+                Rigidbody.mass = 1;
                 Rigidbody.useGravity = true;
+                Rigidbody.constraints = RigidbodyConstraints.None;
 
                 return false;
         }

@@ -12,7 +12,6 @@ public class OnvisualCamera : MonoBehaviour
         if (Camera.current == Camera.main)
         {
             isView = true;
-            Debug.Log("Target in side : " + gameObject.name);
         }
 
     }
@@ -22,7 +21,6 @@ public class OnvisualCamera : MonoBehaviour
         if (Camera.current == Camera.main)
         {
             isView = false;
-            Debug.Log("Target out side" + gameObject.name);
         }
 
     }

@@ -35,6 +35,5 @@ public class SceneMgr : MonoBehaviour
             yield return null;
         }
 
-        GlobalGameMgr.instance.cameraSystem.SetActive();
     }
 }

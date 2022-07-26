@@ -112,15 +112,18 @@ public class GooseGrab : MonoBehaviour
             switch (isDrag)
             {
                 case true:
+           
                     Drop();
                     break;
                 case false:
                     if (grabObject != null) //
                     {
+                        grabObject.GetComponent<PhysicObject>().OnGrab(true);
                         grabObject.GetComponent<PhysicObject>().isGrab = true;
                         isDrag = true;
                         Rigidbody grabObjRb;
 
+                       
 
                         if (!grabObject.GetComponent<PhysicObject>().isHeavy)   //������ ������Ʈ ���� ��
                         {
@@ -191,9 +194,11 @@ public class GooseGrab : MonoBehaviour
 
     public void Drop()
     {
+
         isDrag = false;
         if (grabObject)
         {
+            grabObject.GetComponent<PhysicObject>().OnGrab(false);
             grabObject.GetComponent<PhysicObject>().isGrab = false;
             grabObject.transform.SetParent(null);
             grabObject = null;
