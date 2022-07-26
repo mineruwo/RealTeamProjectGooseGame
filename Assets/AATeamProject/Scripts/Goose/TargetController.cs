@@ -62,8 +62,7 @@ public class TargetController : MonoBehaviour
                     
                     if (angle < maxAngle)
                     {
-                        Debug.Log(goose.forward);
-                        Debug.Log(angle);
+                        
                         track = target.transform;
 
                         distance = vec3.magnitude;

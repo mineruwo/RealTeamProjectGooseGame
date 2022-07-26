@@ -34,6 +34,8 @@ public class OnvisualCamera : MonoBehaviour
         {
             isView = false;
         }
+
+
     }
 
 }

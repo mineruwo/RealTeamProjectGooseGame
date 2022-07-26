@@ -60,6 +60,7 @@ public class Hammering : BTAction
         if(timer>5f && inHammer)
         {
             animator.SetBool("GooseQuacked", true);
+            GameManager.instance.questMgr.GetQuestId(10001);
             isGooseQuacked = true;
         }
         else if(timer>10f && !isGooseQuacked)

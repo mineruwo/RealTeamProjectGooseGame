@@ -24,7 +24,7 @@ public class GooseGrab : MonoBehaviour
     void Update()
     {
         GrabObject();
-        animator.SetBool("isDrag", isDrag);
+        //animator.SetBool("isDrag", isDrag);
         if (handle != null)
         {
             goose.transform.LookAt(handle.transform);
@@ -58,6 +58,14 @@ public class GooseGrab : MonoBehaviour
 
                         var pos = gooseMouse.position - grabObject.GetComponent<SmallObject>().handlePoint.transform.position;
                         grabObject.transform.position += pos;
+
+                        Debug.Log($"이름이름{grabObject.name}");
+
+                        if(grabObject.name == "keys")
+                        {
+                            GameManager.instance.questMgr.GetQuestId(3);
+                        }
+
 
                         grabObjRb.useGravity = false;
                         grabObjRb.isKinematic = false;
@@ -130,6 +138,13 @@ public class GooseGrab : MonoBehaviour
                             grabObjRb = grabObject.GetComponent<SmallObject>().Rigidbody;
 
                             Debug.Log("Success Grab");
+
+                            Debug.Log($"이름이름{grabObject.name}");
+
+                            if (grabObject.name == "keys")
+                            {
+                                GameManager.instance.questMgr.GetQuestId(3);
+                            }
 
                             var rot = gooseMouse.transform.eulerAngles - grabObject.GetComponent<SmallObject>().handlePoint.transform.eulerAngles;
 

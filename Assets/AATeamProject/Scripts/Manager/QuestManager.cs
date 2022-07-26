@@ -10,6 +10,8 @@ public class QuestManager : MonoBehaviour
 
     public event Action ClearEvent;
 
+    public bool testbool = false;
+
     public void GetQuestId(int id)
     {
         currentQuestId = id;
@@ -29,6 +31,7 @@ public class QuestManager : MonoBehaviour
             if (GameManager.instance.dataMgr.currentQuestCount.stage1 == 1)
             {
                 GameManager.instance.uiMgr.WriteMainQuestNote();
+                testbool = true;
             }
             if (ClearEvent != null)
             {

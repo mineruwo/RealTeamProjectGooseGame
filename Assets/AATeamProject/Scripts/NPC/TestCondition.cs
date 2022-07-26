@@ -15,7 +15,7 @@ public class TestCondition : BTConditions
     public override NodeState Update()
     {
         //여기서 bool 변수 받아서 true false 넘겨주고 해머로 들어갈 수 있게 처리
-        if(!DropItem.isFinishedWork)
+        if(!GameManager.instance.questMgr.testbool)
         {
             return NodeState.FAILURE;
         }
@@ -23,5 +23,8 @@ public class TestCondition : BTConditions
         {
             return NodeState.SUCCESS;
         }
+
     }
+
+
 }

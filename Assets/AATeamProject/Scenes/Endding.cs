@@ -6,6 +6,6 @@ public class Endding : MonoBehaviour
 {
     public void NextScene()
     {
-        GameManager.instance.sceneMgr.NextScene(3);
+        GameManager.instance.sceneMgr.NextScene(2);
     }
 }
