@@ -7,7 +7,6 @@ public class CameraInsightInObject : MonoBehaviour
 {
     public CinemachineTargetGroup targetGroup;
 
-
     public int currMember = 0;
 
     private List<GameObject> viewTarget = new List<GameObject>();
@@ -19,7 +18,6 @@ public class CameraInsightInObject : MonoBehaviour
 
     private void Update()
     {
-        CheckToTarget();
         foreach (GameObject go in viewTarget)
         {
             var insight = go.GetComponentInChildren<OnvisualCamera>().isView;   

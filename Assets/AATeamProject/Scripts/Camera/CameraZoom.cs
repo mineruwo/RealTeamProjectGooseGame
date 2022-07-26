@@ -34,12 +34,13 @@ public class CameraZoom : MonoBehaviour
 
             if (isZoom)
             {
-                aim.m_MinimumOrthoSize = Mathf.Lerp(2f, 2.5f, 10f);
-
+                var len = vcam.m_Lens;
+                len.OrthographicSize = Mathf.Lerp(len.OrthographicSize, 2.5f, 3f);
             }
             else
             {
-                aim.m_MinimumOrthoSize = 2f;
+                var len = vcam.m_Lens;
+                len.OrthographicSize = Mathf.Lerp(len.OrthographicSize, 2f, 3f);
             }
 
 
@@ -52,11 +53,13 @@ public class CameraZoom : MonoBehaviour
 
             if (isZoom)
             {
-                aim.m_MinimumOrthoSize = 1.5f;
+                var len = vcam.m_Lens;
+                len.OrthographicSize = Mathf.Lerp(len.OrthographicSize, 1.5f, 3f);
             }
             else
             {
-                aim.m_MinimumOrthoSize = 2f;
+                var len = vcam.m_Lens;
+                len.OrthographicSize = Mathf.Lerp(len.OrthographicSize, 2f, 3f);
             }
 
             isZoom = !isZoom;
