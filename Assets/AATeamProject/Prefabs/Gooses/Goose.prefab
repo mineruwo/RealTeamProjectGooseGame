@@ -5516,7 +5516,7 @@ GameObject:
   - component: {fileID: 8665319478537169479}
   m_Layer: 8
   m_Name: Goose
-  m_TagString: Untagged
+  m_TagString: Goose
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5714,7 +5714,7 @@ MonoBehaviour:
   npc: {fileID: 0}
   layer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1024
   gooseSphereCollider: {fileID: 8665319478537169499}
   groundCastPoint: {fileID: 8665319477973319265}
   curspeed: 15
