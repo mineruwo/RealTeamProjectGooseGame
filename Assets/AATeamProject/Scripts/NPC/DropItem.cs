@@ -51,7 +51,7 @@ public class DropItem : BTAction
 
     }
 
-    private void OnDropItem()
+    public void OnDropItem()
     {
         rb.isKinematic = false;
         isDropped = true;

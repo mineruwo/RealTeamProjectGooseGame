@@ -10,11 +10,9 @@ public class DetectGoosePos : BTConditions
     private GameObject owner;
     private GameObject goose;
     private GameObject item;
-
-    private float detectRadius = 8f;
+    
     private float gooseRadius = 0.5f;
     private static bool isStolen = false;
-    private static bool isQuacked = false;
     
     public DetectGoosePos(GameObject owner)
     {

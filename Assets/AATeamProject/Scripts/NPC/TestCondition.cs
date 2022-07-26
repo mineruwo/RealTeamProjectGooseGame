@@ -23,6 +23,5 @@ public class TestCondition : BTConditions
         {
             return NodeState.SUCCESS;
         }
-        return NodeState.RUNNING;
     }
 }

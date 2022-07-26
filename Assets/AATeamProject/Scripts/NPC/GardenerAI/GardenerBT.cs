@@ -33,6 +33,15 @@ public class GardenerBT : MonoBehaviour
         //BTSequence chasing = new BTSequence();
         DetectGooseSound detectSound = new DetectGooseSound(gameObject);
 
+        //**************************hit Goose
+        BTSequence touch = new BTSequence();
+        ShooDuck shoo = new ShooDuck(gameObject);
+        DropItem shoo2 = new DropItem(gameObject);
+        GrabItem shoo3 = new GrabItem(gameObject);
+        touch.AddChild(shoo);   
+        touch.AddChild(shoo2);
+        touch.AddChild(shoo3);
+
 
         //**************************gardener watering
         BTSequence watering = new BTSequence();
@@ -73,6 +82,7 @@ public class GardenerBT : MonoBehaviour
 
 
         //**************************gardener vase
+        BTSequence ChangeVase = new BTSequence();
 
 
         //**************************gardener hammering
@@ -114,6 +124,7 @@ public class GardenerBT : MonoBehaviour
 
         Idle idle = new Idle(gameObject);
 
+        btMainSelector.AddChild(touch);
         btMainSelector.AddChild(detectSound);
         btMainSelector.AddChild(detectState);
         btMainSelector.AddChild(wetState);
