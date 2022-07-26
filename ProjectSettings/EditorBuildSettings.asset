@@ -20,7 +20,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/AATeamProject/Scenes/SceneGame.unity
     guid: 712adcde2b2dae04c84bd09b13d388fc
-  - enabled: 1
-    path: Assets/AATeamProject/Scenes/EndingScene.unity
-    guid: 0051940d31a124142ad24a3f1468aa1d
   m_configObjects: {}
