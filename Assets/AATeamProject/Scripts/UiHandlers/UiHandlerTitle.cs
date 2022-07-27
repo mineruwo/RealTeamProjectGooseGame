@@ -86,6 +86,14 @@ public class UiHandlerTitle : MonoBehaviour
             {
                 GameManager.instance.dataMgr.saveFileDate.Stage1Time = "비어있음";
             }
+            if (slotNum == 2)
+            {
+                GameManager.instance.dataMgr.saveFileDate.Stage2Time = "비어있음";
+            }
+            if (slotNum == 3)
+            {
+                GameManager.instance.dataMgr.saveFileDate.Stage3Time = "비어있음";
+            }
             GameManager.instance.uiMgr.OnClickDeleteButton(slotNum);
             UpdateSaveData();
             isGetEraser = false;
