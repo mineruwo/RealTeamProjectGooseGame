@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -526,6 +526,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &502235237 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8665319478919450120, guid: 11e2dbef325df5e4584f12c5256da631, type: 3}
+  m_PrefabInstance: {fileID: 1280132190}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &572497833 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8665319479506153749, guid: 11e2dbef325df5e4584f12c5256da631, type: 3}
@@ -910,6 +915,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8665319479036435865, guid: 11e2dbef325df5e4584f12c5256da631, type: 3}
   m_PrefabInstance: {fileID: 1280132190}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1183699845 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8665319479580062466, guid: 11e2dbef325df5e4584f12c5256da631, type: 3}
+  m_PrefabInstance: {fileID: 1280132190}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1196691893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,7 +1012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8665319478537169500, guid: 11e2dbef325df5e4584f12c5256da631, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.14
+      value: -17.118
       objectReference: {fileID: 0}
     - target: {fileID: 8665319478537169500, guid: 11e2dbef325df5e4584f12c5256da631, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1061,9 +1071,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8665319479685499785, guid: 11e2dbef325df5e4584f12c5256da631, type: 3}
+      propertyPath: skin
+      value: 
+      objectReference: {fileID: 502235237}
+    - target: {fileID: 8665319479685499785, guid: 11e2dbef325df5e4584f12c5256da631, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 1207383199}
+    - target: {fileID: 8665319479685499785, guid: 11e2dbef325df5e4584f12c5256da631, type: 3}
+      propertyPath: gooseHead
+      value: 
+      objectReference: {fileID: 1183699845}
     - target: {fileID: 8665319479685499785, guid: 11e2dbef325df5e4584f12c5256da631, type: 3}
       propertyPath: necks.Array.size
       value: 6

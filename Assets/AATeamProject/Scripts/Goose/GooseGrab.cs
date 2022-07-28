@@ -10,18 +10,32 @@ public class GooseGrab : MonoBehaviour
     public Rigidbody rb;
     public GameObject goose;
 
-    private GameObject handle;
+    public GameObject handle;
+
+    public Transform gooseHead;
+    public Transform OriParent;
 
     public bool isDrag = false;
     public static bool isGrap = false;
 
     public GameObject[] necks;
+    public List<Vector3> necksDistance;
 
-    public List<float> distance;
     // Start is called before the first frame update
     void Start()
     {
-        // rb = GetComponent<Rigidbody>();
+        OriParent = gooseHead.parent;
+
+        for (int i = 0; i < necks.Length - 1; i++)
+        {
+            necksDistance.Add(necks[i].transform.position - necks[i + 1].transform.position);
+        }
+
+        foreach(var j in necksDistance)
+        {
+            Debug.Log(j.magnitude);
+        }
+       
     }
 
     // Update is called once per frame
@@ -87,7 +101,9 @@ public class GooseGrab : MonoBehaviour
                         grabObject.transform.SetParent(gooseMouse);
                     }
                     else if (grabObject.GetComponent<PhysicObject>().isHeavy)    //���ſ� ������Ʈ ���� ��
-                    {       
+                    {
+                        //gooseHead.transform.SetParent(goose.transform);
+
                         grabObjRb = grabObject.GetComponent<BigObject>().Rigidbody;
                         handle = grabObject.GetComponent<BigObject>().handlePoint[0];
                         Vector3 vec3 = gooseMouse.transform.position - handle.transform.position;
@@ -105,10 +121,10 @@ public class GooseGrab : MonoBehaviour
                             }
                         }
 
-                        Vector3 localPos = handle.transform.position - gooseMouse.transform.position;
-                        goose.transform.position += localPos;
+                        //Vector3 localPos = handle.transform.position - gooseMouse.transform.position;
+                        //goose.transform.position += localPos;
 
-                        goose.transform.LookAt(handle.transform.position);
+                        //goose.transform.LookAt(handle.transform.position);
 
                         var joint = goose.AddComponent<ConfigurableJoint>();
                         joint.connectedBody = grabObjRb;
@@ -116,7 +132,7 @@ public class GooseGrab : MonoBehaviour
                         joint.autoConfigureConnectedAnchor = false;
 
                         SoftJointLimit limit = joint.linearLimit;
-                        limit.limit = 0.3f;
+                        limit.limit = 0.5f;
                         joint.linearLimit = limit;
 
                         joint.xMotion = ConfigurableJointMotion.Limited;
@@ -125,7 +141,8 @@ public class GooseGrab : MonoBehaviour
 
                         // joint.connectedAnchor = handle.transform.position;
                         joint.connectedAnchor = grabObjRb.gameObject.transform.InverseTransformPoint(handle.transform.position);
-                        joint.anchor = goose.transform.InverseTransformPoint(gooseMouse.transform.position);
+                        //joint.anchor = goose.transform.InverseTransformPoint(gooseMouse.transform.position);
+                        joint.anchor = new Vector3(0, 5, -2);
                     }
                 }
                 break;
@@ -152,7 +169,7 @@ public class GooseGrab : MonoBehaviour
         var joint = goose.GetComponentInParent<ConfigurableJoint>();
         if (handle != null)
         {
-            goose.transform.LookAt(handle.transform);
+            //goose.transform.LookAt(handle.transform);
         }
         if (joint)
         {
@@ -162,7 +179,25 @@ public class GooseGrab : MonoBehaviour
 
     private void LateUpdate()
     {
-        
+        if (handle != null)
+        {
+            Vector3 targetVec3 = handle.transform.position;
+            gooseHead.transform.position += handle.transform.position-gooseMouse.transform.position;
+
+            
+                //necks[0].transform.position += (gooseHead.transform.position - necks[0].transform.position) - necksDistance[0];
+            //necks[0].transform.position = targetVec3;
+            //necks[1].transform.position = (targetVec3 - necks[1].transform.position).normalized * necksDistance[0].magnitude;
+            //for (int i = 1; i < necks.Length; i++)
+            //{
+            //    targetVec3 = necks[i - 1].transform.position;
+            //    Vector3 dir = (targetVec3 - necks[i].transform.position).normalized;
+            //    necks[i].transform.position += (dir * necksDistance[i].magnitude);
+
+
+                //}
+
+        }
     }
 
     private void OnTriggerStay(Collider other)

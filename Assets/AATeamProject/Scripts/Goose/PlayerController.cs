@@ -67,8 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         if (input)
         {
-            rb.AddForce(dir * curspeed);
-
+            rb.velocity = dir * curspeed;
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
         }
         else
