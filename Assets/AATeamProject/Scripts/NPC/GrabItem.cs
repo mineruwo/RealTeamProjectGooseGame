@@ -63,19 +63,27 @@ public class GrabItem : BTAction
             rb.isKinematic = true;
 
             var leftHand = GameObject.Find("leftGrasper").transform;
+            if(!item.GetComponent<PhysicObject>().isHeavy)
+            {
+                var smallItemTrans = item.GetComponent<SmallObject>();
+                smallItemTrans.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+                var smallItemRot = leftHand.eulerAngles - smallItemTrans.handlePoint.transform.eulerAngles;
+                smallItemTrans.transform.eulerAngles += smallItemRot;
+                var smallPos = leftHand.position = smallItemTrans.handlePoint.transform.position;
+                smallItemTrans.transform.position += smallPos;
+                item.transform.SetParent(GameObject.Find("leftGrasper").transform);
+                isGrabbed = true;
+
+
+            }
+
             var itemTrans = item.GetComponent<BigObject>();
-
             itemTrans.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            
             var rot = leftHand.eulerAngles - itemTrans.handlePoint[0].transform.eulerAngles;
-
             itemTrans.transform.eulerAngles += rot;
-
             var pos = leftHand.position - itemTrans.handlePoint[0].transform.position;
             itemTrans.transform.position += pos;
-
             item.transform.SetParent(GameObject.Find("leftGrasper").transform);
-
             isGrabbed = true;
         }
     }
