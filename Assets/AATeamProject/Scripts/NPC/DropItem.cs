@@ -35,8 +35,12 @@ public class DropItem : BTAction
             return NodeState.FAILURE;
         }
 
-        OnDropItem();
+        if(!GrabItem.isGrabbed)
+        {
+            return NodeState.FAILURE;
+        }
 
+        OnDropItem();
         if (!isDropped)
             return NodeState.FAILURE;
         else if(isDropped && !isFinishedWork)

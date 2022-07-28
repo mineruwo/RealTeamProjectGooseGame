@@ -25,13 +25,34 @@ public class GardenerBT : MonoBehaviour
     {
         aiState = new BTRoot();
         BTSelector btMainSelector = new BTSelector();
-        BTSequence workSelector = new BTSequence();
+        BTSequence working = new BTSequence();
 
+        //**************************Condition Set
         TestCondition test = new TestCondition(gameObject);
 
+
+
         //**************************gardener hearing Sound
-        //BTSequence chasing = new BTSequence();
         DetectGooseSound detectSound = new DetectGooseSound(gameObject);
+
+
+
+        //**************************When gardener detect goose
+
+        BTSequence detecting = new BTSequence();
+        BTSequence detectState = new BTSequence();
+
+
+
+        DetectingCondition findyou = new DetectingCondition(gameObject);
+        DetectGoosePos detectGoose = new DetectGoosePos(gameObject);
+        Chasing chasingGoose = new Chasing(gameObject);
+
+        detectState.AddChild(findyou);
+        detectState.AddChild(detectGoose);
+        detectState.AddChild(chasingGoose);
+
+
 
         //**************************hit Goose
         BTSequence touch = new BTSequence();
@@ -105,19 +126,16 @@ public class GardenerBT : MonoBehaviour
         Wet wetGardener = new Wet(gameObject);
         wetState.AddChild(wetGardener);
 
-        //**************************When gardener detect goose
-        BTSequence detectState = new BTSequence();
-        DetectGoosePos detectGoose = new DetectGoosePos(gameObject);
-        Chasing chasingGoose = new Chasing(gameObject);
-
-        detectState.AddChild(detectGoose);
-        detectState.AddChild(chasingGoose);
 
 
         //**************************Work Selector
-        workSelector.AddChild(watering);
-        workSelector.AddChild(gardening);
-        workSelector.AddChild(hammeringSign);
+        working.AddChild(watering);
+        working.AddChild(gardening);
+        working.AddChild(hammeringSign);
+
+
+        //**************************Detect Selector
+        detecting.AddChild(detectState);
 
 
         //**************************Main Selector
@@ -126,9 +144,9 @@ public class GardenerBT : MonoBehaviour
 
         btMainSelector.AddChild(touch);
         btMainSelector.AddChild(detectSound);
-        btMainSelector.AddChild(detectState);
+        btMainSelector.AddChild(detecting);
         btMainSelector.AddChild(wetState);
-        btMainSelector.AddChild(workSelector);
+        btMainSelector.AddChild(working);
         btMainSelector.AddChild(idle);
 
         aiState.AddChild(btMainSelector);

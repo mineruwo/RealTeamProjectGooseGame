@@ -30,6 +30,7 @@ public class ShooDuck : BTAction
         {
             if (!GrabItem.isGrabbed)
             {
+                animator.Rebind();
                 animator.SetBool("ReactionActive", true);
                 animator.SetInteger("ReactionIndex", 0);
                 return NodeState.FAILURE;
