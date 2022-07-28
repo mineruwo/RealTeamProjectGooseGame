@@ -31,13 +31,13 @@ public class DetectingCondition : BTAction
         else
         {
             return NodeState.SUCCESS;
-        }
+        } 
         return NodeState.RUNNING;
     }
 
     private void OnDetectGoose()
     {
-        float distance = 5f;
+        float distance = 2f;
         Vector3 vec3 = goose.transform.position - owner.transform.position;
         if(vec3.magnitude < distance)
         {
