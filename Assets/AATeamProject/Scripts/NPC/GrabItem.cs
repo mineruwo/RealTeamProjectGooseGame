@@ -61,7 +61,21 @@ public class GrabItem : BTAction
         if (distance < detectRadius)
         {
             rb.isKinematic = true;
+
+            var leftHand = GameObject.Find("leftGrasper").transform;
+            var itemTrans = item.GetComponent<BigObject>();
+
+            itemTrans.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            
+            var rot = leftHand.eulerAngles - itemTrans.handlePoint[0].transform.eulerAngles;
+
+            itemTrans.transform.eulerAngles += rot;
+
+            var pos = leftHand.position - itemTrans.handlePoint[0].transform.position;
+            itemTrans.transform.position += pos;
+
             item.transform.SetParent(GameObject.Find("leftGrasper").transform);
+
             isGrabbed = true;
         }
     }
