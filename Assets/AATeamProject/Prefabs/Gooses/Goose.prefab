@@ -16151,7 +16151,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8665319479580062467}
-  m_LocalRotation: {x: 0.919302, y: 0.0000000055233893, z: 0.39355287, w: 0.00000009761345}
+  m_LocalRotation: {x: 0.9193003, y: -0, z: 0.3935567, w: 0}
   m_LocalPosition: {x: -0.81227255, y: 0.00000006132507, z: -0.0000004768373}
   m_LocalScale: {x: 1, y: 1, z: 0.9999995}
   m_ConstrainProportionsScale: 0
@@ -16172,7 +16172,7 @@ Transform:
   - {fileID: 8665319479685499894}
   m_Father: {fileID: 8665319479506153748}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 4.127671, y: -141.43457, z: -167.88675}
+  m_LocalEulerAnglesHint: {x: 180, y: -46.35199, z: 0}
 --- !u!1 &8665319479586452830
 GameObject:
   m_ObjectHideFlags: 0
@@ -18665,12 +18665,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e3e346294e33a4a82898b7fc1ae01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 8665319478537169501}
   gooseMouse: {fileID: 8665319479913792907}
   grabObject: {fileID: 0}
   rb: {fileID: 8665319478537169498}
   goose: {fileID: 8665319478537169476}
   isDrag: 0
+  necks:
+  - {fileID: 8665319479506153749}
+  - {fileID: 8665319479036435865}
+  - {fileID: 8665319478983695145}
+  - {fileID: 8665319478319868018}
+  - {fileID: 8665319478286543785}
+  - {fileID: 8665319479751226351}
+  distance: []
 --- !u!1 &8665319479696739369
 GameObject:
   m_ObjectHideFlags: 0
