@@ -98,6 +98,26 @@ public class DataManager : MonoBehaviour
             setJson = JsonConvert.SerializeObject(saveFileDate);
             File.WriteAllText(path, setJson);
         }
+
+        if (currentSlot == 2)
+        {
+            saveFileDate.Stage2Time = DateTime.Now.ToString(("MM-dd HH:mm:ss tt"));
+
+            fileName = "DefaultSaveTime";
+            path = Application.persistentDataPath + fileName + ".Json";
+            setJson = JsonConvert.SerializeObject(saveFileDate);
+            File.WriteAllText(path, setJson);
+        }
+
+        if (currentSlot == 3)
+        {
+            saveFileDate.Stage3Time = DateTime.Now.ToString(("MM-dd HH:mm:ss tt"));
+
+            fileName = "DefaultSaveTime";
+            path = Application.persistentDataPath + fileName + ".Json";
+            setJson = JsonConvert.SerializeObject(saveFileDate);
+            File.WriteAllText(path, setJson);
+        }
     }
 
     public void DeleteQuestData(int slotNum)

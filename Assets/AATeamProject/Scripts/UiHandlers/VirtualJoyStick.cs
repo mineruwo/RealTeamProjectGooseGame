@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class VirtualJoyStick : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     public Image point;
-    public float radius = 100f;
+    public float radius = 70f;
 
     private Vector2 originalPoint = Vector2.zero;
     public RectTransform rectTf;

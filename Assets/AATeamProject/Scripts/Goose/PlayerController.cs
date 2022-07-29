@@ -79,16 +79,16 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
-        var v = Input.GetAxisRaw("Vertical");
-        var h = Input.GetAxisRaw("Horizontal");
+        // var v = Input.GetAxisRaw("Vertical");
+        // var h = Input.GetAxisRaw("Horizontal");
 
         // 재휘 모바일 수정
         //Debug.Log($"[PlayerController] 들어가는중?");
         //Debug.Log($"[PlayerController] 값 출력?{GameManager.instance.inputMgr.moveX}");
         //
 
-        //var v = GameManager.instance.inputMgr.moveX;
-        //var h = GameManager.instance.inputMgr.moveZ;
+        var v = GameManager.instance.inputMgr.moveX;
+        var h = GameManager.instance.inputMgr.moveZ;
 
         input = v != 0f || h != 0f;
 

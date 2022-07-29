@@ -38,10 +38,7 @@ public class ClearStage
 [System.Serializable]
 public class Option
 {
-    public string language;
-
     public int musicVolume;
-    public int sfxVolume;
 
     // false : 거위만 true : 거위 + NPC
     public bool isNpcFocus;

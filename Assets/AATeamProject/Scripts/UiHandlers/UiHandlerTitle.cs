@@ -9,8 +9,8 @@ public class UiHandlerTitle : MonoBehaviour
     public Camera camera;
 
     public GameObject[] cameraPoints;
-    public int pointNum = 1;
-    public int distance = 20;
+    private int pointNum = 1;
+    private int distance = 280;
 
     public GameObject eraser;
     private Vector3 eraserDPosition;
@@ -19,6 +19,11 @@ public class UiHandlerTitle : MonoBehaviour
     private int slotNum;
 
     public GameObject[] timeTexts;
+    public GameObject volState;
+    public GameObject cameraState;
+
+    private int volNum = 5;
+    private bool isLookGoose = true;
 
     public void Start()
     {
@@ -39,8 +44,17 @@ public class UiHandlerTitle : MonoBehaviour
                 {
                     pointNum = 0;
                 }
+                if (hit.transform.gameObject.name == "Option")
+                {
+                    pointNum = 2;
+                }
 
-                if (hit.transform.gameObject.name == "arrow")
+                if (hit.transform.gameObject.name == "arrow_book")
+                {
+                    pointNum = 1;
+                }
+
+                if (hit.transform.gameObject.name == "arrow_option")
                 {
                     pointNum = 1;
                 }
@@ -58,6 +72,42 @@ public class UiHandlerTitle : MonoBehaviour
                 if (hit.transform.gameObject.name == "savebook_red")
                 {
                     GameManager.instance.uiMgr.OnClickGameSlot(3);
+                }
+
+                if(hit.transform.gameObject.name == "vol_arrowL")
+                {
+                    volNum--;
+                    volState.GetComponent<TextMeshPro>().text = volNum.ToString();
+                }
+                if (hit.transform.gameObject.name == "vol_arrowR")
+                {
+                    volNum++;
+                    volState.GetComponent<TextMeshPro>().text = volNum.ToString();
+                }
+
+                if (hit.transform.gameObject.name == "ca_arrowL")
+                {
+                    isLookGoose = !isLookGoose;
+                    if(isLookGoose)
+                    {
+                        cameraState.GetComponent<TextMeshPro>().text = "거위만";
+                    }
+                    else
+                    {
+                        cameraState.GetComponent<TextMeshPro>().text = "거위 + 사람";
+                    }
+                }
+                if (hit.transform.gameObject.name == "ca_arrowR")
+                {
+                    isLookGoose = !isLookGoose;
+                    if (isLookGoose)
+                    {
+                        cameraState.GetComponent<TextMeshPro>().text = "거위만";
+                    }
+                    else
+                    {
+                        cameraState.GetComponent<TextMeshPro>().text = "거위 + 사람";
+                    }
                 }
             }
         }
@@ -86,6 +136,14 @@ public class UiHandlerTitle : MonoBehaviour
             {
                 GameManager.instance.dataMgr.saveFileDate.Stage1Time = "비어있음";
             }
+            if (slotNum == 2)
+            {
+                GameManager.instance.dataMgr.saveFileDate.Stage2Time = "비어있음";
+            }
+            if (slotNum == 3)
+            {
+                GameManager.instance.dataMgr.saveFileDate.Stage3Time = "비어있음";
+            }
             GameManager.instance.uiMgr.OnClickDeleteButton(slotNum);
             UpdateSaveData();
             isGetEraser = false;
@@ -111,4 +169,10 @@ public class UiHandlerTitle : MonoBehaviour
     {
         GameManager.instance.uiMgr.OnClickDeleteButton(slotNum);
     }
+
+
+    // 옵션
+
+
+
 }

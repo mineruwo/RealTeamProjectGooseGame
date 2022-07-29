@@ -66,12 +66,14 @@ public class UiManager : MonoBehaviour
             DeleteQuestNote();
             questMenuUp.SetActive(false);
             questMenuDown.SetActive(false);
+            Time.timeScale = 1;
         }
         else
         {
             questMenuUp.SetActive(true);
             questMenuDown.SetActive(true);
             WriteQuestNote();
+            Time.timeScale = 0;
         }
     }
 
