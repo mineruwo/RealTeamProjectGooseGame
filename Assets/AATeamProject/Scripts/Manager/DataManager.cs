@@ -46,7 +46,7 @@ public class DataManager : MonoBehaviour
         string path = Application.persistentDataPath + fileName + ".Json";
 
         fileInfo = new FileInfo(path);
-
+       
         if (!fileInfo.Exists)
         {
             currentQuestDataList = JsonConvert.DeserializeObject<List<Quest>>(DefaultQuestData.ToString());
@@ -68,7 +68,7 @@ public class DataManager : MonoBehaviour
             path = Application.persistentDataPath + fileName + ".Json";
             json = File.ReadAllText(path);
             currentQuestCount = JsonConvert.DeserializeObject<ClearStage>(json);
-        }
+        }      
         currentSlot = slotNum;
     }
 
@@ -92,23 +92,32 @@ public class DataManager : MonoBehaviour
         if (currentSlot == 1)
         {
             saveFileDate.Stage1Time = DateTime.Now.ToString(("MM-dd HH:mm:ss tt"));
+
+            fileName = "DefaultSaveTime";
+            path = Application.persistentDataPath + fileName + ".Json";
+            setJson = JsonConvert.SerializeObject(saveFileDate);
+            File.WriteAllText(path, setJson);
         }
+
         if (currentSlot == 2)
         {
             saveFileDate.Stage2Time = DateTime.Now.ToString(("MM-dd HH:mm:ss tt"));
+
+            fileName = "DefaultSaveTime";
+            path = Application.persistentDataPath + fileName + ".Json";
+            setJson = JsonConvert.SerializeObject(saveFileDate);
+            File.WriteAllText(path, setJson);
         }
+
         if (currentSlot == 3)
         {
             saveFileDate.Stage3Time = DateTime.Now.ToString(("MM-dd HH:mm:ss tt"));
+
+            fileName = "DefaultSaveTime";
+            path = Application.persistentDataPath + fileName + ".Json";
+            setJson = JsonConvert.SerializeObject(saveFileDate);
+            File.WriteAllText(path, setJson);
         }
-
-
-
-        fileName = "DefaultSaveTime";
-        path = Application.persistentDataPath + fileName + ".Json";
-        setJson = JsonConvert.SerializeObject(saveFileDate);
-        File.WriteAllText(path, setJson);
-
     }
 
     public void DeleteQuestData(int slotNum)
