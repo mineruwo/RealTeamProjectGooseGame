@@ -26,6 +26,11 @@ public class Chasing : BTAction
     public override NodeState Update()
     {
         OnChase();
+        if(!GooseGrab.isGrap)
+        {
+            Debug.Log("right");
+            return NodeState.SUCCESS;
+        }
         return NodeState.RUNNING;
     }
 

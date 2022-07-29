@@ -38,19 +38,17 @@ public class GardenerBT : MonoBehaviour
 
 
         //**************************When gardener detect goose
-
-        BTSequence detecting = new BTSequence();
         BTSequence detectState = new BTSequence();
-
-
 
         DetectingCondition findyou = new DetectingCondition(gameObject);
         DetectGoosePos detectGoose = new DetectGoosePos(gameObject);
         Chasing chasingGoose = new Chasing(gameObject);
+        GoIdle stopChasing = new GoIdle(gameObject);
 
         detectState.AddChild(findyou);
         detectState.AddChild(detectGoose);
         detectState.AddChild(chasingGoose);
+        detectState.AddChild(stopChasing);
 
 
 
@@ -124,7 +122,10 @@ public class GardenerBT : MonoBehaviour
         //**************************When gardener Wets
         BTSequence wetState = new BTSequence();
         Wet wetGardener = new Wet(gameObject);
+        GoIdle wetReturn = new GoIdle(gameObject);
         wetState.AddChild(wetGardener);
+        wetState.AddChild(wetReturn);
+
 
 
 
@@ -135,17 +136,19 @@ public class GardenerBT : MonoBehaviour
 
 
         //**************************Detect Selector
-        detecting.AddChild(detectState);
 
 
         //**************************Main Selector
 
         Idle idle = new Idle(gameObject);
 
-        btMainSelector.AddChild(touch);
         btMainSelector.AddChild(detectSound);
-        btMainSelector.AddChild(detecting);
         btMainSelector.AddChild(wetState);
+        btMainSelector.AddChild(detectState);
+        btMainSelector.AddChild(touch);
+
+
+
         btMainSelector.AddChild(working);
         btMainSelector.AddChild(idle);
 
