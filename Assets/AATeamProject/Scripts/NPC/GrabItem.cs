@@ -57,7 +57,7 @@ public class GrabItem : BTAction
     private void OnFindItem()
     {
         float distance = Vector3.Distance(item.transform.position, owner.transform.position);
-        Debug.Log(distance);
+        //Debug.Log(distance);
         if (distance < detectRadius)
         {
             rb.isKinematic = true;
