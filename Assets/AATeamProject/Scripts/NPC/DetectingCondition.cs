@@ -8,6 +8,7 @@ public class DetectingCondition : BTAction
     private GameObject owner;
     private GameObject goose;
     private bool isDectected = false;
+    public static bool gotYou = false;
 
     private float maxAngle = 90f;
 
@@ -26,10 +27,13 @@ public class DetectingCondition : BTAction
         OnDetectGoose();
         if (!isDectected)
         {
+            gotYou = false;
             return NodeState.FAILURE;
         }
         else
         {
+            Debug.Log("tttttt");
+            gotYou = true;
             return NodeState.SUCCESS;
         } 
     }
