@@ -22,6 +22,7 @@ public class DetectGooseSound : BTAction
         animator = owner.GetComponent<Animator>();
         agent = owner.GetComponent<NavMeshAgent>();
         goose = GameObject.FindGameObjectWithTag("Goose");
+        animator.Rebind();  
     }
 
     public override NodeState Update()

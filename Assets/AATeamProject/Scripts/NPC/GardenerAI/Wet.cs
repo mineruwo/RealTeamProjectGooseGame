@@ -25,7 +25,6 @@ public class Wet : BTAction
         if (DetectGoose.isWetted)
         {
             OnWet();
-            Debug.Log("d");
             return NodeState.SUCCESS;
         }
         else

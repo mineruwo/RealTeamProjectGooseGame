@@ -61,8 +61,8 @@ public class GrabItem : BTAction
         if (distance < detectRadius)
         {
             rb.isKinematic = true;
-
             var leftHand = GameObject.Find("leftGrasper").transform;
+
             if(!item.GetComponent<PhysicObject>().isHeavy)
             {
                 var smallItemTrans = item.GetComponent<SmallObject>();
