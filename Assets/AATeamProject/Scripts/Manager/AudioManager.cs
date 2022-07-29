@@ -11,8 +11,7 @@ public class AudioManager : MonoBehaviour
     public string BGMFilePath = "Assets/Resources/Audio/BGM/Bruyers/";
     private int BGMCurrentSequence = 1;
     private string index;
-    [System.Obsolete]
-    WWW www;
+  
 
     public void BGMPlay()
     {
@@ -30,9 +29,9 @@ public class AudioManager : MonoBehaviour
 
         if (!BGMClips.ContainsKey(BGMCurrentSequence))
         {
-            www = new($"{Application.persistentDataPath}{BGMFilePath}{fileName}{index}.wav");
+          //  www = new($"{Application.persistentDataPath}{BGMFilePath}{fileName}{index}.wav");
 
-            var audio = www.GetAudioClip();
+            var audio = Resources.Load("Audio/SFX/" + fileName+index) as AudioClip;
 
             BGMClips.Add(BGMCurrentSequence, audio);
 
@@ -56,20 +55,21 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    [System.Obsolete]
     public AudioClip SFXPlay(string key)
     {
         if (!audioClips.ContainsKey(key))
         {
-            www = new($"{Application.persistentDataPath}{SFXFilePath}{key}.wav");
+            // www = new($"{Application.persistentDataPath}{SFXFilePath}{key}.wav");
 
-            var audio = www.GetAudioClip();
+            //var audio = www.GetAudioClip();
+
+            var audio = Resources.Load("Audio/SFX/" + key) as AudioClip;
 
             audioClips.Add(key, audio);
-
+             
         }
 
-        var clip = audioClips.GetValueOrDefault(key);
+         var clip = audioClips.GetValueOrDefault(key);
 
         SoundSource.PlayOneShot(clip);
 
@@ -84,5 +84,6 @@ public class AudioManager : MonoBehaviour
         {
             SoundSource = set;
         }
+
     }
 }

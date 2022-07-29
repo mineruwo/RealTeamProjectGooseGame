@@ -12,10 +12,10 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
 
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
+        //else if (instance != this)
+        //{
+        //    Destroy(gameObject);
+        //}
 
         DontDestroyOnLoad(gameObject);
     }
@@ -39,4 +39,14 @@ public class GameManager : MonoBehaviour
     public GlobalSceneManager sceneMgr;
 
     public InputManager inputMgr;
+
+    public void Update()
+    {
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+    }
 }

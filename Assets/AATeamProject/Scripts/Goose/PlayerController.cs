@@ -124,6 +124,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Velocity", rb.velocity.magnitude * 2f);
     }
 
+    [System.Obsolete]
     public void InputSet()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -147,9 +148,9 @@ public class PlayerController : MonoBehaviour
         {
             float npcDistance = 3f;
             //꽥꽥
-            //gamemanager.audioMgr.SFXPlay("")
-            var source = Camera.main.transform.GetComponent<AudioSource>();
-            source.PlayOneShot(honk);
+            var ran = Random.Range(1, 7);
+            string fileName = "sfx_goose_honk_b_0";
+            GameManager.instance.audioMgr.SFXPlay(fileName + ran.ToString());
             // gamemanager.audioMgr.SFXPlay("sfx_goose_honk_b_01");
             //npc와의 거리가 약 10cm 정도 거리라면 npc 어그로 끄는 함수 발동
             var distance = npc.transform.position - transform.position;
