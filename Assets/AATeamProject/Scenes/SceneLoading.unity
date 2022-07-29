@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1092,9 +1092,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c56fd3aed5f8fe94791cac482ce5ebf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  asyncCilps: []
   SoundSource: {fileID: 0}
-  SFXFilePath: Assets/Resources/Audio/SFX/
-  BGMFilePath: Assets/Resources/Audio/BGM/Bruyers/
+  SFXFilePath: Audio/SFX/
+  BGMFilePath: Audio/BGM/Bruyeres/
+  isAsync: 1
+  idx: 0
 --- !u!1 &8492101496970187378
 GameObject:
   m_ObjectHideFlags: 0

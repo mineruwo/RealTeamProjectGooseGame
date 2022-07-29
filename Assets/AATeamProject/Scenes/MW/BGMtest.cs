@@ -5,12 +5,12 @@ using UnityEngine;
 public class BGMtest : MonoBehaviour
 {
 
-    // Update is called once per frame
-    void Update()
+   
+    void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            GlobalGameMgr.instance.audioMgr.BGMPlay();
+            GameManager.instance.audioMgr.BGMPlay();
         }
     }
 }
