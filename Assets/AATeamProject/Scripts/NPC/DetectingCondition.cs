@@ -32,7 +32,6 @@ public class DetectingCondition : BTAction
         {
             return NodeState.SUCCESS;
         } 
-        return NodeState.RUNNING;
     }
 
     private void OnDetectGoose()

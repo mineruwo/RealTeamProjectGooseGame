@@ -29,6 +29,10 @@ public class GrabItem : BTAction
 
     public override NodeState Update()
     {
+
+        if (isGrabbed)
+            return NodeState.SUCCESS;
+
         if (item == null)
         {
             if(item2 != null)
@@ -49,8 +53,6 @@ public class GrabItem : BTAction
             OnFindItem();
         }
 
-        if (isGrabbed)
-            return NodeState.SUCCESS;
         return NodeState.RUNNING;
     }
 
@@ -68,23 +70,25 @@ public class GrabItem : BTAction
                 var smallItemTrans = item.GetComponent<SmallObject>();
                 smallItemTrans.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
                 var smallItemRot = leftHand.eulerAngles - smallItemTrans.handlePoint.transform.eulerAngles;
+
                 smallItemTrans.transform.eulerAngles += smallItemRot;
-                var smallPos = leftHand.position = smallItemTrans.handlePoint.transform.position;
+                var smallPos = leftHand.position - smallItemTrans.handlePoint.transform.position;
                 smallItemTrans.transform.position += smallPos;
-                item.transform.SetParent(GameObject.Find("leftGrasper").transform);
+                item.transform.SetParent(leftHand);
                 isGrabbed = true;
-
-
+            }
+            else if (item.GetComponent<PhysicObject>().isHeavy)
+            {
+                var itemTrans = item.GetComponent<BigObject>();
+                itemTrans.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+                var rot = leftHand.eulerAngles - itemTrans.handlePoint[0].transform.eulerAngles;
+                itemTrans.transform.eulerAngles += rot;
+                var pos = leftHand.position - itemTrans.handlePoint[0].transform.position;
+                itemTrans.transform.position += pos;
+                item.transform.SetParent(leftHand);
+                isGrabbed = true;
             }
 
-            var itemTrans = item.GetComponent<BigObject>();
-            itemTrans.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            var rot = leftHand.eulerAngles - itemTrans.handlePoint[0].transform.eulerAngles;
-            itemTrans.transform.eulerAngles += rot;
-            var pos = leftHand.position - itemTrans.handlePoint[0].transform.position;
-            itemTrans.transform.position += pos;
-            item.transform.SetParent(GameObject.Find("leftGrasper").transform);
-            isGrabbed = true;
         }
     }
 

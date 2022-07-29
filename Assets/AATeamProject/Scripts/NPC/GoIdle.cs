@@ -25,6 +25,10 @@ public class GoIdle : BTAction
         animator = owner.GetComponent<Animator>();
         animator.Rebind();
         agent = owner.GetComponent<NavMeshAgent>();
+        if (!owner.GetComponent<NavMeshAgent>().enabled)
+        {
+            owner.GetComponent<NavMeshAgent>().enabled = true;
+        }
     }
 
     public override void Terminate(){ }
@@ -43,6 +47,7 @@ public class GoIdle : BTAction
             if(timer > 5f)
             {
                 timer = 0f;
+                GrabItem.isGrabbed = false;
                 return NodeState.SUCCESS;
             }
             return NodeState.RUNNING;
