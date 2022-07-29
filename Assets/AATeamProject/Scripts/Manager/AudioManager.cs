@@ -5,43 +5,70 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     private Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
+    public List<AudioClip> asyncCilps = new List<AudioClip>();
     private Dictionary<int, AudioClip> BGMClips = new Dictionary<int, AudioClip>();
     public AudioSource SoundSource;
-    public string SFXFilePath = "Assets/Resources/Audio/SFX/";
-    public string BGMFilePath = "Assets/Resources/Audio/BGM/Bruyers/";
+    public string SFXFilePath = "Audio/SFX/";
+    public string BGMFilePath = "Audio/BGM/Bruyeres/";
     private int BGMCurrentSequence = 1;
-    private string index;
-  
+    public bool isAsync = false;
+    [SerializeField]
+    private int idx = 0;
+
 
     public void BGMPlay()
     {
         string fileName = "Bruyeres_";
 
-        if (BGMCurrentSequence < 10)
+
+        switch (isAsync)
         {
-            index = string.Format("{0:D1}", BGMCurrentSequence);
+            case true:
+
+                if (asyncCilps.Count == 0)
+                {
+                    StartCoroutine(LoadBGMAsync($"{BGMFilePath}{fileName}"));
+                }
+
+
+                SoundSource.PlayOneShot(asyncCilps[idx]);
+
+                idx++;
+
+                
+                if (idx == asyncCilps.Count)
+                {
+
+                    UnloadClips();
+
+                    StartCoroutine(LoadBGMAsync($"{BGMFilePath}{fileName}"));
+
+                }
+
+                break;
+
+
+            case false:
+                if (!BGMClips.ContainsKey(BGMCurrentSequence))
+                {
+                    //  www = new($"{Application.persistentDataPath}{BGMFilePath}{fileName}{index}.wav");
+
+                    var audio = Resources.Load($"{BGMFilePath}{fileName}{indexConverter(BGMCurrentSequence)}") as AudioClip;
+
+                    BGMClips.Add(BGMCurrentSequence, audio);
+
+                }
+
+                var clip = BGMClips.GetValueOrDefault(BGMCurrentSequence);
+
+                SoundSource.PlayOneShot(clip);
+
+                break;
         }
-        else
-        {
-            index = BGMCurrentSequence.ToString();
-        }
 
 
-        if (!BGMClips.ContainsKey(BGMCurrentSequence))
-        {
-          //  www = new($"{Application.persistentDataPath}{BGMFilePath}{fileName}{index}.wav");
-
-            var audio = Resources.Load("Audio/SFX/" + fileName+index) as AudioClip;
-
-            BGMClips.Add(BGMCurrentSequence, audio);
-
-        }
-        var clip = BGMClips.GetValueOrDefault(BGMCurrentSequence);
 
 
-        SoundSource.PlayOneShot(clip);
-
-        BGMCurrentSequence++;
 
         if (BGMCurrentSequence > 154)
         {
@@ -63,13 +90,13 @@ public class AudioManager : MonoBehaviour
 
             //var audio = www.GetAudioClip();
 
-            var audio = Resources.Load("Audio/SFX/" + key) as AudioClip;
+            var audio = Resources.Load($"{SFXFilePath}{key}") as AudioClip;
 
             audioClips.Add(key, audio);
-             
+
         }
 
-         var clip = audioClips.GetValueOrDefault(key);
+        var clip = audioClips.GetValueOrDefault(key);
 
         SoundSource.PlayOneShot(clip);
 
@@ -86,4 +113,63 @@ public class AudioManager : MonoBehaviour
         }
 
     }
+
+
+    private IEnumerator LoadBGMAsync(string path)
+    {
+
+        int count = 0;
+
+        while (count < 10)
+        {
+
+            ResourceRequest resourceRequest = Resources.LoadAsync<AudioClip>($"{path}{indexConverter(BGMCurrentSequence)}");
+
+            count++;
+
+            AudioClip audioClip = resourceRequest.asset as AudioClip;
+
+            asyncCilps.Add(audioClip);
+
+            BGMCurrentSequence++;
+
+            yield return resourceRequest;
+
+
+        }
+
+
+
+    }
+
+
+    private string indexConverter(int idx)
+    {
+        string index;
+
+        if (idx < 10)
+        {
+            index = string.Format("{0:D2}", idx);
+        }
+        else
+        {
+            index = idx.ToString();
+        }
+
+        return index;
+    }
+
+
+    private void UnloadClips()
+    {
+        for (int i = 0; i < asyncCilps.Count; i++)
+        {
+            asyncCilps[i].UnloadAudioData();
+        }
+
+        asyncCilps.Clear();
+        idx = 0;
+    }
+
+
 }
