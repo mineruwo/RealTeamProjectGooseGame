@@ -18670,6 +18670,9 @@ MonoBehaviour:
   grabObject: {fileID: 0}
   rb: {fileID: 8665319478537169498}
   goose: {fileID: 8665319478537169476}
+  handle: {fileID: 0}
+  gooseHead: {fileID: 8665319479580062466}
+  gooseHeadCollider: {fileID: 8665319478007022643}
   isDrag: 0
   necks:
   - {fileID: 8665319479506153749}
@@ -18678,7 +18681,7 @@ MonoBehaviour:
   - {fileID: 8665319478319868018}
   - {fileID: 8665319478286543785}
   - {fileID: 8665319479751226351}
-  distance: []
+  necksDistance: []
 --- !u!1 &8665319479696739369
 GameObject:
   m_ObjectHideFlags: 0
