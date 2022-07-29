@@ -20,6 +20,7 @@ public class OnvisualCamera : MonoBehaviour
 
         if (Camera.current == Camera.main)
         {
+            Debug.Log("Target out" + gameObject.name);
             isView = false;
         }
 

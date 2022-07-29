@@ -29,7 +29,7 @@ public class CameraInsightInObject : MonoBehaviour
 
                 if (check == -1)
                 {
-                    targetGroup.AddMember(go.transform, 1, 0);
+                    targetGroup.AddMember(go.transform, 1.5f, 2);
                     currMember++;
                 }
             }
