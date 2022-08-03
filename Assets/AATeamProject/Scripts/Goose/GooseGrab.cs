@@ -20,26 +20,31 @@ public class GooseGrab : MonoBehaviour
 
     public GameObject[] necks;
     public List<float> necksDistance;
+    public float totalDistance;
 
     // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < necks.Length - 1; i++)
         {
+            Debug.Log(necks[i].transform.position);
             necksDistance.Add((necks[i].transform.position - necks[i + 1].transform.position).magnitude);
         }
 
         foreach(var j in necksDistance)
         {
             Debug.Log(j);
-            
         }
        
+        foreach(var distance in necksDistance)
+        {
+            totalDistance += distance;
+        }
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
         if (Input.GetKeyDown(KeyCode.Z))
         {
             GrabAndDropObject();
@@ -84,8 +89,6 @@ public class GooseGrab : MonoBehaviour
                         var pos = gooseMouse.position - grabObject.GetComponent<SmallObject>().handlePoint.transform.position;
                         grabObject.transform.position += pos;
 
-                        Debug.Log($"이름이름{grabObject.name}");
-
                         if(grabObject.name == "keys")
                         {
                             GameManager.instance.questMgr.GetQuestId(3);
@@ -99,12 +102,12 @@ public class GooseGrab : MonoBehaviour
                     }
                     else if (grabObject.GetComponent<PhysicObject>().isHeavy)    //���ſ� ������Ʈ ���� ��
                     {
-                        gooseHeadCollider.isTrigger = true;
+                        //gooseHeadCollider.isTrigger = true;
                         grabObjRb = grabObject.GetComponent<BigObject>().Rigidbody;
                         handle = grabObject.GetComponent<BigObject>().handlePoint[0];
                         Vector3 vec3 = gooseMouse.transform.position - handle.transform.position;
-                        float distance = vec3.magnitude;
 
+                        float distance = vec3.magnitude;
                         var handlePoints = grabObject.GetComponent<BigObject>().handlePoint;
                         foreach (var handlePoint in handlePoints)
                         {
@@ -117,10 +120,7 @@ public class GooseGrab : MonoBehaviour
                             }
                         }
 
-                        //Vector3 localPos = handle.transform.position - gooseMouse.transform.position;
-                        //goose.transform.position += localPos;
-
-                        //goose.transform.LookAt(handle.transform.position);
+                        goose.transform.position += handle.transform.position - gooseMouse.transform.position;
 
                         var joint = goose.AddComponent<ConfigurableJoint>();
                         joint.connectedBody = grabObjRb;
@@ -128,22 +128,21 @@ public class GooseGrab : MonoBehaviour
                         joint.autoConfigureConnectedAnchor = false;
 
                         SoftJointLimit limit = joint.linearLimit;
-                        limit.limit = 0.5f;
+                        limit.limit = 0.4f;
                         joint.linearLimit = limit;
 
                         joint.xMotion = ConfigurableJointMotion.Limited;
                         joint.yMotion = ConfigurableJointMotion.Limited;
                         joint.zMotion = ConfigurableJointMotion.Limited;
 
-                        // joint.connectedAnchor = handle.transform.position;
                         joint.connectedAnchor = grabObjRb.gameObject.transform.InverseTransformPoint(handle.transform.position);
-                        //joint.anchor = goose.transform.InverseTransformPoint(gooseMouse.transform.position);
                         joint.anchor = new Vector3(0, 5, 1);
                     }
                 }
                 break;
         }
     }
+
     public void Drop()
     {
         gooseHeadCollider.isTrigger = false;
@@ -162,22 +161,17 @@ public class GooseGrab : MonoBehaviour
         handle = null;
     }
 
-    private void FixedUpdate()
-    {
-        var joint = goose.GetComponentInParent<ConfigurableJoint>();
-        if (handle != null)
-        {
-            //goose.transform.LookAt(handle.transform);
-        }
-    }
 
     private void LateUpdate()
     {
         if (handle != null)
         {
-            gooseHead.transform.position += handle.transform.position - gooseMouse.transform.position;
-
-            necks[0].transform.position = handle.transform.position;
+            for(int i=0; i < necks.Length; i++)
+            {
+                Quaternion LookRotation = Quaternion.LookRotation(necks[i].transform.position - handle.transform.position, necks[i].transform.up) * Quaternion.Euler(new Vector3(0, -90, 0));
+                necks[i].transform.rotation = LookRotation;
+            }
+            animator.SetFloat("Sneak", 1f);
         }
     }
 
@@ -210,6 +204,4 @@ public class GooseGrab : MonoBehaviour
             grabObject = null;
         }
     }
-
-
 }
