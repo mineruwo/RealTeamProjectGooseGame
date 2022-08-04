@@ -16,7 +16,7 @@ public class GardenerBT : MonoBehaviour
         CreateBehaviorTreeAiState();
         rigBuilder = GetComponent<RigBuilder>();
     }
-    private void Update()
+    private void Update()        
     {
         aiState.Tick();
     }

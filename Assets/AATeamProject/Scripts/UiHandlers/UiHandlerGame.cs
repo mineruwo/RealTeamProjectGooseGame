@@ -70,4 +70,22 @@ public class UiHandlerGame : MonoBehaviour
     {
         GameManager.instance.uiMgr.OnClickSaveButton();
     }
+
+    public void OnClickVolLeftArrow()
+    {
+        GameManager.instance.uiMgr.OnClickVolLeftArrow();
+    }
+    public void OnClickVolRightArrow()
+    {
+        GameManager.instance.uiMgr.OnClickVolRightArrow();
+    }
+
+    public void OnClickCameraLeftArrow()
+    {
+        GameManager.instance.uiMgr.OnClickCameraLeftArrow();
+    }
+    public void OnClickCameraRightArrow()
+    {
+        GameManager.instance.uiMgr.OnClickCameraRightArrow();
+    }
 }
