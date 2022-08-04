@@ -18,10 +18,11 @@ public class ChaseCondition : BTConditions
         {
             return NodeState.FAILURE;
         }
-        else
+        else if(DetectingCondition.gotYou && GooseGrab.isGrap)
         {
-            Debug.Log("컨디션통과");
             return NodeState.SUCCESS;
         }
+
+        return NodeState.FAILURE;
     }
 }
