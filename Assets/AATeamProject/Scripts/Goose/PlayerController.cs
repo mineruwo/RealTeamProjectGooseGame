@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public Transform groundCastPoint;
     private bool isGround;
 
-    private bool isSneck;
+    public bool isSneck;
     private bool isRun = false;
     private bool isWing = false;
     public static bool isHonk = false;

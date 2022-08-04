@@ -9,6 +9,7 @@ public class GooseGrab : MonoBehaviour
     public GameObject grabObject;
     public Rigidbody rb;
     public GameObject goose;
+    public PlayerController playerController;
 
     public GameObject handle;
 
@@ -25,6 +26,7 @@ public class GooseGrab : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerController = goose.GetComponent<PlayerController>();
         for (int i = 0; i < necks.Length - 1; i++)
         {
             Debug.Log(necks[i].transform.position);
@@ -171,7 +173,7 @@ public class GooseGrab : MonoBehaviour
                 Quaternion LookRotation = Quaternion.LookRotation(necks[i].transform.position - handle.transform.position, necks[i].transform.up) * Quaternion.Euler(new Vector3(0, -90, 0));
                 necks[i].transform.rotation = LookRotation;
             }
-            animator.SetFloat("Sneak", 1f);
+            playerController.isSneck = true;
         }
     }
 
