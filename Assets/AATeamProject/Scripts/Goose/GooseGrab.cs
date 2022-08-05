@@ -92,7 +92,7 @@ public class GooseGrab : MonoBehaviour
 
                         grabObjRb.useGravity = false;
                         grabObjRb.isKinematic = false;
-                        grabObjRb.mass = 0f;
+                        grabObjRb.mass = 0;
                         grabObjRb.constraints = RigidbodyConstraints.FreezeAll;
                         grabObject.transform.SetParent(gooseMouse);
                     }
