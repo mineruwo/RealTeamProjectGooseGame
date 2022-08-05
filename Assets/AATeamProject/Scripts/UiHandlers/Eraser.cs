@@ -20,5 +20,9 @@ public class Eraser : MonoBehaviour
         {
             slotNum = 3;
         }
+        else
+        {
+            slotNum = 0;
+        }
     }
 }
