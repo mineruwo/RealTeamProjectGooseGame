@@ -24,6 +24,7 @@ public class UiManager : MonoBehaviour
     private int slotNum;
 
     private int volNum = 5;
+    private string cameraStateName;
     private bool isLookGoose = true;
 
     public void Update()
@@ -71,13 +72,19 @@ public class UiManager : MonoBehaviour
 
                 if (hit.transform.gameObject.name == "vol_arrowL")
                 {
-                    volNum--;
-                    volState.GetComponent<TextMeshPro>().text = volNum.ToString();
+                    if(volNum > 0)
+                    {
+                        volNum--;
+                        volState.GetComponent<TextMeshPro>().text = volNum.ToString();
+                    }
                 }
                 if (hit.transform.gameObject.name == "vol_arrowR")
                 {
-                    volNum++;
-                    volState.GetComponent<TextMeshPro>().text = volNum.ToString();
+                    if(volNum < 11)
+                    {
+                        volNum++;
+                        volState.GetComponent<TextMeshPro>().text = volNum.ToString();
+                    }
                 }
 
                 if (hit.transform.gameObject.name == "ca_arrowL")
@@ -376,11 +383,17 @@ public class UiManager : MonoBehaviour
 
     public void OnClickVolLeftArrow()
     {
-        volNum--;
+        if(volNum > 0)
+        {
+            volNum--;
+        }
     }
     public void OnClickVolRightArrow()
     {
-        volNum++;
+        if(volNum < 11)
+        {
+            volNum++;                  
+        }
     }
 
     public void OnClickCameraLeftArrow()
@@ -388,11 +401,11 @@ public class UiManager : MonoBehaviour
         isLookGoose = !isLookGoose;
         if (isLookGoose)
         {
-            cameraState.GetComponent<TextMeshPro>().text = "거위만";
+            cameraStateName = "거위만";
         }
         else
         {
-            cameraState.GetComponent<TextMeshPro>().text = "거위 + 사람";
+            cameraStateName = "거위 + 사람";
         }
     }
     public void OnClickCameraRightArrow()
@@ -400,13 +413,24 @@ public class UiManager : MonoBehaviour
         isLookGoose = !isLookGoose;
         if (isLookGoose)
         {
-            cameraState.GetComponent<TextMeshPro>().text = "거위만";
+            cameraStateName = "거위만";
         }
         else
         {
-            cameraState.GetComponent<TextMeshPro>().text = "거위 + 사람";
+            cameraStateName = "거위 + 사람";
         }
     }
+
+    public int GetVolNum()
+    {
+        return volNum;
+    }
+
+    public string GetCameraState()
+    {
+        return cameraStateName;
+    }
+
 
 
     public void OnClickSaveButton()

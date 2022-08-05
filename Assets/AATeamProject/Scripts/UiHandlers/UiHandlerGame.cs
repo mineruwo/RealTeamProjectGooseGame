@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UiHandlerGame : MonoBehaviour
 {
@@ -18,6 +19,12 @@ public class UiHandlerGame : MonoBehaviour
     public GameObject questNoteScrap;
 
     public GameObject joyStick;
+
+    //public GameObject volNumText;
+    //public GameObject cameraStateText;
+
+    public TextMeshProUGUI volNumText;
+    public TextMeshProUGUI cameraStateText;
 
     // ¹öÆ°
     public PlayerController gooseCon;
@@ -74,18 +81,26 @@ public class UiHandlerGame : MonoBehaviour
     public void OnClickVolLeftArrow()
     {
         GameManager.instance.uiMgr.OnClickVolLeftArrow();
+        volNumText.text =
+            GameManager.instance.uiMgr.GetVolNum().ToString();
+
     }
     public void OnClickVolRightArrow()
     {
         GameManager.instance.uiMgr.OnClickVolRightArrow();
+        volNumText.text =
+            GameManager.instance.uiMgr.GetVolNum().ToString();
     }
 
     public void OnClickCameraLeftArrow()
     {
         GameManager.instance.uiMgr.OnClickCameraLeftArrow();
+        cameraStateText.text = GameManager.instance.uiMgr.GetCameraState();
     }
     public void OnClickCameraRightArrow()
     {
         GameManager.instance.uiMgr.OnClickCameraRightArrow();
+        cameraStateText.text =
+            GameManager.instance.uiMgr.GetCameraState();
     }
 }
