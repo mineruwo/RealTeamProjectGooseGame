@@ -175,12 +175,12 @@ public class GooseGrab : MonoBehaviour
     {
         var obj = other.GetComponent<PhysicObject>();
 
-        if (obj == null)
+        if ((obj == null) && !isGrap)
         {
             obj = other.GetComponentInParent<PhysicObject>();
         }
 
-        if (obj)
+        if (obj && !isGrap)
         {
             grabObject = obj.gameObject;
         }
