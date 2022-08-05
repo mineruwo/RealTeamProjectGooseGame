@@ -11,6 +11,7 @@ public class DetectGoose : MonoBehaviour
     private Animator animator;
     public GameObject goose;
     public static bool isWetted;
+    public static bool isOver = false;
 
     private float distance;
 
@@ -53,4 +54,8 @@ public class DetectGoose : MonoBehaviour
         }
     }
 
+    public void IsOver()
+    {
+        isOver = true;
+    }
 }

@@ -23,7 +23,7 @@ public class GrabItem : BTAction
     public override void Initialize()
     {
         item = FindNearestObjectByTag("Item");
-        item2 = FindNearestObjectByTag("Beakable");
+        item2 = FindNearestObjectByTag("Stage1Col");
     }
     public override void Terminate() { }
 

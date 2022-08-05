@@ -32,6 +32,7 @@ public class DetectGoosePos : BTAction
         {
             if (!isStolen)
             {
+                Debug.Log("µµµ¿³ð");
                 return NodeState.FAILURE;
             }
             else

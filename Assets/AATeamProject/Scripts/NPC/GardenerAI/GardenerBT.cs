@@ -18,6 +18,7 @@ public class GardenerBT : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(aiState.GetState());
         aiState.Tick();
     }
 
@@ -25,10 +26,11 @@ public class GardenerBT : MonoBehaviour
     {
         aiState = new BTRoot();
         BTSelector btMainSelector = new BTSelector();
+        BTSelector workOr = new BTSelector();
         BTSequence working = new BTSequence();
 
         //**************************Condition Set
-        TestCondition test = new TestCondition(gameObject);
+        TestCondition test = new TestCondition(gameObject); //망치컨디션
 
 
 
@@ -41,18 +43,21 @@ public class GardenerBT : MonoBehaviour
         BTSequence detectState = new BTSequence();
 
         DetectingCondition findyou = new DetectingCondition(gameObject);
+
+        ChaseCondition chaseCondition = new ChaseCondition(gameObject);
         DetectGoosePos detectGoose = new DetectGoosePos(gameObject);
         Chasing chasingGoose = new Chasing(gameObject);
         GoIdle stopChasing = new GoIdle(gameObject);
 
         detectState.AddChild(findyou);
+        detectState.AddChild(chaseCondition);
         detectState.AddChild(detectGoose);
         detectState.AddChild(chasingGoose);
         detectState.AddChild(stopChasing);
 
 
 
-        //**************************hit Goose
+        //**************************hit Goose 애매따리
         BTSequence touch = new BTSequence();
         ShooDuck shoo = new ShooDuck(gameObject);
         DropItem shoo2 = new DropItem(gameObject);
@@ -130,6 +135,9 @@ public class GardenerBT : MonoBehaviour
 
 
         //**************************Work Selector
+        workOr.AddChild(detectState);
+        workOr.AddChild(working);
+
         working.AddChild(watering);
         working.AddChild(gardening);
         working.AddChild(hammeringSign);
@@ -144,12 +152,9 @@ public class GardenerBT : MonoBehaviour
 
         btMainSelector.AddChild(detectSound);
         btMainSelector.AddChild(wetState);
-        btMainSelector.AddChild(detectState);
-        btMainSelector.AddChild(touch);
 
 
-
-        btMainSelector.AddChild(working);
+        btMainSelector.AddChild(workOr);
         btMainSelector.AddChild(idle);
 
         aiState.AddChild(btMainSelector);

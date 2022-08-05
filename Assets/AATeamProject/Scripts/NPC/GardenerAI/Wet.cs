@@ -25,7 +25,11 @@ public class Wet : BTAction
         if (DetectGoose.isWetted)
         {
             OnWet();
-            return NodeState.SUCCESS;
+            if (DetectGoose.isOver)
+            {
+                return NodeState.SUCCESS;
+            }
+            return NodeState.RUNNING;
         }
         else
         {
@@ -40,7 +44,5 @@ public class Wet : BTAction
         animator.SetInteger("ReactionIndex", 1);
         //GameManager.instance.questMgr.GetQuestId(2);
     }
-
-
 
 }

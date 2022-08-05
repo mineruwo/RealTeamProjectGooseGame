@@ -21,6 +21,7 @@ public class Chasing : BTAction
         goose = GameObject.FindGameObjectWithTag("Goose");
         animator = owner.GetComponent<Animator>();
         agent = owner.GetComponent<NavMeshAgent>();
+        animator.Rebind();
     }
 
     public override NodeState Update()
@@ -29,7 +30,7 @@ public class Chasing : BTAction
         if(!GooseGrab.isGrap)
         {
             Debug.Log("right");
-            return NodeState.SUCCESS;
+            return NodeState.FAILURE;
         }
         return NodeState.RUNNING;
     }
