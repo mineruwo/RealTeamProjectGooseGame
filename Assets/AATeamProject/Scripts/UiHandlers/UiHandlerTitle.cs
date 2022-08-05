@@ -30,7 +30,9 @@ public class UiHandlerTitle : MonoBehaviour
         eraserDPosition = eraser.transform.position;
         GameManager.instance.uiMgr.SetTitleMenu(camera, cameraPoints, eraser,
             timeTexts, volState, cameraState);
+        GameManager.instance.uiMgr.deleteEvent += UpdateSaveData;
         UpdateSaveData();
+
     }
 
     public void UpdateSaveData()

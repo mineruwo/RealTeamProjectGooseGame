@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class UiManager : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class UiManager : MonoBehaviour
     private int volNum = 5;
     private string cameraStateName;
     private bool isLookGoose = true;
+
+    public event Action deleteEvent;
 
     public void Update()
     {
@@ -138,17 +141,21 @@ public class UiManager : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             slotNum = eraser.GetComponent<Eraser>().slotNum;
+            Debug.Log($"슬롯번호 : {slotNum}");
             if (slotNum == 1)
             {
                 GameManager.instance.dataMgr.saveFileDate.Stage1Time = "비어있음";
+                deleteEvent();
             }
             if (slotNum == 2)
             {
                 GameManager.instance.dataMgr.saveFileDate.Stage2Time = "비어있음";
+                deleteEvent();
             }
             if (slotNum == 3)
             {
                 GameManager.instance.dataMgr.saveFileDate.Stage3Time = "비어있음";
+                deleteEvent();
             }
             GameManager.instance.uiMgr.OnClickDeleteButton(slotNum);
             //UpdateSaveData();
