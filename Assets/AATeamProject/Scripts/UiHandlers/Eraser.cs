@@ -8,9 +8,12 @@ public class Eraser : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"{other.name}");
         if(other.gameObject.name == "savebook_yellow")
         {
             slotNum = 1;
+            Debug.Log($"½½·Ô¹øÈ£{slotNum}");
+
         }
         if (other.gameObject.name == "savebook_green")
         {
@@ -20,9 +23,11 @@ public class Eraser : MonoBehaviour
         {
             slotNum = 3;
         }
-        else
-        {
-            slotNum = 0;
-        }
+        //else
+        //{
+        //    slotNum = 0;
+        //}
+        Debug.Log($"½½·Ô¹øÈ£{slotNum}");
+
     }
 }
