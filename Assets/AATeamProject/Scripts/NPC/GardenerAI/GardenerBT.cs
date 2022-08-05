@@ -18,7 +18,7 @@ public class GardenerBT : MonoBehaviour
     }
     private void Update()        
     {
-        Debug.Log(aiState.GetState());
+        //Debug.Log(aiState.GetState());
         aiState.Tick();
     }
 

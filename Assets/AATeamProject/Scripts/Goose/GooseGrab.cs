@@ -29,13 +29,7 @@ public class GooseGrab : MonoBehaviour
         playerController = goose.GetComponent<PlayerController>();
         for (int i = 0; i < necks.Length - 1; i++)
         {
-            Debug.Log(necks[i].transform.position);
             necksDistance.Add((necks[i].transform.position - necks[i + 1].transform.position).magnitude);
-        }
-
-        foreach(var j in necksDistance)
-        {
-            Debug.Log(j);
         }
        
         foreach(var distance in necksDistance)

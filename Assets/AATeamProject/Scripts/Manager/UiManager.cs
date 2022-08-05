@@ -80,7 +80,7 @@ public class UiManager : MonoBehaviour
                 }
                 if (hit.transform.gameObject.name == "vol_arrowR")
                 {
-                    if(volNum < 11)
+                    if(volNum < 10)
                     {
                         volNum++;
                         volState.GetComponent<TextMeshPro>().text = volNum.ToString();
@@ -390,7 +390,7 @@ public class UiManager : MonoBehaviour
     }
     public void OnClickVolRightArrow()
     {
-        if(volNum < 11)
+        if(volNum < 10)
         {
             volNum++;                  
         }

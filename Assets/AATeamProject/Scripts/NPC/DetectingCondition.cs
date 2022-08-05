@@ -32,7 +32,6 @@ public class DetectingCondition : BTAction
         }
         else
         {
-            Debug.Log("tttttt");
             gotYou = true;
             return NodeState.SUCCESS;
         } 
