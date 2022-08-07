@@ -103,4 +103,9 @@ public class UiHandlerGame : MonoBehaviour
         cameraStateText.text =
             GameManager.instance.uiMgr.GetCameraState();
     }
+
+    public void OnClickExitButton()
+    {
+        GameManager.instance.uiMgr.OnClickExitButton();
+    }
 }

@@ -438,11 +438,14 @@ public class UiManager : MonoBehaviour
         return cameraStateName;
     }
 
-
-
     public void OnClickSaveButton()
     {
         GameManager.instance.dataMgr.SaveQuestData();
+    }
+
+    public void OnClickExitButton()
+    {
+        Application.Quit();
     }
 }
 
