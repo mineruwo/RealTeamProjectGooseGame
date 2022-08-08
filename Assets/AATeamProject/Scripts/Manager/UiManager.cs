@@ -47,6 +47,10 @@ public class UiManager : MonoBehaviour
                 {
                     pointNum = 2;
                 }
+                if( hit.transform.gameObject.name == "Exit")
+                {
+                    Application.Quit();
+                }
 
                 if (hit.transform.gameObject.name == "arrow_book")
                 {
@@ -180,6 +184,9 @@ public class UiManager : MonoBehaviour
 
     public void OnClickGameSlot(int slotNum)
     {
+        GameManager.instance.dataMgr.currentOptionData.musicVolume = volNum;
+        GameManager.instance.dataMgr.currentOptionData.isGooseFocus = isLookGoose;
+
         GameManager.instance.dataMgr.LoadQuestData(slotNum);
         GameManager.instance.sceneMgr.LoadGameScene();
         GameManager.instance.questMgr.ClearEvent += ShowNoteScrap;

@@ -19,9 +19,7 @@ public class UiHandlerGame : MonoBehaviour
     public GameObject questNoteScrap;
 
     public GameObject joyStick;
-
-    //public GameObject volNumText;
-    //public GameObject cameraStateText;
+    public GameObject gooseButton;
 
     public TextMeshProUGUI volNumText;
     public TextMeshProUGUI cameraStateText;
@@ -29,10 +27,10 @@ public class UiHandlerGame : MonoBehaviour
     // 버튼
     public PlayerController gooseCon;
     public GooseGrab gooseGrab;
-    public Button grab;
-    public Button sneck;
-    public Button wing;
-    public Button run;
+    // public Button grab;
+    // public Button sneck;
+    // public Button wing;
+    // public Button run;
 
     public void Start()
     {
@@ -40,6 +38,17 @@ public class UiHandlerGame : MonoBehaviour
             , questNoteLists, cursors, questPages);
         GameManager.instance.uiMgr.SetScrapNote(questNoteScrap);
         GameManager.instance.inputMgr.SetJoyStick(joyStick);
+
+        volNumText.text = GameManager.instance.dataMgr.currentOptionData.musicVolume.ToString();
+        bool isGooseFocus = GameManager.instance.dataMgr.currentOptionData.isGooseFocus;
+        if(isGooseFocus)
+        {
+            cameraStateText.text = "거위만";
+        }
+        else
+        {
+            cameraStateText.text = "거위 + 사람";
+        }
     }
 
     public void OnClickGrabButton()
@@ -57,6 +66,10 @@ public class UiHandlerGame : MonoBehaviour
     public void OnClickrunButton()
     {
         gooseCon.ChangeRun();
+    }
+    public void OnClickQuackButton()
+    {
+        gooseCon.MakeQuack();
     }
 
     public void OnClickQuestButton()

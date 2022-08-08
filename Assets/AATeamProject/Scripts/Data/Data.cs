@@ -41,7 +41,7 @@ public class Option
     public int musicVolume;
 
     // false : 거위만 true : 거위 + NPC
-    public bool isNpcFocus;
+    public bool isGooseFocus;
 }
 
 [System.Serializable]
