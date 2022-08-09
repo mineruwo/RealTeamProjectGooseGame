@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: gooseMouseAvatarMask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Body_Armature
+    m_Weight: 0
+  - m_Path: Body_Armature/foot_control_L
+    m_Weight: 0
+  - m_Path: Body_Armature/foot_control_R
+    m_Weight: 0
+  - m_Path: Body_Armature/head_control
+    m_Weight: 0
+  - m_Path: Body_Armature/head_pole
+    m_Weight: 0
+  - m_Path: Body_Armature/spine
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/gooseRibbonHome
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/beaklower
+    m_Weight: 1
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/beakupper
+    m_Weight: 1
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/beakupper/grasper
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/CheckObj
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/crownHome
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/headAboveNeckRaycastPoint
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/headAboveNeckRaycastPoint_BACK
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/headCollider
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/headComponents
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/honkemoji
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/honkmuffledemoji
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/multiplayerGooseLookTarget
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/paperCrownHome
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/shooemoji
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/head/sweatemoji
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck2/neck1/neck1AboveNeckRaycastPoint__1_
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck3/neck3AboveNeckRaycastPoint
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neck4BelowNeckRaycastPoint
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck4/neckcollider
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/neck6/neck5/neck5BelowNeckRaycastPoint
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/shoulder_L
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/shoulder_L/upperwing_L
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/shoulder_L/upperwing_L/lowerWing_L
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/shoulder_L/upperwing_L/lowerWing_L/feathers_L
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/shoulder_R
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/shoulder_R/upperwing_R
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/shoulder_R/upperwing_R/lowerWing_R
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/chest/shoulder_R/upperwing_R/lowerWing_R/feathers_R
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/coopBondStrainParticle
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/coopBondStrainParticleArrow
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/GooseHeartCollider
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/tailbone
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/tailbone/tailcollider
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/tailbone/tailfeather
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/thigh_l
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/thigh_l/calf_l
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/thigh_l/calf_l/ankle_l
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/thigh_l/calf_l/ankle_l/toe_l
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/thigh_r
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/thigh_r/calf_r
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/thigh_r/calf_r/ankle_r
+    m_Weight: 0
+  - m_Path: Body_Armature/spine/thigh_r/calf_r/ankle_r/toe_r
+    m_Weight: 0
+  - m_Path: Body_Armature/twoplayer_icon
+    m_Weight: 0
+  - m_Path: Body_Armature/twoplayer_icon_particle
+    m_Weight: 0
+  - m_Path: Goosemesh
+    m_Weight: 0
+  - m_Path: GoosePoseHighlighter
+    m_Weight: 0
+  - m_Path: grabobject
+    m_Weight: 0
+  - m_Path: GroundCastPoint
+    m_Weight: 0
+  - m_Path: RibbonOnSystem
+    m_Weight: 0
+  - m_Path: RibbonOnSystem/RibbonBOn
+    m_Weight: 0
+  - m_Path: RibbonOnSystem/RibbonOff
+    m_Weight: 0
+  - m_Path: RibbonOnSystem/RibbonOn
+    m_Weight: 0
+  - m_Path: Rig_1
+    m_Weight: 0
+  - m_Path: Rig_1/HeadAim
+    m_Weight: 0
+  - m_Path: Rig_1/HeadTarget
+    m_Weight: 0

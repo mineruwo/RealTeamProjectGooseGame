@@ -61,6 +61,12 @@ public class PlayerController : MonoBehaviour
         run = Mathf.Lerp(run, isRun ? 1f : 0f, Time.deltaTime * 10f);
         animator.SetFloat("Run", run);
 
+        var v = Input.GetAxis("Vertical");
+        var h = Input.GetAxis("Horizontal");
+
+        animator.SetFloat("velocityZ", dir.z);
+        animator.SetFloat("velocityX", dir.x);
+
     }
 
     private void FixedUpdate()
@@ -78,16 +84,16 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
-        //var v = Input.GetAxisRaw("Vertical");
-        //var h = Input.GetAxisRaw("Horizontal");
+        var v = Input.GetAxisRaw("Vertical");
+        var h = Input.GetAxisRaw("Horizontal");
 
         // 재휘 모바일 수정
         //Debug.Log($"[PlayerController] 들어가는중?");
         //Debug.Log($"[PlayerController] 값 출력?{GameManager.instance.inputMgr.moveX}");
         //
 
-        var v = GameManager.instance.inputMgr.moveX;
-        var h = GameManager.instance.inputMgr.moveZ;
+        //var v = GameManager.instance.inputMgr.moveX;
+        //var h = GameManager.instance.inputMgr.moveZ;
 
         input = v != 0f || h != 0f;
 
@@ -146,6 +152,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
+            animator.SetTrigger("Honk");
             float npcDistance = 3f;
             //꽥꽥
             var ran = Random.Range(1, 7);
