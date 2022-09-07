@@ -45,7 +45,7 @@ public class GooseGrab : MonoBehaviour
         {
             GrabAndDropObject();
         }
-        animator.SetBool("isDrag", isDrag);
+        //animator.SetBool("isDrag", isDrag);
         if (handle != null)
         {
             goose.transform.LookAt(handle.transform);
